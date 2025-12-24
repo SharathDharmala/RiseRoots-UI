@@ -1,0 +1,339 @@
+/* ===============================
+   GLOBAL
+================================ */
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ffffff 60%,
+    #f8fbf9 100%
+  );
+  padding-top: 96px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.header {
+  background: var(--header-bg);
+  padding: 14px 0 12px;
+  color: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  width: 100%;
+  padding-left: 32px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+/* ======================================================
+   MULTI-LANGUAGE HEADER FONT NORMALIZATION
+====================================================== */
+
+/* Default – English (Latin script) */
+.header.en .brand-name {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+/* Telugu – visually taller script */
+.header.te .brand-name {
+  font-size: 20px;        /* reduced for visual parity */
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+/* Hindi – medium-height script */
+.header.hi .brand-name {
+  font-size: 21px;
+  line-height: 1.22;
+  font-weight: 600;
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  height: 38px;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* LANGUAGE */
+.lang {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.lang button {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: #ffffff;
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.lang button:hover {
+  background: var(--accent);
+  color: #1B4332;
+}
+
+/* TAGLINE */
+.tagline {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-top: -2px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.tabs button {
+  padding: 6px 16px;
+  border-radius: 18px;
+  border: none;
+  background: rgba(255,255,255,0.14);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: var(--accent);
+  color: #1B4332;
+}
+
+/* ===============================
+   TAB CONTENT
+================================ */
+.tab-content {
+  min-height: calc(100vh - 200px);
+  margin-top: -10px;
+  padding: 16px 16px 24px;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+
+.services-card {
+  max-width: 1200px;   /* 🔥 wider & consistent */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.services-card::before {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  display: block;
+  margin: 0 auto 18px;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  background: var(--footer-bg);
+  color: #d8f3dc;
+}
+
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px 16px 32px;
+  gap: 40px;
+}
+
+.footer-left .address {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.footer-right {
+  text-align: right;
+  min-width: 260px;
+  margin-left: auto;
+}
+
+/* CONTACT */
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phone {
+  font-size: 14px;
+  color: var(--text-soft);
+  text-decoration: none;
+}
+
+.contact .icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact .icon:hover {
+  text-decoration: underline;
+}
+
+/* WhatsApp icon */
+.whatsapp-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  background: #25D366;
+  padding: 1.5px;
+}
+
+/* LINKS */
+.footer-links {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-bottom {
+  margin-top: 0;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 120px;
+  }
+
+  .header-inner {
+    padding: 16px;
+    height: auto;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .header.en .brand-name {
+  font-size: 18px;
+}
+
+.header.te .brand-name {
+  font-size: 17px;
+}
+
+.header.hi .brand-name {
+  font-size: 17.5px;
+}
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tabs button {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-right {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .contact-row {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+/* ===============================
+   GLOBAL CONTENT WIDTH (UNIFIED)
+================================ */
+.app-container {
+  max-width: 1400px;          /* 🔥 unified width */
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}

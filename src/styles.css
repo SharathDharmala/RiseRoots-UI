@@ -1,0 +1,69 @@
+/* You can add global styles to this file, and also import other style files */
+/* GLOBAL RESET */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;   /* THIS is the key */
+}
+
+/* ======================================================
+   COLOR THEMES – RiseRoots
+   (Enable ONLY ONE option at a time)
+====================================================== */
+
+:root {
+  --header-bg: #1F3C88;
+  --footer-bg: #162A5A;
+  --accent:    #D4AF37;
+  --text-soft: #F1F4FA;
+}
+/*
+:root {
+  --header-bg: #1E56D0;  
+  --footer-bg: #14306A;  
+  --accent:    #F2C94C;  
+  --text-soft: #F5F8FF;
+}
+  
+
+:root {
+  --header-bg: #3FA9F5;   
+  --footer-bg: #1E6091;  
+  --accent:    #F9C74F;   
+  --text-soft: #F4FBFF;
+}
+  
+
+:root {
+  --header-bg: #243A5E;   
+  --footer-bg: #141E30;   
+  --accent:    #FFB703;   
+  --text-soft: #EAF0F8;
+}
+
+:root {
+  --header-bg: #1F7A8C;   
+  --footer-bg: #14505C;  
+  --accent:    #F2C94C;   
+  --text-soft: #F2FBFC;  
+}
+
+
+:root {
+  --header-bg: #2D52C1;   
+  --footer-bg: #2D6A4F;   
+  --accent:    #FFD166;   
+  --text-soft: #FFF1E6;   
+}
+
+*/
+
+
+
+
+

@@ -1,0 +1,36 @@
+<div class="modal-backdrop">
+  <div class="modal">
+
+    <!-- HEADER -->
+    <div class="modal-header">
+      <h3>{{ title }}</h3>
+      <button class="close-btn" (click)="close()">✕</button>
+      
+    </div>
+
+    <!-- BODY -->
+    <div class="modal-body"
+         (mousedown)="onStart($event)"
+         (mouseup)="onEnd($event)"
+         (touchstart)="onStart($event)"
+         (touchend)="onEnd($event)">
+
+      <button class="nav left" (click)="prev()">‹</button>
+
+      <img
+        [src]="images[currentIndex]"
+        class="slide-img"
+        draggable="false"
+        alt="Area image" draggable="false"
+  (dragstart)="$event.preventDefault()"/>
+
+      <button class="nav right" (click)="next()">›</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="modal-footer">
+      {{ currentIndex + 1 }} / {{ images.length }}
+    </div>
+
+  </div>
+</div>
