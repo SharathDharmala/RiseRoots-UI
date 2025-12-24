@@ -1,0 +1,25 @@
+
+
+<section class="landing">
+<div class="services-card">
+  <h2>{{ content[lang].title }}</h2>
+
+  <!-- MULTI-PARAGRAPH INTRO -->
+  <p
+    class="intro"
+    *ngFor="let para of content[lang].intro">
+    {{ para }}
+  </p>
+
+  <!-- CORE STRENGTHS -->
+  <h3 class="strengths-title">
+    {{ content[lang].strengthsTitle }}
+  </h3>
+
+  <ul class="strengths">
+    <li *ngFor="let point of content[lang].points">
+      ✔ {{ point }}
+    </li>
+  </ul>
+</div>
+</section>
