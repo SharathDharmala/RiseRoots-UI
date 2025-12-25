@@ -1,25 +1,68 @@
-
-
 <section class="landing">
-<div class="services-card">
-  <h2>{{ content[lang].title }}</h2>
+  <div class="services-card">
+    <!-- TITLE -->
+    <h2>{{ content[lang].title }}</h2>
 
-  <!-- MULTI-PARAGRAPH INTRO -->
-  <p
-    class="intro"
-    *ngFor="let para of content[lang].intro">
-    {{ para }}
-  </p>
+    <!-- MULTI-PARAGRAPH INTRO -->
+    <p class="intro" *ngFor="let para of content[lang].intro">
+      {{ para }}
+    </p>
 
-  <!-- CORE STRENGTHS -->
-  <h3 class="strengths-title">
-    {{ content[lang].strengthsTitle }}
-  </h3>
+    <!-- ACTIVE SERVICES -->
+    <h3 class="section-title">
+      {{ content[lang].activeTitle }}
+    </h3>
 
-  <ul class="strengths">
-    <li *ngFor="let point of content[lang].points">
-      ✔ {{ point }}
-    </li>
-  </ul>
-</div>
+    <ul class="services-list">
+      <li *ngFor="let service of content[lang].activeServices">
+        {{ service }}
+      </li>
+    </ul>
+
+    <p class="evaluation">
+      {{ content[lang].evaluation }}
+    </p>
+
+    <!-- EXTENDED / ADVISORY SERVICES -->
+    <h3 class="section-title">
+      {{ content[lang].extendedTitle }}
+    </h3>
+
+    <ul class="services-list muted">
+      <li *ngFor="let service of content[lang].extendedServices">
+        {{ service }}
+      </li>
+    </ul>
+
+    <p class="phased">
+      {{ content[lang].phased }}
+    </p>
+
+    <!-- CORE STRENGTHS -->
+    <h3 class="strengths-title">
+      {{ content[lang].strengthsTitle }}
+    </h3>
+
+    <ul class="strengths">
+      <li *ngFor="let strength of content[lang].strengths">✔ {{ strength }}</li>
+    </ul>
+
+    <!-- VISION -->
+    <h3 class="section-title">
+      {{ content[lang].visionTitle }}
+    </h3>
+
+    <p class="vision">
+      {{ content[lang].vision }}
+    </p>
+
+    <!-- WHY CHOOSE -->
+    <h3 class="section-title">
+      {{ content[lang].whyTitle }}
+    </h3>
+
+    <ul class="why-choose">
+      <li *ngFor="let reason of content[lang].why">🌟 {{ reason }}</li>
+    </ul>
+  </div>
 </section>

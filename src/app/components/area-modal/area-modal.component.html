@@ -1,11 +1,10 @@
-<div class="modal-backdrop">
-  <div class="modal">
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
 
     <!-- HEADER -->
     <div class="modal-header">
       <h3>{{ title }}</h3>
       <button class="close-btn" (click)="close()">✕</button>
-      
     </div>
 
     <!-- BODY -->
@@ -15,21 +14,66 @@
          (touchstart)="onStart($event)"
          (touchend)="onEnd($event)">
 
-      <button class="nav left" (click)="prev()">‹</button>
+      <!-- LEFT NAV -->
+      <button
+        class="nav left"
+        *ngIf="currentIndex < images.length"
+        (click)="prev()">‹</button>
 
+      <!-- IMAGE SLIDE -->
       <img
+        *ngIf="currentIndex < images.length"
         [src]="images[currentIndex]"
         class="slide-img"
         draggable="false"
-        alt="Area image" draggable="false"
-  (dragstart)="$event.preventDefault()"/>
+        (dragstart)="$event.preventDefault()" />
 
-      <button class="nav right" (click)="next()">›</button>
+      <!-- CONTACT SLIDE -->
+      <div
+        *ngIf="currentIndex === images.length"
+        class="contact-slide">
+
+        <h3>Contact Us</h3>
+
+        <div class="contact-wrapper">
+
+          <div class="contact-row" *ngFor="let c of contacts">
+            <div class="contact-number">
+              📞 {{ c.phone }}
+            </div>
+
+           <div class="contact-actions">
+  <a class="btn call" [href]="c.tel">Call</a>
+
+  <a class="btn whatsapp"
+     [href]="c.whatsapp"
+     target="_blank"
+     rel="noopener">
+    Watsapp
+  </a>
+</div>
+
+          </div>
+
+          <div class="contact-email">
+            <a [href]="email.link">
+              ✉️ {{ email.value }}
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT NAV -->
+      <button
+        class="nav right"
+        *ngIf="currentIndex < images.length"
+        (click)="next()">›</button>
     </div>
 
     <!-- FOOTER -->
     <div class="modal-footer">
-      {{ currentIndex + 1 }} / {{ images.length }}
+      {{ currentIndex + 1 }} / {{ totalSlides }}
     </div>
 
   </div>

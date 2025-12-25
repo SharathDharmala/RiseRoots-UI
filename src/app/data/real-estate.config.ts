@@ -21,29 +21,34 @@ export interface AreaConfig {
 }
 
 export interface CategoryConfig {
-  key: 'farmLands' | 'plots' | 'flats' | 'leasing' | 'resale' | 'commercial';
+  key:
+    | 'farmLands'
+    | 'plots'
+    | 'flats'
+    | 'leasing'
+    | 'resale'
+    | 'commercial'
+    | 'propertyManagement'
+    | 'jointVentures'
+    | 'legalSupport';
+
   banner?: string;
   label: { en: string; te: string; hi: string };
   subtitle?: { en: string; te: string; hi: string };
-  disabled?: boolean;   // 🔥 NEW
+  disabled?: boolean;
 }
 
 /* ======================================================
    IMAGE GENERATOR HELPER
 ====================================================== */
 
-export function generateImages(
-  staticImages: string[] = [],
-  sources: ImageSourceConfig[] = []
-): string[] {
-  const generated = sources.flatMap(src => {
+export function generateImages(banner: string[], sources: ImageSourceConfig[] = []): string[] {
+  const generated = sources.flatMap((src) => {
     const ext = src.ext ?? 'jpeg';
-    return Array.from({ length: src.count }, (_, i) =>
-      `${src.basePath}/${i + 1}.${ext}`
-    );
+    return Array.from({ length: src.count }, (_, i) => `${src.basePath}/${i + 1}.${ext}`);
   });
 
-  return [...staticImages, ...generated];
+  return [...banner, ...generated]; // 🔥 banner always first
 }
 
 /* ======================================================
@@ -51,7 +56,6 @@ export function generateImages(
 ====================================================== */
 
 export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
-
   /* ===============================
      FARM LANDS
   ============================== */
@@ -61,10 +65,10 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       name: 'Anakapalli',
       description: 'Tattabandha – Prime agricultural belt',
       images: generateImages(
-        ['banners/farm-lands.jpg'],
-        [{ basePath: 'banners/farm/anakapalli', count: 25 }]
-      )
-    }
+        ['banners/farm-lands.jpg']
+        /*[{ basePath: 'banners/farm/anakapalli', count: 2 }]*/
+      ),
+    },
   ],
 
   /* ===============================
@@ -74,17 +78,25 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'anandapuram',
       name: 'Anandapuram',
-      images: generateImages(['banners/open-plots.jpg'])
+      images: generateImages(['banners/open-plots.jpg']),
     },
     {
       key: 'tagarapuvalasa',
-      name: 'Tagarapuvalasa',
-      images: generateImages(['banners/open-plots.jpg'])
+      name: 'Tagarapuvalasa, Utkarsha Vajradhaara',
+      images: generateImages(['banners/open-plots.jpg'],
+      [{ basePath: 'open-plots/tagarapuvalasa-utakrsha', count: 3 }])
+    },
+    {
+      key: 'tagarapuvalasa',
+      name: 'Tagarapuvalasa,TrueCapital ',
+      images: generateImages(['banners/open-plots.jpg'],
+      [{ basePath: 'open-plots/tagarapuvalasa-bbg', count: 4 }])
     },
     {
       key: 'gandigundam',
       name: 'Gandigundam',
-      images: generateImages(['banners/open-plots.jpg'])
+      images: generateImages(['banners/open-plots.jpg'],
+      [{ basePath: 'open-plots/tagarapuvalasa-bbg', count: 6 }]),
     },
     {
       key: 'vizianagaram',
@@ -92,8 +104,8 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       description: 'AKR-GardenCity-Vizianagaram (Chelluru)',
       images: generateImages(
         ['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/vizianagaram', count: 25 }]
-      )
+        [{ basePath: 'open-plots/vizianagaram', count: 24 }]
+      ),
     },
     {
       key: 'dakamarri',
@@ -101,18 +113,27 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       images: generateImages(
         ['banners/open-plots.jpg'],
         [{ basePath: 'open-plots/dakamarri', count: 8 }]
-      )
+      ),
     },
     {
       key: 'bhogapuram',
-      name: 'Bhogapuram',
-      images: generateImages(['banners/open-plots.jpg'])
+      name: 'Bhogapuram, AeroDestiny',
+      images: generateImages(['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/bhogapuram-aerodestiny', count: 1 }]
+      ),
+    },
+    {
+      key: 'bhogapuram',
+      name: 'Bhogapuram, Kohinoor',
+      images: generateImages(['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/bhogapuram-kohinoor', count: 11 }]
+      ),
     },
     {
       key: 'kothavalasa',
       name: 'Kothavalasa',
-      images: generateImages(['banners/open-plots.jpg'])
-    }
+      images: generateImages(['banners/open-plots.jpg']),
+    },
   ],
 
   /* ===============================
@@ -121,12 +142,12 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
   flats: [
     {
       key: 'madhurawada',
-      name: 'Madhurawada',
+      name: 'Madhurawada, Utkarsha Apartments',
       description: 'Ready & under-construction flats',
       images: generateImages(
         ['banners/residential-flats.jpg'],
-        [{ basePath: 'banners/flats/madhurawada', count: 1 }]
-      )
-    }
-  ]
+        [{ basePath: 'residential-flats/madhurawada', count: 22 }]
+      ),
+    },
+  ],
 };
