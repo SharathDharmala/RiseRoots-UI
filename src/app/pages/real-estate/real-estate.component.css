@@ -43,7 +43,9 @@
   width: 100%;
   max-height: 60vh;
 
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* ======================================================
@@ -53,7 +55,7 @@
   background: #ffffff;
   padding: 16px;
   border-radius: 18px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
 }
 
 .menu button {
@@ -65,16 +67,16 @@
   background: #f9fafb;
   font-size: 14px;
   font-weight: 500;
-  color: #1f3c88;
+  color: #1F3C88;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 /* ACTIVE */
 .menu button.active {
-  background: linear-gradient(135deg, #1f3c88, #274bb5);
+  background: linear-gradient(135deg, #1F3C88, #274BB5);
   color: #ffffff;
-  border: 1px solid #1f3c88;
+  border: 1px solid #1F3C88;
   box-shadow: 0 6px 16px rgba(31, 60, 136, 0.35);
   font-weight: 600;
 }
@@ -82,12 +84,18 @@
 /* HOVER */
 .menu button:hover:not(.active):not(.disabled) {
   background: #eef2ff;
-  border-color: #1f3c88;
+  border-color: #1F3C88;
 }
 
 /* DISABLED */
 .menu button.disabled {
-  background: repeating-linear-gradient(45deg, #f3f4f6, #f3f4f6 8px, #eef0f3 8px, #eef0f3 16px);
+  background: repeating-linear-gradient(
+    45deg,
+    #f3f4f6,
+    #f3f4f6 8px,
+    #eef0f3 8px,
+    #eef0f3 16px
+  );
   color: #9ca3af;
   border: 1px dashed #d1d5db;
   cursor: not-allowed;
@@ -123,6 +131,7 @@
   background: #000;
 }
 
+
 /* ======================================================
    BANNER OVERLAY
 ====================================================== */
@@ -136,12 +145,13 @@
   /* 🔥 only bottom dark, center stays bright */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.2) 35%,
-    rgba(0, 0, 0, 0.05) 60%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(0,0,0,0.45) 0%,
+    rgba(0,0,0,0.20) 35%,
+    rgba(0,0,0,0.05) 60%,
+    rgba(0,0,0,0) 100%
   );
 }
+
 
 .banner-overlay h3 {
   margin: 0 0 6px;
@@ -162,14 +172,14 @@
   background: #ffffff;
   padding: 18px;
   border-radius: 18px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
 }
 
 .areas h4 {
   margin-bottom: 14px;
   font-size: 15px;
   font-weight: 600;
-  color: #1f3c88;
+  color: #1F3C88;
 }
 
 .area-card {
@@ -177,19 +187,19 @@
   margin-bottom: 12px;
   border-radius: 24px;
   background: #f6f8ff;
-  color: #1f3c88;
+  color: #1F3C88;
   font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
-  border: 1px solid rgba(31, 60, 136, 0.18);
+  border: 1px solid rgba(31,60,136,0.18);
   transition: all 0.25s ease;
 }
 
 .area-card:hover {
-  background: linear-gradient(135deg, #1f3c88, #254fa3);
+  background: linear-gradient(135deg, #1F3C88, #254FA3);
   color: #ffffff;
-  border-color: #d4af37;
-  box-shadow: 0 6px 16px rgba(31, 60, 136, 0.35);
+  border-color: #D4AF37;
+  box-shadow: 0 6px 16px rgba(31,60,136,0.35);
   transform: translateY(-1px);
 }
 

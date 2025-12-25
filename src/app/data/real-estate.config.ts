@@ -1,11 +1,15 @@
 /* ======================================================
-   IMAGE CONFIG MODELS
+   MEDIA CONFIG MODELS
 ====================================================== */
 
-export interface ImageSourceConfig {
+export interface MediaSourceConfig {
   basePath: string;
+
+  /** Number of files: 1.ext ... n.ext */
   count: number;
-  ext?: string; // default: jpeg
+
+  /** File extension (default: jpeg) */
+  ext?: string; // jpeg | jpg | png | mp4 | pdf
 }
 
 export interface AreaConfig {
@@ -13,10 +17,7 @@ export interface AreaConfig {
   name: string;
   description?: string;
 
-  staticImages?: string[];
-  imageSources?: ImageSourceConfig[];
-
-  /** ALWAYS resolved – safe for UI */
+  /** Always resolved – safe for UI */
   images: string[];
 }
 
@@ -39,16 +40,23 @@ export interface CategoryConfig {
 }
 
 /* ======================================================
-   IMAGE GENERATOR HELPER
+   MEDIA GENERATOR (COUNT-BASED ONLY)
 ====================================================== */
 
-export function generateImages(banner: string[], sources: ImageSourceConfig[] = []): string[] {
+export function generateMedia(
+  banner: string[],
+  sources: MediaSourceConfig[] = []
+): string[] {
   const generated = sources.flatMap((src) => {
     const ext = src.ext ?? 'jpeg';
-    return Array.from({ length: src.count }, (_, i) => `${src.basePath}/${i + 1}.${ext}`);
+
+    return Array.from({ length: src.count }, (_, i) => {
+      return `${src.basePath}/${i + 1}.${ext}`;
+    });
   });
 
-  return [...banner, ...generated]; // 🔥 banner always first
+  // Banner always comes first
+  return [...banner, ...generated];
 }
 
 /* ======================================================
@@ -64,36 +72,42 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'anakapalli',
       name: 'Anakapalli',
       description: 'Tattabandha – Prime agricultural belt',
-      images: generateImages(
-        ['banners/farm-lands.jpg']
-        /*[{ basePath: 'banners/farm/anakapalli', count: 2 }]*/
+      images: generateMedia(['banners/farm-lands.jpg']),
+    },
+    {
+      key: 'devarapalli-chandan',
+      name: 'Devarapalli – Chandan Valley',
+      description: '10-Year-Old Red & White Sandalwood',
+      images: generateMedia(
+        ['banners/farm-lands.jpg'],
+        [
+          { basePath: 'farm-lands/devarapalli-chandanvalley', count: 6 },        // images
+          { basePath: 'farm-lands/devarapalli-chandanvalley', count: 1, ext: 'mp4' }, // videos
+          { basePath: 'farm-lands/devarapalli-chandanvalley', count: 0, ext: 'pdf' }, // pdf
+        ]
       ),
     },
     {
-      key: 'devarapalli',
-      name: 'Devarapalli Chandan Valley',
-      description: '**10-Year-Old Red & White Sandalwood',
-      images: generateImages(
+      key: 'devarapalli-phenix',
+      name: 'Devarapalli – Phenix Valley',
+      description: 'Karjur, Agarwood',
+      images: generateMedia(
         ['banners/farm-lands.jpg'],
-        [{ basePath: 'farm-lands/devarapalli-chandanvalley', count: 6 }]
-      ),
-    },
-    {
-      key: 'devarapalli',
-      name: 'Devarapalli Phenix Valley',
-      description: '**Karjur, Agarwood',
-      images: generateImages(
-        ['banners/farm-lands.jpg'],
-        [{ basePath: 'farm-lands/devarapalli-phenixvalley', count: 2 }]
+        [{ basePath: 'farm-lands/devarapalli-phenixvalley', count: 3 },
+          { basePath: 'farm-lands/devarapalli-phenixvalley', count: 0 , ext: 'mp4'},
+          { basePath: 'farm-lands/devarapalli-phenixvalley', count: 1 , ext: 'pdf'}
+        ]
       ),
     },
     {
       key: 'gajapathinagaram',
       name: 'Gajapathinagaram',
-      description: '**White Sandle',
-      images: generateImages(
+      description: 'White Sandalwood',
+      images: generateMedia(
         ['banners/farm-lands.jpg'],
-        [{ basePath: 'farm-lands/gajapathinagaram', count: 2 }]
+        [{ basePath: 'farm-lands/gajapathinagaram', count: 0 },
+          { basePath: 'farm-lands/gajapathinagaram', count: 1 , ext: 'mp4'},
+          { basePath: 'farm-lands/gajapathinagaram', count: 2 , ext: 'pdf'}]
       ),
     },
   ],
@@ -105,76 +119,107 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'anandapuram',
       name: 'Anandapuram',
-      images: generateImages(['banners/open-plots.jpg']),
+      images: generateMedia(['banners/open-plots.jpg']),
     },
     {
-      key: 'tagarapuvalasa',
-      name: 'Tagarapuvalasa, Utkarsha Vajradhaara',
-      images: generateImages(['banners/open-plots.jpg'],
-      [{ basePath: 'open-plots/tagarapuvalasa-utakrsha', count: 3 }])
+      key: 'tagarapuvalasa-utkarsha',
+      name: 'Tagarapuvalasa – Utkarsha Vajradhaara',
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/tagarapuvalasa-utakrsha', count: 3 },
+          { basePath: 'open-plots/tagarapuvalasa-utakrsha', count: 0 , ext: 'mp4'},
+          { basePath: 'open-plots/tagarapuvalasa-utakrsha', count: 2 , ext: 'pdf'}]
+      ),
     },
     {
-      key: 'tagarapuvalasa',
-      name: 'Tagarapuvalasa,TrueCapital ',
-      images: generateImages(['banners/open-plots.jpg'],
-      [{ basePath: 'open-plots/tagarapuvalasa-bbg-truecapital', count: 8 }])
+      key: 'tagarapuvalasa-truecapital',
+      name: 'Tagarapuvalasa – TrueCapital',
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/tagarapuvalasa-bbg-truecapital', count: 7 },
+          { basePath: 'open-plots/tagarapuvalasa-bbg-truecapital', count: 1 , ext: 'mp4'},
+          { basePath: 'open-plots/tagarapuvalasa-bbg-truecapital', count: 0 , ext: 'pdf'}]
+      ),
     },
     {
       key: 'gandigundam',
       name: 'Gandigundam',
-      images: generateImages(['banners/open-plots.jpg'],
-      [{ basePath: 'open-plots/gandigundam', count: 6 }]),
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [
+          { basePath: 'open-plots/gandigundam', count: 6 },        // images
+          { basePath: 'open-plots/gandigundam', count: 0, ext: 'mp4' }, // video
+          { basePath: 'open-plots/gandigundam', count: 0, ext: 'pdf' }, // pdf
+        ]
+      ),
     },
     {
       key: 'vizianagaram',
-      name: 'Vizianagaram',
-      description: 'AKR-GardenCity-Vizianagaram (Chelluru)',
-      images: generateImages(
+      name: 'Vizianagaram – AKR Garden City (Chelluru)',
+      images: generateMedia(
         ['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/vizianagaram', count: 24 }]
+        [{ basePath: 'open-plots/vizianagaram', count: 25 },
+          { basePath: 'open-plots/vizianagaram', count: 1 , ext: 'mp4'},
+          { basePath: 'open-plots/vizianagaram', count: 0 , ext: 'pdf'}]
       ),
     },
     {
       key: 'dakamarri',
       name: 'Dakamarri',
-      images: generateImages(
+      images: generateMedia(
         ['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/dakamarri', count: 8 }]
+        [{ basePath: 'open-plots/dakamarri', count: 13 },
+          { basePath: 'open-plots/dakamarri', count: 1 , ext: 'mp4'},
+          { basePath: 'open-plots/dakamarri', count: 0 , ext: 'pdf'}]
       ),
     },
     {
-      key: 'bhogapuram',
-      name: 'Bhogapuram, AeroDestiny',
-      images: generateImages(['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/bhogapuram-aerodestiny', count: 1 }]
+      key: 'bhogapuram-aerodestiny',
+      name: 'Bhogapuram – Aero Destiny',
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/bhogapuram-aerodestiny', count: 1 },
+          { basePath: 'open-plots/bhogapuram-aerodestiny', count: 0 , ext: 'mp4'},
+          { basePath: 'open-plots/bhogapuram-aerodestiny', count: 0 , ext: 'pdf'}]
       ),
     },
     {
-      key: 'bhogapuram',
-      name: 'Bhogapuram, Kohinoor',
-      images: generateImages(['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/bhogapuram-kohinoor', count: 11 }]
+      key: 'bhogapuram-kohinoor',
+      name: 'Bhogapuram – Kohinoor',
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/bhogapuram-kohinoor', count: 11 },
+          { basePath: 'open-plots/bhogapuram-kohinoor', count: 0 , ext: 'mp4'},
+          { basePath: 'open-plots/bhogapuram-kohinoor', count: 0 , ext: 'pdf'}]
       ),
     },
     {
       key: 'kothavalasa',
-      name: 'Kothavalasa-',
-      images: generateImages(['banners/open-plots.jpg'],
-        [{ basePath: 'open-plots/kothavalasa', count: 3 }]
+      name: 'Kothavalasa',
+      images: generateMedia(
+        ['banners/open-plots.jpg'],
+        [{ basePath: 'open-plots/kothavalasa', count: 2 },
+          { basePath: 'open-plots/kothavalasa', count: 1 , ext: 'mp4'},
+          { basePath: 'open-plots/kothavalasa', count: 0 , ext: 'pdf'}]
       ),
     },
   ],
+
   /* ===============================
      RESIDENTIAL FLATS
   ============================== */
   flats: [
     {
       key: 'madhurawada',
-      name: 'Madhurawada, Utkarsha Apartments',
+      name: 'Madhurawada – Utkarsha Apartments',
       description: 'Ready & under-construction flats',
-      images: generateImages(
+      images: generateMedia(
         ['banners/residential-flats.jpg'],
-        [{ basePath: 'residential-flats/madhurawada', count: 22 }]
+        [
+          { basePath: 'residential-flats/madhurawada', count: 18 },       // images
+          { basePath: 'residential-flats/madhurawada', count: 4, ext: 'mp4' }, // video
+          { basePath: 'residential-flats/madhurawada', count: 0, ext: 'pdf' }, // pdf
+        ]
       ),
     },
   ],
