@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 /* GLOBAL RESET */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;   /* THIS is the key */
+  padding: 0 24px; /* THIS is the key */
 }
 
 /* ======================================================
@@ -17,10 +20,10 @@ html, body {
 ====================================================== */
 
 :root {
-  --header-bg: #1F3C88;
-  --footer-bg: #162A5A;
-  --accent:    #D4AF37;
-  --text-soft: #F1F4FA;
+  --header-bg: #1f3c88;
+  --footer-bg: #162a5a;
+  --accent: #d4af37;
+  --text-soft: #f1f4fa;
 }
 /*
 :root {
@@ -62,8 +65,3 @@ html, body {
 }
 
 */
-
-
-
-
-

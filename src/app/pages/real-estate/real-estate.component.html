@@ -1,58 +1,48 @@
 <section class="page-section">
-  <div class="realestate-container">   <!-- NEW -->
+  <div class="realestate-container">
+    <!-- NEW -->
     <div class="realestate">
+      <!-- CATEGORY MENU -->
+      <aside class="menu">
+        <button
+          *ngFor="let c of categories"
+          (click)="selectCategory(c)"
+          [class.active]="c.key === activeCategory.key"
+          [class.disabled]="c.disabled"
+          [disabled]="c.disabled"
+        >
+          {{ c.label[lang] }}
+          <span *ngIf="c.disabled" class="coming-soon"></span>
+        </button>
+      </aside>
 
+      <!-- BANNER -->
+      <section class="realestate-center">
+        <div class="banner">
+          <img [src]="activeCategory.banner" alt="Category Banner" />
 
-  <!-- CATEGORY MENU -->
-  <aside class="menu">
-   <button
-  *ngFor="let c of categories"
-  (click)="selectCategory(c)"
-  [class.active]="c.key === activeCategory.key"
-  [class.disabled]="c.disabled"
-  [disabled]="c.disabled">
+          <div class="banner-overlay">
+            <h3>{{ activeCategory.label[lang] }}</h3>
+            <p class="banner-sub">
+              {{ activeCategory.subtitle?.[lang] }}
+            </p>
+          </div>
+        </div>
+      </section>
 
-  {{ c.label[lang] }}
-  <span *ngIf="c.disabled" class="coming-soon"></span>
-</button>
+      <!-- AREAS -->
+      <section class="areas">
+        <h4>Available Areas</h4>
 
-  </aside>
+        <div class="area-card" *ngFor="let area of areas" (click)="openArea(area)">
+          <div class="area-title">📍 {{ area.name }}</div>
 
-  <!-- BANNER -->
-<section class="realestate-center">
-  <div class="banner">
-    <img [src]="activeCategory.banner" alt="Category Banner" />
-
-    <div class="banner-overlay">
-      <h3>{{ activeCategory.label[lang] }}</h3>
-      <p class="banner-sub">
-        {{ activeCategory.subtitle?.[lang] }}
-      </p>
+          <div class="area-desc" *ngIf="area.description">
+            {{ area.description }}
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-</section>
-
-  <!-- AREAS -->
-  <section class="areas">
-    <h4>Available Areas</h4>
-
-    <div
-      class="area-card"
-      *ngFor="let area of areas"
-      (click)="openArea(area)">
-
-      <div class="area-title">
-        📍 {{ area.name }}
-      </div>
-
-      <div class="area-desc" *ngIf="area.description">
-        {{ area.description }}
-      </div>
-
-    </div>
-  </section>
-
-</div>
   </div>
 </section>
 
@@ -61,8 +51,6 @@
   *ngIf="modalVisible"
   [title]="modalTitle"
   [images]="modalImages"
-  (closed)="modalVisible = false">
+  (closed)="modalVisible = false"
+>
 </app-area-modal>
-
-
-

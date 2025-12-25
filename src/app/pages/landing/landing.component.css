@@ -1,3 +1,7 @@
+/* =====================================================
+   WRAPPER
+===================================================== */
+
 .services-wrapper {
   display: flex;
   justify-content: center;
@@ -13,65 +17,32 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* TITLE */
+/* =====================================================
+   RESET DEFAULT MARGINS (CRITICAL FIX)
+===================================================== */
+
+.services-card h2,
+.services-card h3,
+.services-card p,
+.services-card ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
 .services-card h2 {
   text-align: center;
   font-size: 28px;
   margin-bottom: 18px;
-  color: #081C15;
+  color: #081c15;
 }
 
-/* INTRO */
-.services-intro {
-  text-align: center;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #374151;
-  margin-bottom: 34px;
-}
-
-/* LIST */
-.services-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.services-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-  font-size: 15px;
-  color: #1f2937;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.services-list li:last-child {
-  border-bottom: none;
-}
-
-/* ICON */
-.services-list .icon {
-  color: #2e7d32;
-  font-size: 16px;
-  margin-top: 3px;
-}
-
-/* TEXT */
-.services-list .text {
-  line-height: 1.6;
-}
-
-.landing {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.landing h2 {
-  font-size: 26px;
-  margin-bottom: 14px;
-}
+/* =====================================================
+   INTRO PARAGRAPHS
+===================================================== */
 
 .landing .intro {
   font-size: 15px;
@@ -80,33 +51,134 @@
   color: #374151;
 }
 
+/* =====================================================
+   SECTION TITLES
+===================================================== */
+
+.section-title,
 .strengths-title {
-  margin-top: 24px;
-  margin-bottom: 12px;
+  margin-top: 20px;
+  margin-bottom: 8px;
   font-size: 20px;
+  font-weight: 600;
+  color: #081c15;
 }
 
-.strengths {
+/* =====================================================
+   SERVICES LIST
+===================================================== */
+
+.services-list {
   list-style: none;
+  margin: 6px 0 6px 0;
   padding: 0;
 }
 
+.services-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 0;
+  font-size: 15px;
+  line-height: 1.35;
+  color: #1f2937;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.services-list li:last-child {
+  border-bottom: none;
+}
+
+/* =====================================================
+   CONTEXT LINES (FIXED GAP ISSUE)
+===================================================== */
+
+.evaluation,
+.phased {
+  margin: 4px 0 10px 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #374151;
+}
+
+/* =====================================================
+   CORE STRENGTHS
+===================================================== */
+
+.strengths {
+  list-style: none;
+  margin: 6px 0 10px 0;
+  padding-left: 18px;
+}
+
 .strengths li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-size: 14px;
 }
 
-/* MOBILE */
+/* =====================================================
+   WHY CHOOSE
+===================================================== */
+
+.why-choose {
+  list-style: none;
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+}
+
+.why-choose li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* =====================================================
+   LANDING CONTAINER
+===================================================== */
+
+.landing {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   MOBILE OPTIMIZATION
+===================================================== */
+
 @media (max-width: 768px) {
   .services-card {
-    padding: 30px 22px;
+    padding: 28px 22px;
   }
 
   .services-card h2 {
     font-size: 22px;
   }
 
-  .services-intro {
-    font-size: 14px;
+  .section-title,
+  .strengths-title {
+    font-size: 18px;
+    margin-top: 16px;
   }
+
+  .landing .intro {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .services-list li {
+    font-size: 14px;
+    padding: 3px 0;
+  }
+}
+
+/* Fine-tune spacing BEFORE section headings */
+.section-title,
+.strengths-title {
+  margin-top: 14px; /* 👈 small, visible gap */
+  margin-bottom: 8px;
+}
+/* Fix spacing BEFORE service section headings */
+.services-card h3,
+.services-card h4 {
+  margin-top: 14px !important; /* small controlled gap */
+  margin-bottom: 8px !important;
 }

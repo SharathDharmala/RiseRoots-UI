@@ -6,12 +6,7 @@ html {
 }
 
 body {
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #ffffff 60%,
-    #f8fbf9 100%
-  );
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #f8fbf9 100%);
   padding-top: 96px;
 }
 
@@ -52,7 +47,7 @@ body {
 
 /* Telugu – visually taller script */
 .header.te .brand-name {
-  font-size: 20px;        /* reduced for visual parity */
+  font-size: 20px; /* reduced for visual parity */
   line-height: 1.25;
   font-weight: 600;
 }
@@ -100,7 +95,7 @@ body {
 
 .lang button:hover {
   background: var(--accent);
-  color: #1B4332;
+  color: #1b4332;
 }
 
 /* TAGLINE */
@@ -130,7 +125,7 @@ body {
   padding: 6px 16px;
   border-radius: 18px;
   border: none;
-  background: rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
   font-size: 13px;
   cursor: pointer;
@@ -138,7 +133,7 @@ body {
 
 .tabs button.active {
   background: var(--accent);
-  color: #1B4332;
+  color: #1b4332;
 }
 
 /* ===============================
@@ -151,9 +146,8 @@ body {
   animation: fadeIn 0.25s ease-in-out;
 }
 
-
 .services-card {
-  max-width: 1200px;   /* 🔥 wider & consistent */
+  max-width: 1200px; /* 🔥 wider & consistent */
   width: 100%;
   margin: 0 auto;
 }
@@ -174,7 +168,6 @@ body {
   background: var(--footer-bg);
   color: #d8f3dc;
 }
-
 
 .footer-grid {
   display: flex;
@@ -233,8 +226,15 @@ body {
   width: 13px;
   height: 13px;
   border-radius: 3px;
-  background: #25D366;
+  background: #25d366;
   padding: 1.5px;
+}
+
+.email-icon {
+  width: 14px;
+  height: 10px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 /* LINKS */
@@ -254,7 +254,7 @@ body {
 .footer-bottom {
   margin-top: 0;
   padding: 8px 0;
-  border-top: 1px solid rgba(255,255,255,0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   text-align: center;
   font-size: 12px;
   color: var(--text-soft);
@@ -264,7 +264,6 @@ body {
    MOBILE RESPONSIVE
 ================================ */
 @media (max-width: 768px) {
-
   body {
     padding-top: 120px;
   }
@@ -279,16 +278,16 @@ body {
   }
 
   .header.en .brand-name {
-  font-size: 18px;
-}
+    font-size: 18px;
+  }
 
-.header.te .brand-name {
-  font-size: 17px;
-}
+  .header.te .brand-name {
+    font-size: 17px;
+  }
 
-.header.hi .brand-name {
-  font-size: 17.5px;
-}
+  .header.hi .brand-name {
+    font-size: 17.5px;
+  }
 
   .tabs {
     flex-wrap: wrap;
@@ -320,6 +319,13 @@ body {
     gap: 12px;
   }
 
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
   .footer-links {
     justify-content: center;
     flex-wrap: wrap;
@@ -331,7 +337,7 @@ body {
    GLOBAL CONTENT WIDTH (UNIFIED)
 ================================ */
 .app-container {
-  max-width: 1400px;          /* 🔥 unified width */
+  max-width: 1400px; /* 🔥 unified width */
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
