@@ -34,27 +34,42 @@ body {
   box-sizing: border-box;
 }
 
+/* =========================
+   HEADER LOGO
+========================= */
+.header-logo img {
+  width: 30px;          /* 🔥 reduced size */
+  height: 30px;         /* keep square for round shape */
+  object-fit: cover;
+
+  border-radius: 50%;   /* 🔥 makes it round */
+  background: #ffffff; /* clean edge on dark header */
+  padding: 4px;        /* subtle breathing space */
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
 /* ======================================================
    MULTI-LANGUAGE HEADER FONT NORMALIZATION
 ====================================================== */
 
 /* Default – English (Latin script) */
 .header.en .brand-name {
-  font-size: 22px;
+  font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
 }
 
 /* Telugu – visually taller script */
 .header.te .brand-name {
-  font-size: 20px; /* reduced for visual parity */
+  font-size: 22px; /* reduced for visual parity */
   line-height: 1.25;
   font-weight: 600;
 }
 
 /* Hindi – medium-height script */
 .header.hi .brand-name {
-  font-size: 21px;
+  font-size: 25px;
   line-height: 1.22;
   font-weight: 600;
 }
@@ -75,6 +90,7 @@ body {
   font-weight: 700;
   color: #ffffff;
 }
+
 
 /* LANGUAGE */
 .lang {

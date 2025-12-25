@@ -1,9 +1,9 @@
 <!-- ================= HEADER ================= -->
-<header class="header">
+<header class="header" [ngClass]="lang">
   <!-- HEADER INNER -->
   <div class="header-inner header-wide">
     <!-- BRAND -->
-    <div class="brand">
+    <div class="brand header-logo">
       <img src="assets/logo/riseroots.png" alt="RiseRoots Logo" class="logo" />
       <span class="brand-name">
         {{ text[lang].title }}

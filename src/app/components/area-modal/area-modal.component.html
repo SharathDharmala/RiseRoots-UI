@@ -17,17 +17,52 @@
       <!-- LEFT NAV -->
       <button class="nav left" [disabled]="currentIndex === 0" (click)="prev()">‹</button>
 
-      <!-- IMAGE SLIDE -->
+      <!-- WATERMARK -->
+      <div class="watermark">RiseRoots</div>
+
+      <!-- IMAGE -->
       <img
-        *ngIf="currentIndex < images.length"
-        [src]="images[currentIndex]"
+        *ngIf="currentIndex < media.length && getMediaType(media[currentIndex]) === 'image'"
+        [src]="media[currentIndex]"
         class="slide-img"
         draggable="false"
         (dragstart)="$event.preventDefault()"
       />
 
+      <!-- VIDEO -->
+      <video
+        *ngIf="currentIndex < media.length && getMediaType(media[currentIndex]) === 'video'"
+        class="slide-video"
+        [src]="media[currentIndex]"
+        autoplay
+        muted
+        controls
+        playsinline
+      ></video>
+
+      <!-- PDF -->
+      <object
+        *ngIf="currentIndex < media.length && getMediaType(media[currentIndex]) === 'pdf'"
+        [data]="media[currentIndex]"
+        type="application/pdf"
+        class="slide-pdf"
+      >
+        <p class="pdf-fallback">
+          PDF preview not supported.
+          <a [href]="media[currentIndex]" target="_blank">Open PDF</a>
+        </p>
+      </object>
+
+      <!-- UNSUPPORTED -->
+      <div
+        *ngIf="currentIndex < media.length && getMediaType(media[currentIndex]) === 'unknown'"
+        class="unsupported"
+      >
+        Unsupported file format
+      </div>
+
       <!-- CONTACT SLIDE -->
-      <div *ngIf="currentIndex === images.length" class="contact-slide">
+      <div *ngIf="currentIndex === media.length" class="contact-slide">
         <h3>Contact Us</h3>
 
         <div class="contact-wrapper">
@@ -50,7 +85,7 @@
       </div>
 
       <!-- RIGHT NAV -->
-      <button class="nav right" [disabled]="currentIndex === images.length" (click)="next()">
+      <button class="nav right" [disabled]="currentIndex === media.length" (click)="next()">
         ›
       </button>
     </div>

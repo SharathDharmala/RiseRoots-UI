@@ -1,6 +1,5 @@
 <section class="page-section">
   <div class="realestate-container">
-    <!-- NEW -->
     <div class="realestate">
       <!-- CATEGORY MENU -->
       <aside class="menu">
@@ -34,7 +33,11 @@
       <section class="areas">
         <h4>Available Areas</h4>
 
-        <div class="area-card" *ngFor="let area of areas" (click)="openArea(area)">
+        <div
+          class="area-card"
+          *ngFor="let area of areas"
+          (click)="openArea(area)"
+        >
           <div class="area-title">📍 {{ area.name }}</div>
 
           <div class="area-desc" *ngIf="area.description">
@@ -46,11 +49,10 @@
   </div>
 </section>
 
-<!-- IMAGE MODAL -->
+<!-- AREA MODAL -->
 <app-area-modal
   *ngIf="modalVisible"
   [title]="modalTitle"
-  [images]="modalImages"
-  (closed)="modalVisible = false"
->
+  [media]="modalMedia"
+  (closed)="closeModal()">
 </app-area-modal>
