@@ -1,6 +1,5 @@
 <div class="modal-backdrop" (click)="close()">
   <div class="modal" (click)="$event.stopPropagation()">
-
     <!-- HEADER -->
     <div class="modal-header">
       <h3>{{ title }}</h3>
@@ -8,17 +7,15 @@
     </div>
 
     <!-- BODY -->
-    <div class="modal-body"
-         (mousedown)="onStart($event)"
-         (mouseup)="onEnd($event)"
-         (touchstart)="onStart($event)"
-         (touchend)="onEnd($event)">
-
+    <div
+      class="modal-body"
+      (mousedown)="onStart($event)"
+      (mouseup)="onEnd($event)"
+      (touchstart)="onStart($event)"
+      (touchend)="onEnd($event)"
+    >
       <!-- LEFT NAV -->
-      <button
-        class="nav left"
-        *ngIf="currentIndex < images.length"
-        (click)="prev()">‹</button>
+      <button class="nav left" [disabled]="currentIndex === 0" (click)="prev()">‹</button>
 
       <!-- IMAGE SLIDE -->
       <img
@@ -26,55 +23,39 @@
         [src]="images[currentIndex]"
         class="slide-img"
         draggable="false"
-        (dragstart)="$event.preventDefault()" />
+        (dragstart)="$event.preventDefault()"
+      />
 
       <!-- CONTACT SLIDE -->
-      <div
-        *ngIf="currentIndex === images.length"
-        class="contact-slide">
-
+      <div *ngIf="currentIndex === images.length" class="contact-slide">
         <h3>Contact Us</h3>
 
         <div class="contact-wrapper">
-
           <div class="contact-row" *ngFor="let c of contacts">
-            <div class="contact-number">
-              📞 {{ c.phone }}
+            <div class="contact-number">📞 {{ c.phone }}</div>
+
+            <div class="contact-actions">
+              <a class="btn call" [href]="c.tel">Call</a>
+
+              <a class="btn whatsapp" [href]="c.whatsapp" target="_blank" rel="noopener">
+                Watsapp
+              </a>
             </div>
-
-           <div class="contact-actions">
-  <a class="btn call" [href]="c.tel">Call</a>
-
-  <a class="btn whatsapp"
-     [href]="c.whatsapp"
-     target="_blank"
-     rel="noopener">
-    Watsapp
-  </a>
-</div>
-
           </div>
 
           <div class="contact-email">
-            <a [href]="email.link">
-              ✉️ {{ email.value }}
-            </a>
+            <a [href]="email.link"> ✉️ {{ email.value }} </a>
           </div>
-
         </div>
       </div>
 
       <!-- RIGHT NAV -->
-      <button
-        class="nav right"
-        *ngIf="currentIndex < images.length"
-        (click)="next()">›</button>
+      <button class="nav right" [disabled]="currentIndex === images.length" (click)="next()">
+        ›
+      </button>
     </div>
 
     <!-- FOOTER -->
-    <div class="modal-footer">
-      {{ currentIndex + 1 }} / {{ totalSlides }}
-    </div>
-
+    <div class="modal-footer">{{ currentIndex + 1 }} / {{ totalSlides }}</div>
   </div>
 </div>

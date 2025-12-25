@@ -87,6 +87,11 @@
   );
   z-index: 1;
 }
+/* Any visual overlay must NOT capture clicks */
+.modal-body::before,
+.modal-body::after {
+  pointer-events: none !important;
+}
 
 .slide-img {
   position: relative;
@@ -120,6 +125,12 @@
   color: #fff;
   font-size: 28px;
   cursor: pointer;
+  z-index: 10;        /* MUST be higher than image */
+  pointer-events: auto;
+}
+
+.slide-img {
+  pointer-events: none;   /* image must not block clicks */
 }
 
 .nav.left {
@@ -244,6 +255,40 @@
 .contact-email a {
   color: #93c5fd;
   text-decoration: none;
+}
+
+/* Email link styling */
+a.mail-link,
+a[href^="mailto"] {
+  color: #93c5fd;          /* soft white */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a.mail-link:hover,
+a[href^="mailto"]:hover {
+  color: #facc15;           /* gold on hover */
+  text-decoration: underline;
+}
+.mail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mail-row i {
+  color: #facc15;           /* gold icon */
+}
+
+:host ::ng-deep .contact-email a {
+  color: #e5e7eb !important;
+  text-decoration: none !important;
+  font-weight: 500;
+}
+
+:host ::ng-deep .contact-email a:hover {
+  color: #facc15 !important;
+  text-decoration: underline;
 }
 
 /* =========================

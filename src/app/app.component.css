@@ -260,6 +260,20 @@ body {
   color: var(--text-soft);
 }
 
+/* =========================
+   FOOTER EMAIL LINK
+========================= */
+footer a[href^="mailto"] {
+  color: #e5e7eb;          /* soft white */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a[href^="mailto"]:hover {
+  color: #facc15;          /* RiseRoots gold */
+  text-decoration: underline;
+}
+
 /* ===============================
    MOBILE RESPONSIVE
 ================================ */
