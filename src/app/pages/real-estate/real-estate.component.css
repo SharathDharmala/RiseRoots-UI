@@ -42,11 +42,87 @@
 }
 
 /* BOTTOM MEDIA AREA */
+/* =========================
+   VIDEO CONTAINER
+========================= */
 .media-zone {
-  flex: 1;                 /* 🔥 fills remaining space */
-  min-height: 220px;
-  background: #000;
   position: relative;
+  width: 100%;
+  margin-top: 12px;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  background: transparent; /* 🔥 no black */
+}
+
+/* =========================
+   VIDEO ITSELF
+========================= */
+.bg-video {
+  width: 100%;
+  max-height: 220px;   /* ⬅ reduce from current size */
+  object-fit: cover;
+  display: block;
+  border-radius: 22px;
+  transition: opacity 0.5s ease-in-out; /* 🔥 smooth */
+  opacity: 1;
+}
+
+/* =========================
+   SOFT EDGE / CINEMATIC FADE
+========================= */
+.media-zone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  /* soft vignette */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0) 55%,
+    rgba(0,0,0,0.18) 100%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================
+   VIDEO WATERMARK
+========================= */
+.media-zone .video-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+
+  font-size: 58px;            /* slightly smaller due to reduced video height */
+  font-weight: 800;
+  letter-spacing: 6px;
+
+  color: rgba(255, 255, 255, 0.22); /* 🔥 increased intensity */
+  text-transform: uppercase;
+
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+
+/* Slightly stronger on mobile */
+@media (max-width: 768px) {
+  .media-zone {
+    min-height: 160px;
+  }
+  .media-zone .video-watermark {
+    font-size: 34px;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.26);
+  }
+  .bg-video {
+    object-fit: contain; /* less crop on mobile */
+  }
 }
 
 /* ======================================================
@@ -114,43 +190,71 @@
 /* ======================================================
    CENTER BANNER (MAIN HERO – SMALL IMAGE)
 ====================================================== */
+/* ======================================================
+   BANNER CONTAINER
+====================================================== */
 .banner {
   width: 100%;
+  position: relative;
   border-radius: 18px;
   overflow: hidden;
-  position: relative;
-  background: transparent;   /* 🔥 no black */
-}
 
-/* 🔥 THIS IS CRITICAL */
-.banner img {
-  width: 100%;
-  height: auto;              /* image decides height */
-  display: block;
-  object-fit: cover;         /* fills nicely for wide banners */
+  /* 🔥 remove dull / black background */
+  background: transparent;
 }
 
 /* ======================================================
-   BANNER OVERLAY
+   BANNER IMAGE (SMALL HERO)
+====================================================== */
+.banner img {
+  width: 100%;
+  height: auto;                /* 🔥 image controls height */
+  max-height: 360px;           /* desktop hero size */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+}
+
+/* ======================================================
+   OPTIONAL: BANNER VIDEO (future-proof)
+====================================================== */
+.banner video {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+}
+
+/* ======================================================
+   BANNER OVERLAY (BOTTOM ONLY – CENTER BRIGHT)
 ====================================================== */
 .banner-overlay {
   position: absolute;
   inset: 0;
+
   display: flex;
   align-items: flex-end;
-  padding: 20px;
+  padding: 18px 22px;
 
-  /* 🔥 only bottom dark, center stays bright */
+  /* 🔥 no dull center */
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0.20) 35%,
-    rgba(0,0,0,0.05) 60%,
-    rgba(0,0,0,0) 100%
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.30) 30%,
+    rgba(0, 0, 0, 0.10) 55%,
+    rgba(0, 0, 0, 0.00) 75%
   );
+
+  pointer-events: none; /* overlay should not block clicks */
 }
 
-
+/* ======================================================
+   TEXT
+====================================================== */
 .banner-overlay h3 {
   margin: 0 0 6px;
   font-size: 22px;
@@ -160,7 +264,8 @@
 
 .banner-sub {
   font-size: 13px;
-  opacity: 0.95;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.4;
 }
 
 /* ======================================================
@@ -245,6 +350,53 @@
     max-height: 35vh;
   }
 }
+
+/* ======================================================
+   RESPONSIVE TUNING
+====================================================== */
+@media (max-width: 1024px) {
+  .banner img,
+  .banner video {
+    max-height: 300px;
+  }
+
+  .banner-overlay h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner img,
+  .banner video {
+    max-height: 240px;
+    border-radius: 14px;
+  }
+
+  .banner-overlay {
+    padding: 14px 16px;
+  }
+
+  .banner-overlay h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner img,
+  .banner video {
+    max-height: 200px;
+    border-radius: 12px;
+  }
+
+  .banner-overlay h3 {
+    font-size: 16px;
+  }
+
+  .banner-sub {
+    font-size: 12px;
+  }
+}
+
 
 /* ======================================================
    IMAGE PROTECTION

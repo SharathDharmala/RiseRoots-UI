@@ -27,17 +27,22 @@
             </p>
           </div>
         </div>
+
+        <!-- VIDEO ZONE -->
+        <div class="media-zone" *ngIf="bannerMedia.enabled">
+          <video #vizagVideo class="bg-video" autoplay muted playsinline preload="metadata"></video>
+
+          <div class="video-watermark">
+            {{ bannerMedia.watermarkText }}
+          </div>
+        </div>
       </section>
 
       <!-- AREAS -->
       <section class="areas">
         <h4>Available Areas</h4>
 
-        <div
-          class="area-card"
-          *ngFor="let area of areas"
-          (click)="openArea(area)"
-        >
+        <div class="area-card" *ngFor="let area of areas" (click)="openArea(area)">
           <div class="area-title">📍 {{ area.name }}</div>
 
           <div class="area-desc" *ngIf="area.description">
@@ -54,5 +59,6 @@
   *ngIf="modalVisible"
   [title]="modalTitle"
   [media]="modalMedia"
-  (closed)="closeModal()">
+  (closed)="closeModal()"
+>
 </app-area-modal>
