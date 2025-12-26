@@ -176,6 +176,49 @@ body {
   display: block;
   margin: 0 auto 18px;
 }
+/* MAIN SERVICES CONTAINER */
+.services-card {
+  background: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 48px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* TITLE */
+.services-card h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* PARAGRAPHS */
+.services-card p,
+.services-card li {
+  text-align: left;              /* 🔥 important */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+  .services-card {
+    padding: 22px 18px;          /* 🔥 equal left & right padding */
+    margin: 0 12px;              /* 🔥 prevents edge clipping */
+  }
+
+  .services-card h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .services-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    text-align: left;            /* 🔥 NOT center */
+  }
+}
 
 /* ===============================
    FOOTER
