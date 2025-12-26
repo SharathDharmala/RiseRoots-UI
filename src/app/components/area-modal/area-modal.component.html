@@ -63,23 +63,22 @@
 
       <!-- CONTACT SLIDE -->
       <div *ngIf="currentIndex === media.length" class="contact-slide">
-        <h3>Contact Us</h3>
+        <div class="contact-content">
+          <h3>Contact Us</h3>
 
-        <div class="contact-wrapper">
-          <div class="contact-row" *ngFor="let c of contacts">
-            <div class="contact-number">📞 {{ c.phone }}</div>
+          <div class="contact-wrapper">
+            <div class="contact-row" *ngFor="let c of contacts">
+              <div class="contact-number">📞 {{ c.phone }}</div>
 
-            <div class="contact-actions">
-              <a class="btn call" [href]="c.tel">Call</a>
-
-              <a class="btn whatsapp" [href]="c.whatsapp" target="_blank" rel="noopener">
-                WhatsApp
-              </a>
+              <div class="contact-actions">
+                <a class="btn call" [href]="c.tel">Call</a>
+                <a class="btn whatsapp" [href]="c.whatsapp" target="_blank">WhatsApp</a>
+              </div>
             </div>
-          </div>
 
-          <div class="contact-email">
-            <a [href]="email.link"> ✉️ {{ email.value }} </a>
+            <div class="contact-email">
+              <a [href]="email.link"> ✉️ {{ email.value }} </a>
+            </div>
           </div>
         </div>
       </div>

@@ -162,22 +162,41 @@
    CONTACT SLIDE
 ========================= */
 .contact-slide {
-  z-index: 2;
-  color: #fff;
-  text-align: center;
+  position: relative; /* 🔥 override media behavior */
+  width: 100%;
+  height: 100%; /* 🔥 fill modal body */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 🔥 vertical centering */
+  align-items: center; /* 🔥 horizontal centering */
+
+  padding: 24px 20px;
+  box-sizing: border-box;
+
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(6px);
-  padding: 32px 28px;
+
   border-radius: 14px;
-  max-width: 520px;
-  width: 90%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .contact-slide h3 {
-  margin-bottom: 16px;
+  color: #ffffff !important;   /* 🔥 force white */
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.contact-content {
+  width: 100%;
+  max-width: 520px; /* 🔥 controls card width */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 16px;
 }
 
 /* =========================
@@ -192,30 +211,51 @@
 }
 
 .contact-row {
+  width: 100%;
   background: #111;
-  border-radius: 22px;
-  padding: 10px 14px;
+  border-radius: 20px;
+
+  padding: 14px 18px;
+
   display: flex;
-  align-items: center;
+  align-items: center;            /* 🔥 hard vertical center */
   justify-content: space-between;
+
+  min-height: 56px;               /* 🔥 stabilizes row height */
 }
 
 .contact-number {
+  color: #ffffff !important;      /* 🔥 force visible white */
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;            /* 🔥 vertical alignment */
+  gap: 8px;
+
+  line-height: 1;                 /* 🔥 prevents vertical drift */
   white-space: nowrap;
 }
 
 .contact-actions {
   display: flex;
-  gap: 15px;
+  align-items: center;            /* 🔥 align with number */
+  gap: 10px;
+}
+
+.contact-content,
+.contact-row,
+.contact-number {
+  opacity: 1 !important;          /* 🔥 override fade */
 }
 
 .contact-actions a {
-  display: inline-flex;
-  align-items: center;
+  min-width: 72px;
+  text-align: center;
+
   padding: 6px 14px;
   border-radius: 18px;
+
   font-size: 13px;
   font-weight: 600;
 }
@@ -234,9 +274,14 @@
    EMAIL (CONTACT + FOOTER SAFE)
 ========================= */
 .contact-email {
-  background: #1f2937;
-  border-radius: 22px;
-  padding: 12px 20px;
+  margin-top: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-size: 14px;
 }
 
 .contact-email a {
@@ -258,15 +303,19 @@
     height: 300px;
   }
 
+  .contact-slide {
+    justify-content: flex-start;   /* 🔥 avoids vertical squeeze */
+    padding-top: 20px;
+  }
+
   .contact-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
+    min-height: auto;
   }
 
   .contact-actions {
-    width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
   }
 }
 

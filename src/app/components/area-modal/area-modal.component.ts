@@ -29,7 +29,7 @@ export class AreaModalComponent implements OnChanges {
   private startX = 0;
   private swipeThreshold = 50;
 
-  /* CONTACT DATA */
+  /* CONTACT DATA 
   contacts = [
     {
       phone: '+91 7801021056',
@@ -46,7 +46,7 @@ export class AreaModalComponent implements OnChanges {
   email = {
     value: 'riseroots@outlook.com',
     link: 'mailto:riseroots@outlook.com',
-  };
+  };*/
 
   /* Total slides (last = contact slide) */
   get totalSlides(): number {
