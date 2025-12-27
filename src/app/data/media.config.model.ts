@@ -1,5 +1,5 @@
 export interface MediaSourceConfig {
-  basePath: string;     // e.g. 'assets/videos/vizag'
-  count: number;        // number of files
-  ext?: 'mp4' | 'webm'; // default mp4
+  basePath: string;   
+  count: number;      
+  ext?: 'jpg' | 'jpeg' | 'png' | 'webp' | 'mp4' | 'webm' | 'JPG' | 'JPEG' | 'PNG' | 'WEBP' | 'MP4' | 'WEBM';
 }

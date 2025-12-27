@@ -7,7 +7,7 @@ import { RealEstateComponent } from './pages/real-estate/real-estate.component';
 import { Meta, Title } from '@angular/platform-browser';
 
 /* ✅ CONFIG IMPORT (dot notation – matches contact.config.ts) */
-import { CONTACT_CONFIG, ContactItem } from './data/contact.config';
+import { CONTACT_CONFIG, ContactItem } from './config/contact.config';
 
 @Component({
   selector: 'app-root',

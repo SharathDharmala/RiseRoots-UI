@@ -15,8 +15,9 @@
         </button>
       </aside>
 
-      <!-- BANNER -->
+      <!-- CENTER -->
       <section class="realestate-center">
+        <!-- BANNER -->
         <div class="banner">
           <img [src]="activeCategory.banner" alt="Category Banner" />
 
@@ -28,19 +29,40 @@
           </div>
         </div>
 
-        <!-- VIDEO ZONE -->
-        <div class="media-zone" *ngIf="bannerMedia.enabled">
-          <video #vizagVideo class="bg-video" autoplay muted playsinline preload="metadata"></video>
+        <!-- MEDIA ZONE -->
+        <ng-container *ngIf="bannerMedia.videoEnabled || (bannerMedia.imageEnabled && hasImages)">
+          <div class="banner-media-zone">
+            <!-- VIDEO -->
+            <video
+              *ngIf="bannerMedia.videoEnabled"
+              #vizagVideo
+              class="bg-video"
+              autoplay
+              muted
+              playsinline
+            ></video>
 
-          <div class="video-watermark">
-            {{ bannerMedia.watermarkText }}
+            <!-- IMAGE SLIDER -->
+            <img
+              *ngIf="bannerMedia.imageEnabled && hasImages"
+              class="banner-slide"
+              [src]="images[currentImageIndex]"
+            />
+
+            <!-- WATERMARK -->
+            <div class="video-watermark" *ngIf="bannerMedia.watermarkText">
+              {{ bannerMedia.watermarkText }}
+            </div>
           </div>
-        </div>
+        </ng-container>
       </section>
 
       <!-- AREAS -->
       <section class="areas">
-        <h4>Available Areas</h4>
+        <div class="locations-cta">
+          Click Below to View Locations
+          <span class="arrow">↓</span>
+        </div>
 
         <div class="area-card" *ngFor="let area of areas" (click)="openArea(area)">
           <div class="area-title">📍 {{ area.name }}</div>

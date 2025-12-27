@@ -67,17 +67,28 @@
           <h3>Contact Us</h3>
 
           <div class="contact-wrapper">
-            <div class="contact-row" *ngFor="let c of contacts">
-              <div class="contact-number">📞 {{ c.phone }}</div>
+            <!-- PHONE + WHATSAPP ROWS -->
+            <div class="contact-row" *ngFor="let group of contactGroups">
+              <div class="contact-number">📞 {{ group.value }}</div>
 
               <div class="contact-actions">
-                <a class="btn call" [href]="c.tel">Call</a>
-                <a class="btn whatsapp" [href]="c.whatsapp" target="_blank">WhatsApp</a>
+                <a *ngIf="group.phone" class="btn call" [href]="group.phone.link"> Call </a>
+
+                <a
+                  *ngIf="group.whatsapp"
+                  class="btn whatsapp"
+                  [href]="group.whatsapp.link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  WhatsApp
+                </a>
               </div>
             </div>
 
-            <div class="contact-email">
-              <a [href]="email.link"> ✉️ {{ email.value }} </a>
+            <!-- EMAIL -->
+            <div class="contact-email" *ngIf="emailContact">
+              <a [href]="emailContact.link"> ✉️ {{ emailContact.value }} </a>
             </div>
           </div>
         </div>

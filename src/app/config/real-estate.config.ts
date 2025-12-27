@@ -102,7 +102,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.FARM],
         [
           { basePath: `${FARM}/devarapalli-phenixvalley`, count: 3 },
-          { basePath: `${FARM}/devarapalli-phenixvalley`, count: 1, ext: 'pdf' },
+          { basePath: `${FARM}/devarapalli-phenixvalley`, count: 0, ext: 'pdf' },
         ]
       ),
     },
@@ -114,7 +114,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.FARM],
         [
           { basePath: `${FARM}/gajapathinagaram`, count: 1, ext: 'mp4' },
-          { basePath: `${FARM}/gajapathinagaram`, count: 2, ext: 'pdf' },
+          { basePath: `${FARM}/gajapathinagaram`, count: 0, ext: 'pdf' },
         ]
       ),
     },
@@ -136,7 +136,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.PLOTS],
         [
           { basePath: `${PLOTS}/tagarapuvalasa-utakrsha`, count: 3 },
-          { basePath: `${PLOTS}/tagarapuvalasa-utakrsha`, count: 2, ext: 'pdf' },
+          { basePath: `${PLOTS}/tagarapuvalasa-utakrsha`, count: 0, ext: 'pdf' },
         ]
       ),
     },
@@ -206,8 +206,19 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
           { basePath: `${PLOTS}/kothavalasa`, count: 2 },
           { basePath: `${PLOTS}/kothavalasa`, count: 1, ext: 'mp4' },
         ]
-      ),
+      )
     },
+    {
+      key: 'dabbanda',
+      name: 'Dabbanda(Simhachalam)',
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [
+          { basePath: '${PLOTS}/dabbanda', count: 8 },
+          { basePath: '${PLOTS}/dabbanda', count: 0, ext: 'mp4' },
+        ]
+      ),
+    }
   ],
 
   /* ===============================
