@@ -1,0 +1,86 @@
+<section class="page-section">
+  <div class="realestate-container">
+    <div class="realestate">
+      <!-- CATEGORY MENU -->
+      <aside class="menu">
+        <button
+          *ngFor="let c of categories"
+          (click)="selectCategory(c)"
+          [class.active]="c.key === activeCategory.key"
+          [class.disabled]="c.disabled"
+          [disabled]="c.disabled"
+        >
+          {{ c.label[lang] }}
+          <span *ngIf="c.disabled" class="coming-soon"></span>
+        </button>
+      </aside>
+
+      <!-- CENTER -->
+      <section class="realestate-center">
+        <!-- BANNER -->
+        <div class="banner">
+          <img [src]="activeCategory.banner" alt="Category Banner" />
+
+          <div class="banner-overlay">
+            <h3>{{ activeCategory.label[lang] }}</h3>
+            <p class="banner-sub">
+              {{ activeCategory.subtitle?.[lang] }}
+            </p>
+          </div>
+        </div>
+
+        <!-- MEDIA ZONE -->
+        <ng-container *ngIf="bannerMedia.videoEnabled || (bannerMedia.imageEnabled && hasImages)">
+          <div class="banner-media-zone">
+            <!-- VIDEO -->
+            <video
+              *ngIf="bannerMedia.videoEnabled"
+              #vizagVideo
+              class="bg-video"
+              autoplay
+              muted
+              playsinline
+            ></video>
+
+            <!-- IMAGE SLIDER -->
+            <img
+              *ngIf="bannerMedia.imageEnabled && hasImages"
+              class="banner-slide"
+              [src]="images[currentImageIndex]"
+            />
+
+            <!-- WATERMARK -->
+            <div class="video-watermark" *ngIf="bannerMedia.watermarkText">
+              {{ bannerMedia.watermarkText }}
+            </div>
+          </div>
+        </ng-container>
+      </section>
+
+      <!-- AREAS -->
+      <section class="areas">
+        <div class="locations-cta">
+          Click Below to View Locations
+          <span class="arrow">↓</span>
+        </div>
+
+        <div class="area-card" *ngFor="let area of areas" (click)="openArea(area)">
+          <div class="area-title">📍 {{ area.name }}</div>
+
+          <div class="area-desc" *ngIf="area.description">
+            {{ area.description }}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- AREA MODAL -->
+<app-area-modal
+  *ngIf="modalVisible"
+  [title]="modalTitle"
+  [media]="modalMedia"
+  (closed)="closeModal()"
+>
+</app-area-modal>

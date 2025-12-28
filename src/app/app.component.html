@@ -1,0 +1,129 @@
+<!-- ================= HEADER ================= -->
+<header class="header" [ngClass]="lang">
+  <!-- HEADER INNER -->
+  <div class="header-inner header-wide">
+    <!-- BRAND -->
+    <div class="brand header-logo">
+      <img src="assets/logo/riseroots.png" alt="RiseRoots Logo" class="logo" />
+      <span class="brand-name">
+        {{ text[lang].title }}
+      </span>
+    </div>
+
+    <!-- LANGUAGE SWITCH -->
+    <div class="lang">
+      <button (click)="switchLang('en')">EN</button>
+      <button (click)="switchLang('te')">TE</button>
+      <button (click)="switchLang('hi')">HI</button>
+    </div>
+  </div>
+
+  <!-- TAGLINE -->
+  <div class="tagline">
+    {{ text[lang].tagline }}
+  </div>
+
+  <!-- TABS -->
+  <nav class="tabs">
+    <button [class.active]="activeTab === 'services'" (click)="switchTab('services')">
+      {{ lang === 'en' ? 'Our Services' : lang === 'te' ? 'మా సేవలు' : 'हमारी सेवाएँ' }}
+    </button>
+
+    <button [class.active]="activeTab === 'realestate'" (click)="switchTab('realestate')">
+      {{ lang === 'en' ? 'Real Estate' : lang === 'te' ? 'రియల్ ఎస్టేట్' : 'रियल एस्टेट' }}
+    </button>
+
+    <button [class.active]="activeTab === 'xyz'" (click)="switchTab('xyz')">...</button>
+  </nav>
+</header>
+
+<!-- ================= TAB CONTENT ================= -->
+<div class="tab-content">
+  <app-landing *ngIf="activeTab === 'services'" [lang]="lang"> </app-landing>
+
+  <app-real-estate *ngIf="activeTab === 'realestate'" [lang]="lang"> </app-real-estate>
+
+  <section *ngIf="activeTab === 'xyz'" class="placeholder">
+    <h2>Coming Soon</h2>
+  </section>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-wide footer-grid">
+    <!-- LEFT : ADDRESS -->
+    <div class="footer-left">
+      <p class="address">
+        Kailash's MK Towers, 49-11-24,<br />
+        Lalitha Nagar, Akkayyapalem,<br />
+        Visakhapatnam, Andhra Pradesh – 530016
+      </p>
+    </div>
+
+    <!-- RIGHT : CONTACT + LINKS -->
+    <div class="footer-right">
+      <!-- CONTACT -->
+      <div class="contact">
+        <div class="contact-row" *ngFor="let g of groupedContacts">
+          <!-- CALL -->
+          <a
+            *ngIf="g.phone"
+            [href]="g.phone.link"
+            class="phone"
+            aria-label="Call {{ g.value }}"
+            (click)="contactActions.call(g.value, 'app_root')"
+          >
+            📞 {{ g.value }}
+          </a>
+
+          <!-- WHATSAPP -->
+          <a
+            *ngIf="g.whatsapp"
+            [href]="g.whatsapp.link"
+            target="_blank"
+            rel="noopener"
+            class="icon whatsapp"
+            aria-label="WhatsApp {{ g.value }}"
+            (click)="contactActions.whatsapp(g.value, 'app_root')"
+          >
+            <img src="assets/icons/watsapp.png" alt="WhatsApp" class="whatsapp-icon" />
+            WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-row" *ngFor="let e of emailContacts">
+          <a [href]="e.link" class="email" aria-label="Email {{ e.value }}">
+            <img src="assets/icons/email.png" alt="Email" class="email-icon" />
+
+            {{ e.value }}
+          </a>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="footer-links">
+        <a href="https://g.page/r/Cdfwoh1q0OHuEAE/review" target="_blank">
+          ⭐
+          {{ lang === 'en' ? 'Google Reviews' : lang === 'te' ? 'గూగుల్ సమీక్షలు' : 'गूगल रिव्यू' }}
+        </a>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=RiseRoots+Enterprises+Akkayyapalem+Visakhapatnam"
+          target="_blank"
+        >
+          📍
+          {{
+            lang === 'en'
+              ? 'View on Google Maps'
+              : lang === 'te'
+              ? 'గూగుల్ మ్యాప్స్‌లో చూడండి'
+              : 'गूगल मैप्स पर देखें'
+          }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">© RiseRoots Enterprises. All rights reserved.</div>
+</footer>

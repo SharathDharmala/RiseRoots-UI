@@ -1,0 +1,574 @@
+/* =========================
+   BACKDROP
+========================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 900px;
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, #3b5ccc, #4f7dff);
+  color: #ffffff;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* =========================
+   BODY
+========================= */
+.modal-body {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+/* visual overlay only */
+.modal-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.35));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =========================
+   MEDIA (IMAGE / VIDEO / PDF)
+========================= */
+.slide-img,
+.slide-video {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* media must not block nav clicks */
+.slide-img,
+.slide-video,
+.slide-pdf {
+  pointer-events: none;
+}
+
+/* =========================
+   PDF FIX (IMPORTANT)
+========================= */
+.slide-pdf {
+  position: relative;
+  z-index: 5; /* above overlay */
+  width: 100%;
+  height: 100%;
+  min-height: 360px; /* 🔥 key fix */
+  border-radius: 12px;
+  background: #111;
+}
+
+.pdf-fallback {
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+/* =========================
+   NAV BUTTONS
+========================= */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav.left {
+  left: 14px;
+}
+
+.nav.right {
+  right: 14px;
+}
+
+.nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.modal-footer {
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* =========================
+   CONTACT SLIDE
+========================= */
+.contact-slide {
+  position: relative; /* 🔥 override media behavior */
+  width: 100%;
+  height: 100%; /* 🔥 fill modal body */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 🔥 vertical centering */
+  align-items: center; /* 🔥 horizontal centering */
+
+  padding: 24px 20px;
+  box-sizing: border-box;
+
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(6px);
+
+  border-radius: 14px;
+}
+
+.contact-slide h3 {
+  color: #ffffff !important; /* 🔥 force white */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.contact-content {
+  width: 100%;
+  max-width: 520px; /* 🔥 controls card width */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 16px;
+}
+
+/* =========================
+   CONTACT CONTENT
+========================= */
+.contact-wrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-row {
+  width: 100%;
+  background: #111;
+  border-radius: 20px;
+
+  padding: 14px 18px;
+
+  display: flex;
+  align-items: center; /* 🔥 hard vertical center */
+  justify-content: space-between;
+
+  min-height: 56px; /* 🔥 stabilizes row height */
+}
+
+.contact-number {
+  color: #ffffff !important; /* 🔥 force visible white */
+  font-size: 14px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center; /* 🔥 vertical alignment */
+  gap: 8px;
+
+  line-height: 1; /* 🔥 prevents vertical drift */
+  white-space: nowrap;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center; /* 🔥 align with number */
+  gap: 10px;
+}
+
+.contact-content,
+.contact-row,
+.contact-number {
+  opacity: 1 !important; /* 🔥 override fade */
+}
+
+.contact-actions a {
+  min-width: 72px;
+  text-align: center;
+
+  padding: 6px 14px;
+  border-radius: 18px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.call {
+  background: #2563eb;
+  color: #fff;
+}
+
+.whatsapp {
+  background: #25d366;
+  color: #000;
+}
+
+/* =========================
+   EMAIL (CONTACT + FOOTER SAFE)
+========================= */
+.contact-email {
+  margin-top: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.contact-email a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-email a:hover {
+  color: #facc15;
+  text-decoration: underline;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .modal-body {
+    height: 300px;
+  }
+
+  .contact-slide {
+    justify-content: flex-start; /* 🔥 avoids vertical squeeze */
+    padding-top: 20px;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    gap: 10px;
+    min-height: auto;
+  }
+
+  .contact-actions {
+    justify-content: center;
+  }
+}
+
+/* =========================
+   WATERMARK (GLOBAL SLIDER)
+========================= */
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.1); /* 🔥 low intensity */
+  z-index: 4;
+
+  pointer-events: none; /* 🔥 never block clicks */
+  user-select: none;
+
+  white-space: nowrap;
+}
+
+/* Slightly stronger on video & PDF */
+.slide-video ~ .watermark,
+.slide-pdf ~ .watermark,
+.pdf-placeholder ~ .watermark {
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* Mobile tuning */
+@media (max-width: 768px) {
+  .watermark {
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+}
+
+/* =========================
+   CONTACT – RESPONSIVE ACTION SWITCH
+   (Safe Add-on for RiseRoots GUI)
+========================= */
+
+/* Desktop default */
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* Mobile icon buttons */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.icon-btn.call {
+  background: #2563eb;
+  color: #fff;
+}
+
+.icon-btn.whatsapp {
+  background: #25d366;
+}
+
+.icon-btn img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* =========================
+   MOBILE SMART CONTACT LAYOUT
+========================= */
+@media (max-width: 768px) {
+  /* Contact row becomes clean & flat */
+  .contact-row {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+
+  /* Inline action icons */
+  .mobile-inline {
+    display: flex;
+    gap: 12px;
+  }
+
+  .icon-inline {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .icon-inline.call {
+    color: #93c5fd;
+  }
+
+  .icon-inline.whatsapp {
+    background: rgba(37, 211, 102, 0.15);
+    border-color: rgba(37, 211, 102, 0.35);
+  }
+
+  .icon-inline.whatsapp img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 🔥 EMAIL FOOTER — NEVER OVERLAPS */
+  .contact-footer {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  /* Let slide breathe */
+  .contact-slide {
+    overflow-y: auto;
+  }
+}
+
+/* =========================
+   CONTACT FOOTER – EMAIL (Reach us @)
+========================= */
+.contact-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Label text: "Reach us @" */
+.contact-footer {
+  line-height: 1.4;
+}
+
+/* Email link */
+.contact-footer a {
+  color: #93c5fd;                 /* soft blue */
+  text-decoration: none;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.contact-footer a:hover {
+  background: rgba(147, 197, 253, 0.15);
+  text-decoration: underline;
+}
+
+/* Mail icon spacing */
+.contact-footer a::before {
+  margin-right: 4px;
+}
+
+/* =========================
+   WHATSAPP ICON – SOFT ROUNDED CORNERS
+========================= */
+@media (max-width: 768px) {
+
+  /* WhatsApp gets softer rounded-square look */
+  .icon-inline.whatsapp {
+    border-radius: 10px; /* 👈 round corners, not full circle */
+  }
+
+  /* Optional: slightly smoother inner icon */
+  .icon-inline.whatsapp img {
+    border-radius: 4px;
+  }
+}
+/* =========================
+   HARD DESKTOP PROTECTION
+========================= */
+@media (min-width: 769px) {
+
+  /* Never show mobile inline icons on desktop */
+  .mobile-inline,
+  .icon-inline {
+    display: none !important;
+  }
+
+  /* Restore desktop buttons cleanly */
+  .desktop-only {
+    display: flex !important;
+  }
+
+  /* Safety: prevent large icon leaks */
+  .icon-inline img {
+    max-width: 0 !important;
+    max-height: 0 !important;
+  }
+}
+/* =========================
+   HARD MOBILE PROTECTION
+========================= */
+@media (max-width: 768px) {
+
+  /* Mobile should never show text buttons */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Mobile inline icons only */
+  .mobile-inline {
+    display: flex !important;
+  }
+
+  /* Final WhatsApp icon size clamp */
+  .icon-inline.whatsapp img {
+    width: 16px;
+    height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-footer {
+    font-size: 13px;
+  }
+}
