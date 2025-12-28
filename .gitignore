@@ -41,3 +41,12 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignore all video files everywhere
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Safety: ignore any media folders if needed
+src/public/**/videos/
