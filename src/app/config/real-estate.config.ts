@@ -214,10 +214,9 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       images: generateMedia(
         [BANNERS.PLOTS],
         [
-          { basePath: '${PLOTS}/dabbanda', count: 8 },
-          { basePath: '${PLOTS}/dabbanda', count: 0, ext: 'mp4' },
+          { basePath: '${PLOTS}/dabbanda', count: 8 }
         ]
-      ),
+      )
     }
   ],
 

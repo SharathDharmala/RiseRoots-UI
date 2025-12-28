@@ -69,9 +69,12 @@
           <div class="contact-wrapper">
             <!-- PHONE + WHATSAPP ROWS -->
             <div class="contact-row" *ngFor="let group of contactGroups">
-              <div class="contact-number">📞 {{ group.value }}</div>
+              <div class="contact-number">
+                {{ group.value }}
+              </div>
 
-              <div class="contact-actions">
+              <!-- DESKTOP ACTIONS -->
+              <div class="contact-actions desktop-only">
                 <a *ngIf="group.phone" class="btn call" [href]="group.phone.link"> Call </a>
 
                 <a
@@ -84,10 +87,37 @@
                   WhatsApp
                 </a>
               </div>
+
+              <!-- MOBILE ACTIONS -->
+              <div class="contact-actions mobile-inline">
+                <!-- CALL -->
+                <a
+                  *ngIf="group.phone"
+                  class="icon-inline call"
+                  [href]="group.phone.link"
+                  aria-label="Call"
+                  (click)="onCallClick(group.value)"
+                >
+                  📞
+                </a>
+
+                <!-- WHATSAPP -->
+                <a
+                  *ngIf="group.whatsapp"
+                  class="icon-inline whatsapp"
+                  [href]="group.whatsapp.link"
+                  target="_blank"
+                  aria-label="WhatsApp"
+                  (click)="onWhatsAppClick(group.value)"
+                >
+                  <img src="assets/icons/watsapp.png" alt="WhatsApp" />
+                </a>
+              </div>
             </div>
 
             <!-- EMAIL -->
-            <div class="contact-email" *ngIf="emailContact">
+            <div class="contact-footer" *ngIf="emailContact">
+              {{ emailContact.label }}
               <a [href]="emailContact.link"> ✉️ {{ emailContact.value }} </a>
             </div>
           </div>

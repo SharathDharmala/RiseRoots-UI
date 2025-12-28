@@ -65,10 +65,18 @@
       <!-- CONTACT -->
       <div class="contact">
         <div class="contact-row" *ngFor="let g of groupedContacts">
-          <a *ngIf="g.phone" [href]="g.phone.link" class="phone" aria-label="Call {{ g.value }}">
+          <!-- CALL -->
+          <a
+            *ngIf="g.phone"
+            [href]="g.phone.link"
+            class="phone"
+            aria-label="Call {{ g.value }}"
+            (click)="contactActions.call(g.value, 'app_root')"
+          >
             📞 {{ g.value }}
           </a>
 
+          <!-- WHATSAPP -->
           <a
             *ngIf="g.whatsapp"
             [href]="g.whatsapp.link"
@@ -76,9 +84,9 @@
             rel="noopener"
             class="icon whatsapp"
             aria-label="WhatsApp {{ g.value }}"
+            (click)="contactActions.whatsapp(g.value, 'app_root')"
           >
             <img src="assets/icons/watsapp.png" alt="WhatsApp" class="whatsapp-icon" />
-
             WhatsApp
           </a>
         </div>

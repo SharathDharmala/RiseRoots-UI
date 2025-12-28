@@ -11,6 +11,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { CONTACT_CONFIG, ContactItem } from '../../config/contact.config';
+import { ContactActionsService } from '../../services/contact-actions.service';
 
 /* =========================
    GROUPED CONTACT MODEL
@@ -48,6 +49,11 @@ export class AreaModalComponent implements OnChanges, OnInit {
   ========================= */
   contactGroups: ContactGroup[] = [];
   emailContact?: ContactItem;
+
+  /* =========================
+     CONSTRUCTOR (NEW – SAFE)
+  ========================= */
+  constructor(public contactActions: ContactActionsService) {}
 
   /* =========================
      LIFECYCLE
@@ -91,6 +97,17 @@ export class AreaModalComponent implements OnChanges, OnInit {
     }
 
     this.contactGroups = Array.from(map.values());
+  }
+
+  /* =========================
+     ANALYTICS WRAPPERS (NEW)
+  ========================= */
+  onCallClick(phone: string) {
+    this.contactActions.call(phone, 'area_modal');
+  }
+
+  onWhatsAppClick(phone: string) {
+    this.contactActions.whatsapp(phone, 'area_modal');
   }
 
   /* =========================

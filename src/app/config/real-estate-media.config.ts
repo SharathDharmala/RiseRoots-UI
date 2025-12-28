@@ -6,7 +6,7 @@ export const REAL_ESTATE_BANNER_MEDIA = {
   /* =========================
      VIDEO CONTROL
   ========================= */
-  videoEnabled: false, // 🔥 individual toggle
+  videoEnabled: true, // 🔥 individual toggle
   video: {
     playbackRate: 1.0,
     maxItemsToPlay: 7,
@@ -20,7 +20,7 @@ export const REAL_ESTATE_BANNER_MEDIA = {
   /* =========================
      IMAGE SLIDER CONTROL
   ========================= */
-  imageEnabled: true, // 🔥 individual toggle
+  imageEnabled: false, // 🔥 individual toggle
   image: {
     autoSlide: true,
     slideInterval: 2500,

@@ -11,18 +11,6 @@ export interface ContactItem {
 
 export const CONTACT_CONFIG: ContactItem[] = [
   {
-    type: 'whatsapp',
-    label: 'WhatsApp',
-    value: '+91 7801021056',
-    link: 'https://wa.me/917801021056',
-  },
-  {
-    type: 'phone',
-    label: 'Call',
-    value: '+91 7801021056',
-    link: 'tel:+917801021056',
-  },
-  {
     type: 'phone',
     label: 'Call',
     value: '+91 7036238999',
@@ -33,6 +21,18 @@ export const CONTACT_CONFIG: ContactItem[] = [
     label: 'WhatsApp',
     value: '+91 7036238999',
     link: 'https://wa.me/917036238999',
+  },
+  {
+    type: 'whatsapp',
+    label: 'WhatsApp',
+    value: '+91 7801021056',
+    link: 'https://wa.me/917801021056',
+  },
+  {
+    type: 'phone',
+    label: 'Call',
+    value: '+91 7801021056',
+    link: 'tel:+917801021056',
   },
   {
     type: 'email',

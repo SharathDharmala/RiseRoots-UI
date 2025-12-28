@@ -6,8 +6,11 @@ import { RealEstateComponent } from './pages/real-estate/real-estate.component';
 
 import { Meta, Title } from '@angular/platform-browser';
 
-/* ✅ CONFIG IMPORT (dot notation – matches contact.config.ts) */
+/* CONFIG */
 import { CONTACT_CONFIG, ContactItem } from './config/contact.config';
+
+/* SERVICES */
+import { ContactActionsService } from './services/contact-actions.service';
 
 @Component({
   selector: 'app-root',
@@ -17,33 +20,33 @@ import { CONTACT_CONFIG, ContactItem } from './config/contact.config';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  /* ================= CONTACT DATA ================= */
 
+  /* ================= CONTACT DATA ================= */
   contacts: ContactItem[] = CONTACT_CONFIG;
 
-  /* ================= META / TITLE ================= */
+  /* ================= LANGUAGE ================= */
+  lang: 'en' | 'te' | 'hi' = 'en';
 
-  constructor(private meta: Meta, private title: Title) {
+  text: any = {
+    en: { title: 'RiseRoots Enterprises' },
+    te: { title: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్' },
+    hi: { title: 'राइज़रूट्स एंटरప్రైज़ेज़' },
+  };
+
+  /* ================= TABS ================= */
+  activeTab: 'services' | 'realestate' | 'xyz' = 'services';
+
+  /* ================= CONSTRUCTOR (ONLY ONE) ================= */
+  constructor(
+    private meta: Meta,
+    private title: Title,
+    public contactActions: ContactActionsService
+  ) {
     this.updateMeta();
     this.setPageTitle();
   }
 
   /* ================= LANGUAGE ================= */
-
-  lang: 'en' | 'te' | 'hi' = 'en';
-
-  text: any = {
-    en: {
-      title: 'RiseRoots Enterprises',
-    },
-    te: {
-      title: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్',
-    },
-    hi: {
-      title: 'राइज़रूट्स एंटरप्राइज़ेज़',
-    },
-  };
-
   switchLang(language: 'en' | 'te' | 'hi') {
     this.lang = language;
     this.updateMeta();
@@ -51,20 +54,16 @@ export class AppComponent {
   }
 
   /* ================= TABS ================= */
-
-  activeTab: 'services' | 'realestate' | 'xyz' = 'services';
-
   switchTab(tab: 'services' | 'realestate' | 'xyz') {
     this.activeTab = tab;
   }
 
   /* ================= PAGE TITLE ================= */
-
   setPageTitle() {
     const titles = {
       en: 'RiseRoots Enterprises | Real Estate Consultants',
       te: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ | రియల్ ఎస్టేట్',
-      hi: 'राइज़रूट्स एंटरप्राइज़ेज़ | रियल एस्टेट',
+      hi: 'राइज़रूट्स एంటర్‌प्रైజెస్ | रियल एस्टेट',
     };
 
     this.title.setTitle(titles[this.lang]);
@@ -85,9 +84,6 @@ export class AppComponent {
 
   /* ================= CONTACT HELPERS ================= */
 
-  /**
-   * Groups phone + WhatsApp of same number into a single row
-   */
   get groupedContacts(): {
     value: string;
     phone?: ContactItem;
@@ -95,11 +91,7 @@ export class AppComponent {
   }[] {
     const map = new Map<
       string,
-      {
-        value: string;
-        phone?: ContactItem;
-        whatsapp?: ContactItem;
-      }
+      { value: string; phone?: ContactItem; whatsapp?: ContactItem }
     >();
 
     for (const c of this.contacts) {
@@ -114,15 +106,11 @@ export class AppComponent {
     return Array.from(map.values());
   }
 
-  /**
-   * Email contacts shown separately
-   */
   get emailContacts(): ContactItem[] {
     return this.contacts.filter((c) => c.type === 'email');
   }
 
   /* ================= SECURITY ================= */
-
   @HostListener('document:contextmenu', ['$event'])
   disableRightClick(event: MouseEvent) {
     event.preventDefault();

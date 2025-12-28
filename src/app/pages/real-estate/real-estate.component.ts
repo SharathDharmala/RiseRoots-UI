@@ -114,6 +114,10 @@ export class RealEstateComponent implements AfterViewInit {
   images: string[] = [];
   videos: string[] = [];
 
+  private imageIntervalId: any = null;
+imageSlideDelay = 3500; // 3.5s (adjustable)
+
+
   currentImageIndex = 0;
   currentVideoIndex = 0;
 

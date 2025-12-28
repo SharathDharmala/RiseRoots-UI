@@ -181,7 +181,7 @@
 }
 
 .contact-slide h3 {
-  color: #ffffff !important;   /* 🔥 force white */
+  color: #ffffff !important; /* 🔥 force white */
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 16px;
@@ -218,35 +218,35 @@
   padding: 14px 18px;
 
   display: flex;
-  align-items: center;            /* 🔥 hard vertical center */
+  align-items: center; /* 🔥 hard vertical center */
   justify-content: space-between;
 
-  min-height: 56px;               /* 🔥 stabilizes row height */
+  min-height: 56px; /* 🔥 stabilizes row height */
 }
 
 .contact-number {
-  color: #ffffff !important;      /* 🔥 force visible white */
+  color: #ffffff !important; /* 🔥 force visible white */
   font-size: 14px;
   font-weight: 600;
 
   display: flex;
-  align-items: center;            /* 🔥 vertical alignment */
+  align-items: center; /* 🔥 vertical alignment */
   gap: 8px;
 
-  line-height: 1;                 /* 🔥 prevents vertical drift */
+  line-height: 1; /* 🔥 prevents vertical drift */
   white-space: nowrap;
 }
 
 .contact-actions {
   display: flex;
-  align-items: center;            /* 🔥 align with number */
+  align-items: center; /* 🔥 align with number */
   gap: 10px;
 }
 
 .contact-content,
 .contact-row,
 .contact-number {
-  opacity: 1 !important;          /* 🔥 override fade */
+  opacity: 1 !important; /* 🔥 override fade */
 }
 
 .contact-actions a {
@@ -280,7 +280,7 @@
   align-items: center;
   justify-content: center;
 
-  color: #ffffff; 
+  color: #ffffff;
   font-size: 14px;
 }
 
@@ -304,7 +304,7 @@
   }
 
   .contact-slide {
-    justify-content: flex-start;   /* 🔥 avoids vertical squeeze */
+    justify-content: flex-start; /* 🔥 avoids vertical squeeze */
     padding-top: 20px;
   }
 
@@ -354,5 +354,221 @@
   .watermark {
     font-size: 36px;
     letter-spacing: 2px;
+  }
+}
+
+/* =========================
+   CONTACT – RESPONSIVE ACTION SWITCH
+   (Safe Add-on for RiseRoots GUI)
+========================= */
+
+/* Desktop default */
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* Mobile icon buttons */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.icon-btn.call {
+  background: #2563eb;
+  color: #fff;
+}
+
+.icon-btn.whatsapp {
+  background: #25d366;
+}
+
+.icon-btn img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* =========================
+   MOBILE SMART CONTACT LAYOUT
+========================= */
+@media (max-width: 768px) {
+  /* Contact row becomes clean & flat */
+  .contact-row {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+
+  /* Inline action icons */
+  .mobile-inline {
+    display: flex;
+    gap: 12px;
+  }
+
+  .icon-inline {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .icon-inline.call {
+    color: #93c5fd;
+  }
+
+  .icon-inline.whatsapp {
+    background: rgba(37, 211, 102, 0.15);
+    border-color: rgba(37, 211, 102, 0.35);
+  }
+
+  .icon-inline.whatsapp img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 🔥 EMAIL FOOTER — NEVER OVERLAPS */
+  .contact-footer {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  /* Let slide breathe */
+  .contact-slide {
+    overflow-y: auto;
+  }
+}
+
+/* =========================
+   CONTACT FOOTER – EMAIL (Reach us @)
+========================= */
+.contact-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Label text: "Reach us @" */
+.contact-footer {
+  line-height: 1.4;
+}
+
+/* Email link */
+.contact-footer a {
+  color: #93c5fd;                 /* soft blue */
+  text-decoration: none;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.contact-footer a:hover {
+  background: rgba(147, 197, 253, 0.15);
+  text-decoration: underline;
+}
+
+/* Mail icon spacing */
+.contact-footer a::before {
+  margin-right: 4px;
+}
+
+/* =========================
+   WHATSAPP ICON – SOFT ROUNDED CORNERS
+========================= */
+@media (max-width: 768px) {
+
+  /* WhatsApp gets softer rounded-square look */
+  .icon-inline.whatsapp {
+    border-radius: 10px; /* 👈 round corners, not full circle */
+  }
+
+  /* Optional: slightly smoother inner icon */
+  .icon-inline.whatsapp img {
+    border-radius: 4px;
+  }
+}
+/* =========================
+   HARD DESKTOP PROTECTION
+========================= */
+@media (min-width: 769px) {
+
+  /* Never show mobile inline icons on desktop */
+  .mobile-inline,
+  .icon-inline {
+    display: none !important;
+  }
+
+  /* Restore desktop buttons cleanly */
+  .desktop-only {
+    display: flex !important;
+  }
+
+  /* Safety: prevent large icon leaks */
+  .icon-inline img {
+    max-width: 0 !important;
+    max-height: 0 !important;
+  }
+}
+/* =========================
+   HARD MOBILE PROTECTION
+========================= */
+@media (max-width: 768px) {
+
+  /* Mobile should never show text buttons */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Mobile inline icons only */
+  .mobile-inline {
+    display: flex !important;
+  }
+
+  /* Final WhatsApp icon size clamp */
+  .icon-inline.whatsapp img {
+    width: 16px;
+    height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-footer {
+    font-size: 13px;
   }
 }
