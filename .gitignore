@@ -43,7 +43,7 @@ __screenshots__/
 Thumbs.db
 
 # Ignore all video files everywhere
-*.mp4
+#*.mp4
 *.mov
 *.avi
 *.mkv

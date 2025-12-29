@@ -1,9 +1,30 @@
+<!-- ============================= -->
+<!-- FULL SCREEN FESTIVAL BLAST -->
+<!-- (Overlay only – does NOT remove content) -->
+<!-- ============================= -->
+<app-festival-blast
+  *ngIf="festivalEffect"
+  [effect]="festivalEffect"
+  [message]="festivalMessage">
+</app-festival-blast>
+
+<!-- ============================= -->
+<!-- LOW-IMPACT FESTIVAL BANNER -->
+<!-- (Optional text, subtle) -->
+<!-- ============================= -->
+<div *ngIf="festivalName" class="festival-banner">
+  🎉 {{ festivalMessage || ('Happy ' + festivalName + ' from RiseRoots Family') }}
+</div>
+
+<!-- ============================= -->
+<!-- MAIN LANDING CONTENT (ALWAYS PRESENT) -->
+<!-- ============================= -->
 <section class="landing">
   <div class="services-card">
     <!-- TITLE -->
     <h2>{{ content[lang].title }}</h2>
 
-    <!-- MULTI-PARAGRAPH INTRO -->
+    <!-- INTRO -->
     <p class="intro" *ngFor="let para of content[lang].intro">
       {{ para }}
     </p>
@@ -23,7 +44,7 @@
       {{ content[lang].evaluation }}
     </p>
 
-    <!-- EXTENDED / ADVISORY SERVICES -->
+    <!-- EXTENDED SERVICES -->
     <h3 class="section-title">
       {{ content[lang].extendedTitle }}
     </h3>
@@ -44,7 +65,9 @@
     </h3>
 
     <ul class="strengths">
-      <li *ngFor="let strength of content[lang].strengths">✔ {{ strength }}</li>
+      <li *ngFor="let strength of content[lang].strengths">
+        ✔ {{ strength }}
+      </li>
     </ul>
 
     <!-- VISION -->
@@ -57,12 +80,16 @@
     </p>
 
     <!-- WHY CHOOSE -->
-    <h3 class="section-title">
-      {{ content[lang].whyTitle }}
-    </h3>
+    <ng-container *ngIf="content[lang].whyTitle && content[lang].why">
+      <h3 class="section-title">
+        {{ content[lang].whyTitle }}
+      </h3>
 
-    <ul class="why-choose">
-      <li *ngFor="let reason of content[lang].why">🌟 {{ reason }}</li>
-    </ul>
+      <ul class="why-choose">
+        <li *ngFor="let reason of content[lang].why">
+          🌟 {{ reason }}
+        </li>
+      </ul>
+    </ng-container>
   </div>
 </section>

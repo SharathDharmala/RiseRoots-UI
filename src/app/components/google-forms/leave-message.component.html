@@ -1,0 +1,47 @@
+<div class="leave-message-backdrop" (click)="close.emit()">
+  <div class="leave-message-modal" (click)="$event.stopPropagation()">
+    <h3>Leave a Message</h3>
+    <hr />
+
+    <!-- Context (informational only) -->
+    <p class="context" *ngIf="context?.projectName">
+      Interested in: <strong>{{ context.projectName }}</strong>
+    </p>
+
+    <!-- CUSTOM FORM (NO IFRAME) -->
+    <form #f="ngForm" (ngSubmit)="submit()">
+      <input type="text" name="name" [(ngModel)]="form.name" placeholder="Your Name" required />
+
+      <input
+        type="tel"
+        name="phone"
+        [(ngModel)]="form.phone"
+        placeholder="Mobile Number"
+        required
+      />
+
+      <input type="email" name="email" [(ngModel)]="form.email" placeholder="Email (optional)" />
+
+      <input
+        type="text"
+        name="address"
+        [(ngModel)]="form.address"
+        placeholder="Address (optional)"
+      />
+
+      <textarea
+        name="message"
+        [(ngModel)]="form.message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button type="submit" [disabled]="f.invalid">Send Message</button>
+
+        <button type="button" class="secondary" (click)="close.emit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,15 +1,48 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+
+import { FestivalBlastComponent } from '../../festival/festival-blast/festival-blast.component';
+
+import { FestivalService } from '../../festival/festival.service';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,FestivalBlastComponent 
+  ],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit {
   @Input() lang: 'en' | 'te' | 'hi' = 'en';
+
+  festivalEffect: 'confetti' | 'fireworks' | 'flowers' | null = null;
+  showHeaderEffect = false;
+  festivalMessage?: string;
+  festivalName?: string;
+
+  constructor(private festivalService: FestivalService) {}
+
+  ngOnInit(): void {
+    const festival = this.festivalService.getTodayFestival();
+    if (!festival) return;
+
+    // 🎆 Full screen blast (one-time)
+    this.festivalEffect = festival.blast
+      ? (festival.effect as 'confetti' | 'fireworks' | 'flowers')
+      : null;
+
+    // 🌸 Header subtle effect (all day)
+    this.showHeaderEffect = !!festival.headerEffect;
+
+    // 📝 Optional message
+    this.festivalMessage = festival.messageEnabled ? festival.message : undefined;
+
+    // 🏷 Banner name
+    this.festivalName = festival.name;
+  }
 
   content: any = {
     /* ======================================================

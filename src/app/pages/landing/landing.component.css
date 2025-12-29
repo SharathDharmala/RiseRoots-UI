@@ -37,7 +37,7 @@
   text-align: center;
   font-size: 28px;
   margin-bottom: 18px;
-  color: #081C15;
+  color: #081c15;
 }
 
 /* =====================================================
@@ -61,7 +61,7 @@
   margin-bottom: 8px;
   font-size: 20px;
   font-weight: 600;
-  color: #081C15;
+  color: #081c15;
 }
 
 /* =====================================================
@@ -173,12 +173,44 @@
 /* Fine-tune spacing BEFORE section headings */
 .section-title,
 .strengths-title {
-  margin-top: 14px;   /* 👈 small, visible gap */
+  margin-top: 14px; /* 👈 small, visible gap */
   margin-bottom: 8px;
 }
 /* Fix spacing BEFORE service section headings */
 .services-card h3,
 .services-card h4 {
-  margin-top: 14px !important;   /* small controlled gap */
+  margin-top: 14px !important; /* small controlled gap */
   margin-bottom: 8px !important;
+}
+.festival-banner {
+  position: fixed;
+  top: 70px;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  background: #0b4aa6;
+  color: #fff;
+  padding: 6px 0;
+  z-index: 999;
+}
+.confetti-debug {
+  position: fixed;
+  inset: 0;
+  font-size: 40px;
+  text-align: center;
+  pointer-events: none;
+  animation: pop 1s infinite;
+  z-index: 9999;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

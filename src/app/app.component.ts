@@ -1,71 +1,82 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LandingComponent } from './pages/landing/landing.component';
 import { RealEstateComponent } from './pages/real-estate/real-estate.component';
+import { FestivalBlastComponent } from './festival/festival-blast/festival-blast.component';
 
 import { Meta, Title } from '@angular/platform-browser';
 
 /* CONFIG */
-import { CONTACT_CONFIG, ContactItem } from './config/contact.config';
+import { CONTACT_CONFIG } from './config/contact.config';
 
 /* SERVICES */
 import { ContactActionsService } from './services/contact-actions.service';
+import { FestivalService } from './festival/festival.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, LandingComponent, RealEstateComponent],
+  imports: [CommonModule, LandingComponent, RealEstateComponent, FestivalBlastComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-
+export class AppComponent implements OnInit {
   /* ================= CONTACT DATA ================= */
-  contacts: ContactItem[] = CONTACT_CONFIG;
+  contactConfig = CONTACT_CONFIG;
+
+  /* ================= FESTIVAL STATE ================= */
+  festivalEffect: 'confetti' | 'fireworks' | 'flowers' | 'custom' | null = null;
+  festivalMessage?: string;
+  showHeaderEffect = false;
 
   /* ================= LANGUAGE ================= */
   lang: 'en' | 'te' | 'hi' = 'en';
 
   text: any = {
-    en: { title: 'RiseRoots Enterprises' },
-    te: { title: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్' },
-    hi: { title: 'राइज़रूट्स एंटरప్రైज़ेज़' },
+    en: { title: 'RiseRoots Enterprises', tagline: '' },
+    te: { title: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్', tagline: '' },
+    hi: { title: 'राइज़रूट्स एंटरप्राइज़ेज़', tagline: '' },
   };
 
   /* ================= TABS ================= */
   activeTab: 'services' | 'realestate' | 'xyz' = 'services';
 
-  /* ================= CONSTRUCTOR (ONLY ONE) ================= */
   constructor(
     private meta: Meta,
     private title: Title,
-    public contactActions: ContactActionsService
+    public contactActions: ContactActionsService,
+    private festivalService: FestivalService
   ) {
     this.updateMeta();
     this.setPageTitle();
   }
 
-  /* ================= LANGUAGE ================= */
+  ngOnInit(): void {
+    const festival = this.festivalService.getTodayFestival();
+    if (!festival) return;
+
+    this.festivalEffect = festival.blast ? festival.effect : null;
+    this.showHeaderEffect = !!festival.headerEffect;
+    this.festivalMessage = festival.messageEnabled ? festival.message : undefined;
+  }
+
   switchLang(language: 'en' | 'te' | 'hi') {
     this.lang = language;
     this.updateMeta();
     this.setPageTitle();
   }
 
-  /* ================= TABS ================= */
   switchTab(tab: 'services' | 'realestate' | 'xyz') {
     this.activeTab = tab;
   }
 
-  /* ================= PAGE TITLE ================= */
   setPageTitle() {
     const titles = {
       en: 'RiseRoots Enterprises | Real Estate Consultants',
-      te: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ | రియల్ ఎస్టేట్',
-      hi: 'राइज़रूट्स एంటర్‌प्रైజెస్ | रियल एस्टेट',
+      te: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ | రియల్ ఎస్టేట్ కన్సల్టెంట్స్',
+      hi: 'राइज़रूट्स एंटरप्राइज़ेज़ | रियल एस्टेट कंसल्टेंट्स',
     };
-
     this.title.setTitle(titles[this.lang]);
   }
 
@@ -82,35 +93,6 @@ export class AppComponent {
     });
   }
 
-  /* ================= CONTACT HELPERS ================= */
-
-  get groupedContacts(): {
-    value: string;
-    phone?: ContactItem;
-    whatsapp?: ContactItem;
-  }[] {
-    const map = new Map<
-      string,
-      { value: string; phone?: ContactItem; whatsapp?: ContactItem }
-    >();
-
-    for (const c of this.contacts) {
-      if (c.type === 'phone' || c.type === 'whatsapp') {
-        if (!map.has(c.value)) {
-          map.set(c.value, { value: c.value });
-        }
-        map.get(c.value)![c.type] = c;
-      }
-    }
-
-    return Array.from(map.values());
-  }
-
-  get emailContacts(): ContactItem[] {
-    return this.contacts.filter((c) => c.type === 'email');
-  }
-
-  /* ================= SECURITY ================= */
   @HostListener('document:contextmenu', ['$event'])
   disableRightClick(event: MouseEvent) {
     event.preventDefault();

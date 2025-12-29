@@ -6,26 +6,47 @@ import {
   OnChanges,
   SimpleChanges,
   HostListener,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CONTACT_CONFIG, ContactItem } from '../../config/contact.config';
 import { ContactActionsService } from '../../services/contact-actions.service';
+import { CONTACT_CONFIG } from '../../config/contact.config';
+
+import { LeaveMessageComponent } from '../google-forms/leave-message.component';
 
 /* =========================
    GROUPED CONTACT MODEL
 ========================= */
 interface ContactGroup {
   value: string;
-  phone?: ContactItem;
-  whatsapp?: ContactItem;
+  callLink?: string;
+  whatsappLink?: string;
+}
+
+/* =========================
+   EMAIL MODEL (UI SAFE)
+========================= */
+interface EmailContact {
+  label?: string;
+  value: string;
+  mailto?: string;
+}
+
+/* =========================
+   LEAD CONTEXT (GENERIC & OPTIONAL)
+========================= */
+interface LeadContext {
+  source: 'slider' | 'contact';
+  slideIndex?: number;
+  projectName?: string;
+  category?: string;
 }
 
 @Component({
   selector: 'app-area-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LeaveMessageComponent],
   templateUrl: './area-modal.component.html',
   styleUrls: ['./area-modal.component.css'],
 })
@@ -42,16 +63,21 @@ export class AreaModalComponent implements OnChanges, OnInit {
   /* =========================
      CONTACT CONFIG (SOURCE)
   ========================= */
-  private contactItems: ContactItem[] = CONTACT_CONFIG;
+  private contactConfig = CONTACT_CONFIG;
 
   /* =========================
      DERIVED CONTACT DATA
   ========================= */
   contactGroups: ContactGroup[] = [];
-  emailContact?: ContactItem;
+  visibleEmails: EmailContact[] = [];
 
   /* =========================
-     CONSTRUCTOR (NEW – SAFE)
+     LEAD CONTEXT (NON-BREAKING)
+  ========================= */
+  leadContext?: LeadContext;
+
+  /* =========================
+     CONSTRUCTOR
   ========================= */
   constructor(public contactActions: ContactActionsService) {}
 
@@ -60,6 +86,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
   ========================= */
   ngOnInit(): void {
     this.buildContactGroups();
+    this.buildVisibleEmails();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -70,37 +97,72 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      CONTACT GROUPING LOGIC
-     (NO DATA LOSS)
+     (UNCHANGED BEHAVIOR)
   ========================= */
   private buildContactGroups(): void {
-    const map = new Map<string, ContactGroup>();
-
-    for (const item of this.contactItems) {
-      if (item.type === 'email') {
-        this.emailContact = item;
-        continue;
-      }
-
-      if (!map.has(item.value)) {
-        map.set(item.value, { value: item.value });
-      }
-
-      const group = map.get(item.value)!;
-
-      if (item.type === 'phone') {
-        group.phone = item;
-      }
-
-      if (item.type === 'whatsapp') {
-        group.whatsapp = item;
-      }
-    }
-
-    this.contactGroups = Array.from(map.values());
+    this.contactGroups = this.contactConfig.phones.map((p) => ({
+      value: p.value,
+      callLink: p.callLink,
+      whatsappLink: p.whatsappLink,
+    }));
   }
 
   /* =========================
-     ANALYTICS WRAPPERS (NEW)
+     EMAIL VISIBILITY LOGIC
+     (UNCHANGED BEHAVIOR)
+  ========================= */
+  private buildVisibleEmails(): void {
+    this.visibleEmails = this.contactConfig.emails.filter((e) => e.visibleInUI);
+  }
+
+  /* =========================
+     🔥 LEAVE A MESSAGE (SAFE ADDITION)
+     — NO HARD CODING
+     — NO SIDE EFFECTS
+  ========================= */
+  /* =========================
+   🔥 LEAVE A MESSAGE (FIXED & SAFE)
+   — SINGLE METHOD
+   — NO LOGIC LOSS
+========================= */
+  showLeaveMessage = false;
+
+  openMessageModal(source: 'slider' | 'contact' = 'slider') {
+    this.leadContext = {
+      source,
+      slideIndex: source === 'slider' ? this.currentIndex : undefined,
+      projectName: this.title || undefined,
+      category: this.resolveCategory(this.title),
+    };
+
+    // 🔥 THIS was missing in final flow
+    this.showLeaveMessage = true;
+  }
+
+  /* Optional close handler (clean) */
+  closeLeaveMessage() {
+    this.showLeaveMessage = false;
+  }
+
+  /* =========================
+     CATEGORY RESOLUTION (OPTIONAL)
+     — SAFE FALLBACK
+  ========================= */
+  private resolveCategory(title?: string): string | undefined {
+    if (!title) return undefined;
+
+    const t = title.toLowerCase();
+
+    if (t.includes('plot')) return 'Open Plots';
+    if (t.includes('flat') || t.includes('apartment')) return 'Flats';
+    if (t.includes('farm')) return 'Farm Lands';
+
+    return undefined;
+  }
+
+  /* =========================
+     ANALYTICS WRAPPERS
+     (UNCHANGED)
   ========================= */
   onCallClick(phone: string) {
     this.contactActions.call(phone, 'area_modal');
@@ -112,6 +174,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      SLIDER HELPERS
+     (UNCHANGED)
   ========================= */
   get totalSlides(): number {
     return this.media.length + 1;
@@ -119,6 +182,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      MEDIA TYPE DETECTION
+     (UNCHANGED)
   ========================= */
   getMediaType(src: string): 'image' | 'video' | 'pdf' | 'unknown' {
     const ext = src.split('.').pop()?.toLowerCase() || '';
@@ -132,6 +196,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      MODAL CONTROLS
+     (UNCHANGED)
   ========================= */
   close() {
     this.closed.emit();
@@ -149,6 +214,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      KEYBOARD SUPPORT
+     (UNCHANGED)
   ========================= */
   @HostListener('document:keydown', ['$event'])
   onKey(event: KeyboardEvent) {
@@ -159,21 +225,18 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      SWIPE SUPPORT
+     (UNCHANGED)
   ========================= */
   onStart(event: TouchEvent | MouseEvent) {
     if (this.currentIndex === this.media.length) return;
 
-    this.startX =
-      'touches' in event ? event.touches[0].clientX : event.clientX;
+    this.startX = 'touches' in event ? event.touches[0].clientX : event.clientX;
   }
 
   onEnd(event: TouchEvent | MouseEvent) {
     if (this.currentIndex === this.media.length) return;
 
-    const endX =
-      'changedTouches' in event
-        ? event.changedTouches[0].clientX
-        : event.clientX;
+    const endX = 'changedTouches' in event ? event.changedTouches[0].clientX : event.clientX;
 
     const diff = endX - this.startX;
     if (Math.abs(diff) > this.swipeThreshold) {
@@ -183,6 +246,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
 
   /* =========================
      STOP VIDEO ON SLIDE CHANGE
+     (UNCHANGED)
   ========================= */
   private stopVideo() {
     document.querySelectorAll('video').forEach((v) => {

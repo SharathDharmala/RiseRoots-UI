@@ -1,12 +1,14 @@
+<!-- ================= MAIN MODAL ================= -->
 <div class="modal-backdrop" (click)="close()">
   <div class="modal" (click)="$event.stopPropagation()">
-    <!-- HEADER -->
+
+    <!-- ================= HEADER ================= -->
     <div class="modal-header">
       <h3>{{ title }}</h3>
       <button class="close-btn" (click)="close()">✕</button>
     </div>
 
-    <!-- BODY -->
+    <!-- ================= BODY ================= -->
     <div
       class="modal-body"
       (mousedown)="onStart($event)"
@@ -14,6 +16,7 @@
       (touchstart)="onStart($event)"
       (touchend)="onEnd($event)"
     >
+
       <!-- LEFT NAV -->
       <button class="nav left" [disabled]="currentIndex === 0" (click)="prev()">‹</button>
 
@@ -61,9 +64,25 @@
         Unsupported file format
       </div>
 
-      <!-- CONTACT SLIDE -->
+      <!-- 🔥 LEAVE A MESSAGE – MEDIA SLIDES CTA -->
+      <div class="slider-cta" *ngIf="currentIndex < media.length">
+        <button class="message-btn" (click)="openMessageModal('slider')">
+          💬 Leave a Message
+        </button>
+      </div>
+
+      <!-- ================= CONTACT SLIDE ================= -->
       <div *ngIf="currentIndex === media.length" class="contact-slide">
         <div class="contact-content">
+
+          <!-- CONTACT CTA -->
+          <div class="contact-cta">
+            <span>Need more details?</span>
+            <button class="message-btn" (click)="openMessageModal('contact')">
+              💬 Leave a Message
+            </button>
+          </div>
+
           <h3>Contact Us</h3>
 
           <div class="contact-wrapper">
@@ -75,14 +94,22 @@
 
               <!-- DESKTOP ACTIONS -->
               <div class="contact-actions desktop-only">
-                <a *ngIf="group.phone" class="btn call" [href]="group.phone.link"> Call </a>
+                <a
+                  *ngIf="group.callLink"
+                  class="btn call"
+                  [href]="group.callLink"
+                  (click)="onCallClick(group.value)"
+                >
+                  Call
+                </a>
 
                 <a
-                  *ngIf="group.whatsapp"
+                  *ngIf="group.whatsappLink"
                   class="btn whatsapp"
-                  [href]="group.whatsapp.link"
+                  [href]="group.whatsappLink"
                   target="_blank"
                   rel="noopener"
+                  (click)="onWhatsAppClick(group.value)"
                 >
                   WhatsApp
                 </a>
@@ -90,22 +117,20 @@
 
               <!-- MOBILE ACTIONS -->
               <div class="contact-actions mobile-inline">
-                <!-- CALL -->
                 <a
-                  *ngIf="group.phone"
+                  *ngIf="group.callLink"
                   class="icon-inline call"
-                  [href]="group.phone.link"
+                  [href]="group.callLink"
                   aria-label="Call"
                   (click)="onCallClick(group.value)"
                 >
                   📞
                 </a>
 
-                <!-- WHATSAPP -->
                 <a
-                  *ngIf="group.whatsapp"
+                  *ngIf="group.whatsappLink"
                   class="icon-inline whatsapp"
-                  [href]="group.whatsapp.link"
+                  [href]="group.whatsappLink"
                   target="_blank"
                   aria-label="WhatsApp"
                   (click)="onWhatsAppClick(group.value)"
@@ -115,22 +140,36 @@
               </div>
             </div>
 
-            <!-- EMAIL -->
-            <div class="contact-footer" *ngIf="emailContact">
-              {{ emailContact.label }}
-              <a [href]="emailContact.link"> ✉️ {{ emailContact.value }} </a>
+            <!-- EMAIL FOOTER (VISIBLE EMAILS ONLY) -->
+            <div class="contact-footer" *ngFor="let email of visibleEmails">
+              <a [href]="email.mailto">
+                ✉️ {{ email.label }} {{ email.value }}
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- RIGHT NAV -->
-      <button class="nav right" [disabled]="currentIndex === media.length" (click)="next()">
+      <button
+        class="nav right"
+        [disabled]="currentIndex === media.length"
+        (click)="next()"
+      >
         ›
       </button>
     </div>
 
-    <!-- FOOTER -->
-    <div class="modal-footer">{{ currentIndex + 1 }} / {{ totalSlides }}</div>
+    <!-- ================= FOOTER ================= -->
+    <div class="modal-footer">
+      {{ currentIndex + 1 }} / {{ totalSlides }}
+    </div>
   </div>
 </div>
+
+<!-- ================= 🔥 LEAVE MESSAGE POPUP (OUTSIDE MODAL) ================= -->
+<app-leave-message
+  *ngIf="showLeaveMessage"
+  [context]="leadContext"
+  (close)="closeLeaveMessage()">
+</app-leave-message>

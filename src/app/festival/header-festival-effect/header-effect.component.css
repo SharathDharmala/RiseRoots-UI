@@ -1,0 +1,31 @@
+.site-header {
+  position: relative;
+  height: 80px;
+  background: #1e3a8a;
+}
+
+.header-effect {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti,
+.flowers,
+.fireworks {
+  font-size: 22px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

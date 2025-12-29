@@ -8,11 +8,11 @@ export const REAL_ESTATE_BANNER_MEDIA = {
   ========================= */
   videoEnabled: true, // 🔥 individual toggle
   video: {
-    playbackRate: 1.0,
-    maxItemsToPlay: 7,
+    playbackRate: 1.5,
+    maxItemsToPlay: 4,
     source: {
       basePath: 'assets/videos/video', // image1.mp4...
-      count: 7,
+      count: 4,
       ext: 'mp4',
     } as MediaSourceConfig,
   },
