@@ -1,14 +1,29 @@
 /* ===============================
    GLOBAL
 ================================ */
-html {
-  overflow-y: scroll;
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;   /* 🔥 THIS fixes the cut */
 }
+
+html {
+  overflow-y: auto;
+}
+
 
 body {
   background: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #f8fbf9 100%);
   padding-top: 96px;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 
 /* ===============================
    HEADER
@@ -158,9 +173,10 @@ body {
 .tab-content {
   min-height: calc(100vh - 200px);
   margin-top: -10px;
-  padding: 16px 16px 24px;
+  padding: 16px 0 24px;   /* 🔥 remove side padding */
   animation: fadeIn 0.25s ease-in-out;
 }
+
 
 .services-card {
   max-width: 1200px; /* 🔥 wider & consistent */
@@ -366,13 +382,55 @@ footer a[href^="mailto"]:hover {
 /* ===============================
    GLOBAL CONTENT WIDTH (UNIFIED)
 ================================ */
+.page-section,
 .app-container {
-  max-width: 1400px; /* 🔥 unified width */
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  width: 100%;
+  max-width: 1200px;      /* desktop */
+  margin: 0 auto;         /* center align */
+  padding: 16px;          /* mobile safe padding */
   box-sizing: border-box;
 }
+
 .page-content {
   margin-top: 16px; /* header + tabs height */
+}
+
+@media (max-width: 768px) {
+  .page-section,
+  .app-container {
+    padding: 14px 12px;
+    text-align: center;   /* center content */
+  }
+
+  /* Paragraph readability */
+  .page-section p {
+    text-align: left;     /* optional – better reading */
+  }
+
+  /* Headings */
+  .page-section h1,
+  .page-section h2,
+  .page-section h3 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+.page-section,
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .page-section,
+  .app-container {
+    padding: 14px 12px;
+  }
 }

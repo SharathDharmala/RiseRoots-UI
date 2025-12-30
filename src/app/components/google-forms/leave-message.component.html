@@ -1,11 +1,12 @@
 <div class="leave-message-backdrop" (click)="close.emit()">
   <div class="leave-message-modal" (click)="$event.stopPropagation()">
-    <h3>Leave a Message</h3>
-    <hr />
+    <h3 class="leave-title">Leave a Message</h3>
+    <small class="leave-sub">We’ll get back to you within 24 hours</small>
+    <hr class="leave-divider" />
 
     <!-- Context (informational only) -->
     <p class="context" *ngIf="context?.projectName">
-      Interested in: <strong>{{ context.projectName }}</strong>
+      Interested in: <strong>{{ context.projectName }} Property</strong>
     </p>
 
     <!-- CUSTOM FORM (NO IFRAME) -->

@@ -41,7 +41,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'flats',
-      banner: 'banners/residential-flats1.jpg',
+      banner: 'banners/residential-flats3.jpg',
       label: {
         en: 'Residential Flats',
         te: 'నివాస ఫ్లాట్లు',
@@ -115,8 +115,7 @@ export class RealEstateComponent implements AfterViewInit {
   videos: string[] = [];
 
   private imageIntervalId: any = null;
-imageSlideDelay = 3500; // 3.5s (adjustable)
-
+  imageSlideDelay = 3500; // 3.5s (adjustable)
 
   currentImageIndex = 0;
   currentVideoIndex = 0;

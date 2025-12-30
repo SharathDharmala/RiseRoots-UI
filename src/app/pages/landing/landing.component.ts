@@ -1,17 +1,35 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { FestivalBlastComponent } from '../../festival/festival-blast/festival-blast.component';
 
 import { FestivalService } from '../../festival/festival.service';
 
+interface IntroItem {
+  brand?: string;
+  tagline?: string;
+  text: string;
+}
+
+interface PageContent {
+  title: string;
+  intro: IntroItem[];
+  activeTitle?: string;
+  activeServices?: string[];
+  evaluation?: string;
+  extendedTitle?: string;
+  extendedServices?: string[];
+  phased?: string;
+  strengthsTitle?: string;
+  strengths?: string[];
+  visionTitle?: string;
+  vision?: string;
+}
+
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [
-    CommonModule,FestivalBlastComponent 
-  ],
+  imports: [CommonModule, FestivalBlastComponent],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
 })
@@ -52,11 +70,17 @@ export class LandingComponent implements OnInit {
       title: 'Our Services',
 
       intro: [
-        'Founded in 2020, RiseRoots Enterprises is a Visakhapatnam-based real estate consultancy rooted in integrity, transparency, and customer trust. Operating from Akkayyapalem, we focus on delivering compliant, clear, and value-driven property advisory services.',
-
-        'We partner with individuals, families, and investors to enable informed and secure real estate decisions. Our growth has been shaped by ethical practices, strong regional expertise, and long-term client relationships rather than volume-driven transactions.',
-
-        'Today, RiseRoots Enterprises is recognized as a reliable, customer-centric advisory firm, offering structured guidance that balances immediate needs with long-term investment potential—always aligned with our clients’ financial goals.',
+        {
+          brand: 'RiseRoots Enterprises',
+          tagline: 'grounded in excellence and rising with innovation',
+          text: 'Founded in 2020, RiseRoots Enterprises is a Visakhapatnam-based real estate consultancy rooted in integrity, transparency, and customer trust. Operating from Akkayyapalem, we deliver compliant, clear, and value-driven property advisory services, positioning ourselves as a single point solution for all real estate needs.',
+        },
+        {
+          text: 'We partner with individuals, families, and investors to enable informed and secure real estate decisions. Our growth has been shaped by ethical practices, strong regional expertise, and long-term client relationships rather than volume-driven transactions.',
+        },
+        {
+          text: 'Today, RiseRoots Enterprises is recognized as a reliable, customer-centric advisory firm, offering structured guidance that balances immediate needs with long-term investment potential—always aligned with our clients’ financial goals.',
+        },
       ],
 
       activeTitle: 'Our Active Services',
@@ -104,18 +128,17 @@ export class LandingComponent implements OnInit {
       title: 'మా సేవలు',
 
       intro: [
-        '2020లో స్థాపించబడిన రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్, విశాఖపట్నం అక్కయ్యపాలెం కేంద్రంగా నిజాయితీ, పారదర్శకత మరియు కస్టమర్ నమ్మకంపై ఆధారపడి పనిచేసే రియల్ ఎస్టేట్ కన్సల్టెన్సీ.',
-
-        'వ్యక్తులు, కుటుంబాలు మరియు పెట్టుబడిదారులు భద్రమైన మరియు అవగాహనతో కూడిన రియల్ ఎస్టేట్ నిర్ణయాలు తీసుకునేలా మేము విశ్వసనీయ మార్గనిర్దేశం అందిస్తున్నాము. నైతిక విలువలు మరియు స్థానిక మార్కెట్ అనుభవమే మా అభివృద్ధికి ఆధారం.',
-
-        'ఈ రోజు, రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ ఒక విశ్వసనీయ, కస్టమర్ కేంద్రిత రియల్ ఎస్టేట్ సలహాదార సంస్థగా గుర్తింపు పొందింది.',
-      ],
-
-      activeTitle: 'ప్రస్తుతం అందిస్తున్న సేవలు',
-      activeServices: [
-        'ఓపెన్ ప్లాట్లు – స్పష్టమైన హక్కులు, చట్టబద్ధ అనుమతులు మరియు అభివృద్ధి అవకాశాలతో ఎంపిక చేసిన లేఅవుట్లు',
-        'నివాస ఫ్లాట్లు – సిద్ధంగా ఉన్న మరియు నిర్మాణంలో ఉన్న నివాస ఆస్తులు',
-        'వ్యవసాయ భూములు – ధృవీకరించిన యాజమాన్యంతో దీర్ఘకాలిక విలువ కలిగిన భూములు',
+        {
+          brand: 'RiseRoots Enterprises',
+          tagline: 'grounded in excellence and rising with innovation',
+          text: '2020లో స్థాపించబడిన విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న విశ్వసనీయ రియల్ ఎస్టేట్ కన్సల్టెన్సీ. అక్కయ్యపాలెం నుండి కార్యకలాపాలు నిర్వహిస్తూ, చట్టబద్ధత, పారదర్శకత మరియు కస్టమర్ నమ్మకంపై ఆధారపడి స్పష్టమైన మరియు విలువ ఆధారిత రియల్ ఎస్టేట్ సలహా సేవలను అందిస్తున్నాము.',
+        },
+        {
+          text: 'వ్యక్తులు, కుటుంబాలు మరియు పెట్టుబడిదారులు భద్రమైన మరియు అవగాహనతో కూడిన రియల్ ఎస్టేట్ నిర్ణయాలు తీసుకునేలా మేము విశ్వసనీయ మార్గనిర్దేశం అందిస్తున్నాము. నైతిక విలువలు, బలమైన స్థానిక మార్కెట్ అనుభవం మరియు దీర్ఘకాలిక సంబంధాలే మా అభివృద్ధికి ఆధారం.',
+        },
+        {
+          text: 'ఈ రోజు, RiseRoots Enterprises ఒక విశ్వసనీయ మరియు కస్టమర్ కేంద్రిత రియల్ ఎస్టేట్ సలహాదార సంస్థగా గుర్తింపు పొందింది. తక్షణ అవసరాలు మరియు దీర్ఘకాలిక పెట్టుబడి లక్ష్యాల మధ్య సమతుల్యతతో స్పష్టమైన మార్గనిర్దేశం అందిస్తోంది.',
+        },
       ],
 
       evaluation:
@@ -155,11 +178,17 @@ export class LandingComponent implements OnInit {
       title: 'हमारी सेवाएँ',
 
       intro: [
-        '2020 में स्थापित, विशाखापट्टनम के अक्कैय्यापालेम स्थित राइज़रूट्स एंटरप्राइज़ेज़ एक विश्वसनीय रियल एस्टेट कंसल्टेंसी है, जो ईमानदारी, पारदर्शिता और ग्राहक विश्वास पर आधारित है।',
-
-        'हम व्यक्तियों, परिवारों और निवेशकों को सुरक्षित और सूचित रियल एस्टेट निर्णय लेने में मार्गदर्शन प्रदान करते हैं। हमारा विकास नैतिक मूल्यों और स्थानीय बाजार अनुभव से प्रेरित है।',
-
-        'आज, राइज़रूट्स एंटरप्राइज़ेज़ को एक ग्राहक-केंद्रित और भरोसेमंद रियल एस्टेट सलाहकार के रूप में पहचाना जाता है।',
+        {
+          brand: 'RiseRoots Enterprises',
+          tagline: 'grounded in excellence and rising with innovation',
+          text: '2020 में स्थापित, विशाखापट्टनम स्थित एक विश्वसनीय रियल एस्टेट कंसल्टेंसी, जो ईमानदारी, पारदर्शिता और ग्राहक विश्वास पर आधारित है। अक्कैय्यापालेम से संचालित होकर, हम स्पष्ट, अनुपालन-आधारित और मूल्य-संचालित रियल एस्टेट सलाह सेवाएँ प्रदान करते हैं।',
+        },
+        {
+          text: 'हम व्यक्तियों, परिवारों और निवेशकों को सुरक्षित एवं सूचित रियल एस्टेट निर्णय लेने में मार्गदर्शन प्रदान करते हैं। हमारा विकास नैतिक कार्यप्रणाली, मजबूत स्थानीय बाजार अनुभव और दीर्घकालिक संबंधों से प्रेरित है।',
+        },
+        {
+          text: 'आज, RiseRoots Enterprises को एक विश्वसनीय और ग्राहक-केंद्रित रियल एस्टेट सलाहकार के रूप में पहचाना जाता है, जो तात्कालिक आवश्यकताओं और दीर्घकालिक निवेश लक्ष्यों के बीच संतुलित मार्गदर्शन प्रदान करता है।',
+        },
       ],
 
       activeTitle: 'हमारी सक्रिय सेवाएँ',

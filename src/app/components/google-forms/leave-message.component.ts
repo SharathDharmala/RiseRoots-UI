@@ -59,7 +59,7 @@ export class LeaveMessageComponent {
 
     this.form.message = `Hi RiseRoots Team,
 
-I am interested in ${project}. 
+I am interested in ${project} Property. 
 Please share layout information and next steps.
 
 Looking forward to your response.`;

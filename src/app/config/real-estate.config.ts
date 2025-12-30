@@ -11,6 +11,7 @@ export interface MediaSourceConfig {
 export interface AreaConfig {
   key: string;
   name: string;
+  enabled: boolean;
   description?: string;
   images: string[]; // resolved media list
 }
@@ -80,12 +81,14 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'anakapalli',
       name: 'Anakapalli',
       description: 'Tattabandha – Prime agricultural belt',
+      enabled: true,
       images: generateMedia([BANNERS.FARM]),
     },
     {
       key: 'devarapalli-chandan',
       name: 'Devarapalli – Chandan Valley',
       description: '10-Year-Old Red & White Sandalwood',
+      enabled: true,
       images: generateMedia(
         [BANNERS.FARM],
         [
@@ -98,6 +101,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'devarapalli-phenix',
       name: 'Devarapalli – Phenix Valley',
       description: 'Karjur, Agarwood',
+      enabled: true,
       images: generateMedia(
         [BANNERS.FARM],
         [
@@ -110,10 +114,12 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'gajapathinagaram',
       name: 'Gajapathinagaram',
       description: 'White Sandalwood',
+      enabled: true,
       images: generateMedia(
         [BANNERS.FARM],
         [
-          { basePath: `${FARM}/gajapathinagaram`, count: 1, ext: 'mp4' },
+          { basePath: `${FARM}/gajapathinagaram`, count: 6 },
+          { basePath: `${FARM}/gajapathinagaram`, count: 0, ext: 'mp4' },
           { basePath: `${FARM}/gajapathinagaram`, count: 0, ext: 'pdf' },
         ]
       ),
@@ -127,11 +133,13 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'anandapuram',
       name: 'Anandapuram',
+      enabled: true,
       images: generateMedia([BANNERS.PLOTS]),
     },
     {
       key: 'tagarapuvalasa-utkarsha',
       name: 'Tagarapuvalasa – Utkarsha Vajradhaara',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
@@ -143,6 +151,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'tagarapuvalasa-truecapital',
       name: 'Tagarapuvalasa – TrueCapital',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
@@ -154,6 +163,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'gandigundam',
       name: 'Gandigundam',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [{ basePath: `${PLOTS}/gandigundam`, count: 6 }]
@@ -162,6 +172,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'vizianagaram',
       name: 'Vizianagaram – AKR Garden City (Chelluru)',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
@@ -173,6 +184,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'dakamarri',
       name: 'Dakamarri',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
@@ -184,6 +196,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'bhogapuram-aerodestiny',
       name: 'Bhogapuram – Aero Destiny',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [{ basePath: `${PLOTS}/bhogapuram-aerodestiny`, count: 1 }]
@@ -192,6 +205,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'bhogapuram-kohinoor',
       name: 'Bhogapuram – Kohinoor',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [{ basePath: `${PLOTS}/bhogapuram-kohinoor`, count: 11 }]
@@ -200,6 +214,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'kothavalasa',
       name: 'Kothavalasa',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
@@ -211,10 +226,21 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     {
       key: 'dabbanda',
       name: 'Dabbanda(Simhachalam)',
+      enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
         [
           { basePath: '/open-plots/dabbanda', count: 8 }
+        ]
+      )
+    },{
+      key: 'polipilli-aerogateway',
+      name: 'Aeroateway - Polipilli',
+      enabled: true,
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [
+          { basePath: '/open-plots/polipilli-aerogateway', count: 9 }
         ]
       )
     },
@@ -228,6 +254,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'madhurawada',
       name: 'Madhurawada – Utkarsha Apartments',
       description: 'Ready & under-construction flats',
+      enabled: true,
       images: generateMedia(
         [BANNERS.FLATS],
         [

@@ -24,7 +24,7 @@ export const FESTIVALS: FestivalConfig[] = [
     blast: true,
     headerEffect: true,
     messageEnabled: true,
-    message: 'Happy Christmas from Dharmala Family 🎉',
+    message: 'Happy Christmas from RiseRoots Family 🎉',
   },
   {
     name: 'New Year',

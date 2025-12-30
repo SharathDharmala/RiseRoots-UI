@@ -90,6 +90,31 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+/* ======================================================
+   BASE WATERMARK (shared positioning)
+====================================================== */
+.video-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+
+  font-size: clamp(22px, 3.2vw, 42px);
+  line-height: 1.15;
+
+  font-weight: 500;
+  letter-spacing: 1.5px;
+
+  color: rgba(255, 255, 255, 0.55); /* 👈 stronger but still subtle */
+
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 255, 255, 0.25);
+
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 3;
+}
+
 /* CINEMATIC VIGNETTE */
 .banner-media-zone::after {
   content: '';
@@ -100,21 +125,17 @@
 }
 
 /* WATERMARK */
+/* Banner watermark – elegant & subtle */
 .banner-media-zone .video-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
 
-  font-size: 52px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  color: rgba(255, 255, 255, 0.22);
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 2px;
 
-  text-transform: uppercase;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.25);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 /* =========================
@@ -134,23 +155,17 @@
 /* =========================
    VIDEO WATERMARK
 ========================= */
+/* Video watermark – stronger presence */
 .media-zone .video-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
 
-  font-size: 58px; /* slightly smaller due to reduced video height */
-  font-weight: 800;
-  letter-spacing: 6px;
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 3px;
 
-  color: rgba(255, 255, 255, 0.22); /* 🔥 increased intensity */
-  text-transform: uppercase;
-
-  z-index: 3;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.28);
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Slightly stronger on mobile */
@@ -164,7 +179,21 @@
     color: rgba(255, 255, 255, 0.26);
   }
   .bg-video {
-    object-fit: contain; /* less crop on mobile */
+    width: 100%;
+    height: 200px; /* match banner feel */
+    object-fit: cover; /* 🔥 no empty sides */
+    border-radius: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .banner-media-zone .video-watermark {
+    font-size: 26px;
+    letter-spacing: 1.5px;
+  }
+
+  .media-zone .video-watermark {
+    font-size: 30px;
+    letter-spacing: 2px;
   }
 }
 
@@ -380,22 +409,58 @@
 .locations-cta:hover .arrow {
   transform: translateY(3px);
 }
-
 /* ======================================================
-   RESPONSIVE
+   RESPONSIVE LAYOUT
 ====================================================== */
-@media (max-width: 1024px) {
-  .realestate-center {
-    aspect-ratio: 16 / 7;
-    max-height: 50vh;
-  }
-}
 
-@media (max-width: 900px) {
+/* Tablet & down */
+@media (max-width: 1024px) {
   .realestate {
     grid-template-columns: 1fr;
   }
 
+  /* Media height consistency */
+  .banner img,
+  .banner video,
+  .bg-video {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+
+  .banner-overlay h3 {
+    font-size: 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  /* 🔥 Remove all aspect-ratio logic */
+  .realestate-center {
+    aspect-ratio: unset;
+    max-height: none;
+  }
+
+  /* Banner + video behave identically */
+  .banner img,
+  .banner video,
+  .bg-video {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .banner-overlay {
+    padding: 14px 16px;
+  }
+
+  .banner-overlay h3 {
+    font-size: 18px;
+  }
+
+  /* Horizontal category menu */
   .menu {
     display: flex;
     gap: 10px;
@@ -406,61 +471,15 @@
     white-space: nowrap;
     margin-bottom: 0;
   }
-
-  .banner-overlay {
-    max-width: 92%;
-  }
 }
 
-@media (max-width: 768px) {
-  .realestate-center {
-    aspect-ratio: 4 / 3;
-    max-height: 40vh;
-  }
-}
-
+/* Small mobile */
 @media (max-width: 480px) {
-  .realestate-center {
-    aspect-ratio: 1 / 1;
-    max-height: 35vh;
-  }
-}
-
-/* ======================================================
-   RESPONSIVE TUNING
-====================================================== */
-@media (max-width: 1024px) {
   .banner img,
-  .banner video {
-    max-height: 300px;
-  }
-
-  .banner-overlay h3 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .banner img,
-  .banner video {
-    max-height: 240px;
+  .banner video,
+  .bg-video {
+    height: 200px;
     border-radius: 14px;
-  }
-
-  .banner-overlay {
-    padding: 14px 16px;
-  }
-
-  .banner-overlay h3 {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .banner img,
-  .banner video {
-    max-height: 200px;
-    border-radius: 12px;
   }
 
   .banner-overlay h3 {
@@ -470,6 +489,17 @@
   .banner-sub {
     font-size: 12px;
   }
+}
+
+/* ======================================================
+   MEDIA CONTAINER SAFETY (GLOBAL)
+====================================================== */
+.banner,
+.media-zone,
+.banner-media-zone {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* ======================================================

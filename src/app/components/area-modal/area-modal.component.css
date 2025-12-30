@@ -60,7 +60,7 @@
 ========================= */
 .modal-body {
   position: relative;
-  height: 420px;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,6 +295,21 @@
   text-decoration: underline;
 }
 
+.contact-cta {
+  width: 100%;
+  display: flex;
+  justify-content: center;  /* 🔥 horizontal center */
+  align-items: center;
+  margin: 12px 0 16px;      /* spacing */
+  position: relative;       /* safe for modal */
+}
+
+.contact-cta span {
+  color: #ffffff;      /* 🔥 white text */
+  font-size: 16px;     /* optional – keep subtle */
+  font-weight: 600;
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -326,19 +341,20 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* 🔥 exact center */
 
-  font-size: 64px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: 60px;
+  font-weight: 600;
+  letter-spacing: 2px;
 
-  color: rgba(255, 255, 255, 0.1); /* 🔥 low intensity */
+  color: rgba(255, 255, 255, 0.22);
+
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35);
+
   z-index: 4;
-
-  pointer-events: none; /* 🔥 never block clicks */
+  pointer-events: none;
   user-select: none;
-
   white-space: nowrap;
 }
 
@@ -488,7 +504,7 @@
 
 /* Email link */
 .contact-footer a {
-  color: #93c5fd;                 /* soft blue */
+  color: #93c5fd; /* soft blue */
   text-decoration: none;
   font-weight: 600;
   padding: 2px 6px;
@@ -511,7 +527,6 @@
    WHATSAPP ICON – SOFT ROUNDED CORNERS
 ========================= */
 @media (max-width: 768px) {
-
   /* WhatsApp gets softer rounded-square look */
   .icon-inline.whatsapp {
     border-radius: 10px; /* 👈 round corners, not full circle */
@@ -526,7 +541,6 @@
    HARD DESKTOP PROTECTION
 ========================= */
 @media (min-width: 769px) {
-
   /* Never show mobile inline icons on desktop */
   .mobile-inline,
   .icon-inline {
@@ -548,7 +562,6 @@
    HARD MOBILE PROTECTION
 ========================= */
 @media (max-width: 768px) {
-
   /* Mobile should never show text buttons */
   .desktop-only {
     display: none !important;
@@ -609,6 +622,15 @@
 }
 @media (max-width: 768px) {
   .slider-cta {
-    bottom: 60px; /* clears right arrow */
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+  }
+}
+@media (max-width: 1024px) {
+  .slider-cta {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
   }
 }
