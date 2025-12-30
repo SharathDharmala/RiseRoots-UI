@@ -1,17 +1,29 @@
-<div class="leave-message-backdrop" (click)="close.emit()">
+<div class="leave-message-backdrop" (click)="!isSubmitting && close.emit()">
   <div class="leave-message-modal" (click)="$event.stopPropagation()">
     <h3 class="leave-title">Leave a Message</h3>
-    <small class="leave-sub">We’ll get back to you within 24 hours</small>
+
+    <small class="leave-sub">
+      'Thank you for your message! We’ll get back to you within 24 hours'
+    </small>
+
     <hr class="leave-divider" />
 
     <!-- Context (informational only) -->
-    <p class="context" *ngIf="context?.projectName">
-      Interested in: <strong>{{ context.projectName }} Property</strong>
+    <p class="context" *ngIf="context as ctx">
+      Interested in:
+      <strong>{{ ctx.projectName }} Property</strong>
     </p>
 
     <!-- CUSTOM FORM (NO IFRAME) -->
     <form #f="ngForm" (ngSubmit)="submit()">
-      <input type="text" name="name" [(ngModel)]="form.name" placeholder="Your Name" required />
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="form.name"
+        placeholder="Your Name"
+        required
+        [disabled]="isSubmitting"
+      />
 
       <input
         type="tel"
@@ -19,15 +31,23 @@
         [(ngModel)]="form.phone"
         placeholder="Mobile Number"
         required
+        [disabled]="isSubmitting"
       />
 
-      <input type="email" name="email" [(ngModel)]="form.email" placeholder="Email (optional)" />
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="form.email"
+        placeholder="Email (optional)"
+        [disabled]="isSubmitting"
+      />
 
       <input
         type="text"
         name="address"
         [(ngModel)]="form.address"
         placeholder="Address (optional)"
+        [disabled]="isSubmitting"
       />
 
       <textarea
@@ -35,13 +55,21 @@
         [(ngModel)]="form.message"
         placeholder="Message (optional)"
         rows="3"
+        [disabled]="isSubmitting"
       ></textarea>
+
+      <!-- SUCCESS MESSAGE -->
+      <div class="success-msg" *ngIf="isSent">✅ Message sent successfully</div>
 
       <!-- ACTIONS -->
       <div class="actions">
-        <button type="submit" [disabled]="f.invalid">Send Message</button>
+        <button type="submit" [disabled]="f.invalid || isSubmitting">
+          {{ isSubmitting ? 'Sending…' : 'Send Message' }}
+        </button>
 
-        <button type="button" class="secondary" (click)="close.emit()">Cancel</button>
+        <button type="button" class="secondary" (click)="close.emit()" [disabled]="isSubmitting">
+          Cancel
+        </button>
       </div>
     </form>
   </div>

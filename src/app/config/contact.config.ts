@@ -34,12 +34,32 @@ export interface GoogleFormEntries {
   address: string;
   message: string;
 }
-
 export interface GoogleFormConfig {
+  enabled: boolean;
+
+  targets: GoogleFormTarget[];
+
+  buildMessage: (ctx: { projectName?: string; category?: string }) => string;
+}
+
+export interface GoogleFormTarget {
+  /** primary | secondary */
+  key: 'primary' | 'secondary';
+
+  /** priority: 1 = primary, 2 = secondary */
+  priority: number;
+
+  /** enable / disable individually */
+  enabled: boolean;
+
+  /** Owner / purpose (optional, for clarity) */
+  owner?: 'riseroots' | 'sharath' | string;
+
   formId: string;
   submitUrl: string;
+
+  /** 🔥 Each form has its OWN entry IDs */
   entries: GoogleFormEntries;
-  buildMessage: (ctx: { projectName?: string; category?: string }) => string;
 }
 
 /* =========================
@@ -82,13 +102,12 @@ export const CONTACT_CONFIG: ContactConfig = {
   emails: [
     {
       label: ' reach us at',
-      value: 'riseroots@outlook.com',
-      mailto: 'mailto:riseroots@outlook.com',
+      value: 'riserootsenterprises@gmail.com',
+      mailto: 'mailto:riserootsenterprises@gmail.com',
       visibleInUI: true,
       notifyOnLead: true,
     },
     {
-      // 🔒 hidden tracking / admin email
       value: 'leads@riseroots.in',
       visibleInUI: false,
       notifyOnLead: true,
@@ -96,32 +115,51 @@ export const CONTACT_CONFIG: ContactConfig = {
   ],
 
   /* =========================
-     GOOGLE FORM (SILENT SUBMIT)
+     GOOGLE FORM (PRIMARY / SECONDARY)
   ========================= */
   googleForm: {
-    /** 🔥 Google Form ID */
-    formId: '1FAIpQLSenyt5emwNwNHDtXVt8dxPvevsltiB6Mhuk_U1uxVa2ztp8cg',
+    enabled: true,
 
-    /** 🔥 Silent submit endpoint (NO iframe) */
-    submitUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLSenyt5emwNwNHDtXVt8dxPvevsltiB6Mhuk_U1uxVa2ztp8cg/formResponse',
+    targets: [
+      {
+        key: 'primary',
+        priority: 1,
+        enabled: true,
+        owner: 'riseroots',
 
-    /**
-     * 🔥 REAL entry IDs from your Google Form
-     * (Stable – safe to keep as constants)
-     */
-    entries: {
-      name: 'entry.891386708',
-      phone: 'entry.2113848421',
-      email: 'entry.1493932461',
-      address: 'entry.1650627275',
-      message: 'entry.83128240',
-    },
+        formId: '1FAIpQLScU1YSMOhhkDXf2QNTNouHmrN96YI7G4Xus-im4jr0Negem8g',
+        submitUrl:
+          'https://docs.google.com/forms/d/e/1FAIpQLScU1YSMOhhkDXf2QNTNouHmrN96YI7G4Xus-im4jr0Negem8g/formResponse',
 
-    /**
-     * 🔥 Centralized message builder
-     * Change wording here → reflected everywhere
-     */
+        entries: {
+          name: 'entry.1931623791',
+          phone: 'entry.1018557472',
+          email: 'entry.447083350',
+          address: 'entry.1572425089',
+          message: 'entry.1861503164',
+        },
+      },
+
+      {
+        key: 'secondary',
+        priority: 2,
+        enabled: true,
+        owner: 'sharath',
+
+        formId: '1FAIpQLSenyt5emwNwNHDtXVt8dxPvevsltiB6Mhuk_U1uxVa2ztp8cg',
+        submitUrl:
+          'https://docs.google.com/forms/d/e/1FAIpQLSenyt5emwNwNHDtXVt8dxPvevsltiB6Mhuk_U1uxVa2ztp8cg/formResponse',
+
+        entries: {
+          name: 'entry.891386708',
+          phone: 'entry.2113848421',
+          email: 'entry.1493932461',
+          address: 'entry.1650627275',
+          message: 'entry.83128240',
+        },
+      },
+    ],
+
     buildMessage: ({ projectName, category }) =>
       `I am interested in ${projectName || 'your real estate offerings'}${
         category ? ' (' + category + ')' : ''

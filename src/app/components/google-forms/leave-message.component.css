@@ -253,3 +253,72 @@ button:disabled {
     width: 100%;
   }
 }
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success-msg {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background: rgba(40, 167, 69, 0.12);
+  color: #2e7d32;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =========================
+   SECTION WRAPPER
+========================= */
+.section {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================
+   SOFT DIVIDER
+========================= */
+.soft-divider {
+  height: 1px;
+  margin: 18px 0;
+  background: linear-gradient(to right, transparent, rgba(79, 124, 255, 0.35), transparent);
+}
+
+/* =========================
+   CONTEXT SECTION
+========================= */
+.section-context {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+.section-form {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(240, 245, 255, 0.9));
+  border: 1px solid rgba(79, 124, 255, 0.15);
+}
+
+/* =========================
+   ACTIONS AREA
+========================= */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+.success-msg {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6ee7a8;
+}

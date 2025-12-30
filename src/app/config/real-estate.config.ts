@@ -53,15 +53,10 @@ const FLATS = 'residential-flats';
    MEDIA GENERATOR
 ====================================================== */
 
-export function generateMedia(
-  banner: string[],
-  sources: MediaSourceConfig[] = []
-): string[] {
-  const generated = sources.flatMap(src => {
+export function generateMedia(banner: string[], sources: MediaSourceConfig[] = []): string[] {
+  const generated = sources.flatMap((src) => {
     const ext = src.ext ?? 'jpeg';
-    return Array.from({ length: src.count }, (_, i) =>
-      `${src.basePath}/${i + 1}.${ext}`
-    );
+    return Array.from({ length: src.count }, (_, i) => `${src.basePath}/${i + 1}.${ext}`);
   });
 
   return [...banner, ...generated];
@@ -72,7 +67,6 @@ export function generateMedia(
 ====================================================== */
 
 export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
-
   /* ===============================
      FARM LANDS
   ============================== */
@@ -164,10 +158,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'gandigundam',
       name: 'Gandigundam',
       enabled: true,
-      images: generateMedia(
-        [BANNERS.PLOTS],
-        [{ basePath: `${PLOTS}/gandigundam`, count: 6 }]
-      ),
+      images: generateMedia([BANNERS.PLOTS], [{ basePath: `${PLOTS}/gandigundam`, count: 6 }]),
     },
     {
       key: 'vizianagaram',
@@ -221,28 +212,22 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
           { basePath: `${PLOTS}/kothavalasa`, count: 2 },
           { basePath: `${PLOTS}/kothavalasa`, count: 1, ext: 'mp4' },
         ]
-      )
+      ),
     },
     {
       key: 'dabbanda',
       name: 'Dabbanda(Simhachalam)',
       enabled: true,
-      images: generateMedia(
-        [BANNERS.PLOTS],
-        [
-          { basePath: '/open-plots/dabbanda', count: 8 }
-        ]
-      )
-    },{
+      images: generateMedia([BANNERS.PLOTS], [{ basePath: '/open-plots/dabbanda', count: 8 }]),
+    },
+    {
       key: 'polipilli-aerogateway',
       name: 'Aeroateway - Polipilli',
-      enabled: true,
+      enabled: false,
       images: generateMedia(
         [BANNERS.PLOTS],
-        [
-          { basePath: '/open-plots/polipilli-aerogateway', count: 9 }
-        ]
-      )
+        [{ basePath: '/open-plots/polipilli-aerogateway', count: 9 }]
+      ),
     },
   ],
 

@@ -236,7 +236,7 @@ export class RealEstateComponent implements AfterViewInit {
      AREAS
   ========================= */
   get areas(): AreaConfig[] {
-    return REAL_ESTATE_CONFIG[this.activeCategory.key] || [];
+    return (REAL_ESTATE_CONFIG[this.activeCategory.key] || []).filter((area) => area.enabled);
   }
 
   /* =========================
@@ -247,6 +247,8 @@ export class RealEstateComponent implements AfterViewInit {
   modalMedia: string[] = [];
 
   openArea(area: AreaConfig): void {
+    if (!area.enabled) return; // 🔒 area-level protection
+
     this.modalTitle = area.name;
     this.modalMedia = [...(area.images || [])];
     this.modalVisible = true;

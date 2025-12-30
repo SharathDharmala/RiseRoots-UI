@@ -74,7 +74,7 @@ export class AreaModalComponent implements OnChanges, OnInit {
   /* =========================
      LEAD CONTEXT (NON-BREAKING)
   ========================= */
-  leadContext?: LeadContext;
+  leadContext: LeadContext | null = null;
 
   /* =========================
      CONSTRUCTOR
@@ -135,13 +135,13 @@ export class AreaModalComponent implements OnChanges, OnInit {
       category: this.resolveCategory(this.title),
     };
 
-    // 🔥 THIS was missing in final flow
     this.showLeaveMessage = true;
   }
 
   /* Optional close handler (clean) */
   closeLeaveMessage() {
     this.showLeaveMessage = false;
+    this.leadContext = null;
   }
 
   /* =========================

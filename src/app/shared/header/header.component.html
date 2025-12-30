@@ -1,4 +1,10 @@
 <header class="header">
+
+    <!-- FESTIVAL RIBBON (HEADER OWNED) -->
+  <div *ngIf="festivalMessage" class="festival-message">
+    {{ festivalMessage }}
+  </div>
+  
   <div class="header-inner">
     <div class="brand">
       <img src="assets/logo/riseroots.png" alt="RiseRoots Logo" />

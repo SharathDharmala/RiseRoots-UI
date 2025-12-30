@@ -1,8 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CONTACT_CONFIG } from '../../config/contact.config';
+import {
+  CONTACT_CONFIG,
+  GoogleFormTarget,
+} from '../../config/contact.config';
 
 @Component({
   selector: 'app-leave-message',
@@ -11,10 +20,13 @@ import { CONTACT_CONFIG } from '../../config/contact.config';
   templateUrl: './leave-message.component.html',
   styleUrls: ['./leave-message.component.css'],
 })
-export class LeaveMessageComponent {
-  @Input() context: any;
+export class LeaveMessageComponent implements OnInit {
+  @Input() context: { projectName?: string; category?: string } | null = null;
   @Output() close = new EventEmitter<void>();
 
+  /* =========================
+     FORM MODEL
+  ========================= */
   form = {
     name: '',
     phone: '',
@@ -23,8 +35,30 @@ export class LeaveMessageComponent {
     message: '',
   };
 
-  submit() {
+  /* =========================
+     UI STATE
+  ========================= */
+  isSubmitting = false;
+  isSent = false;
+
+  ngOnInit(): void {
+    const project = this.context?.projectName || 'your project';
+
+    this.form.message = `Hi RiseRoots Team,
+
+I am interested in ${project} Property.
+Please share layout information and next steps.
+
+Looking forward to your response.`;
+  }
+
+  submit(): void {
+    if (this.isSubmitting) return;
+
     const cfg = CONTACT_CONFIG.googleForm;
+    if (!cfg || !cfg.enabled) return;
+
+    this.isSubmitting = true;
 
     const finalMessage =
       this.form.message ||
@@ -33,35 +67,35 @@ export class LeaveMessageComponent {
         category: this.context?.category,
       });
 
-    const payload = new URLSearchParams({
-      [cfg.entries.name]: this.form.name,
-      [cfg.entries.phone]: this.form.phone,
-      [cfg.entries.email]: this.form.email || '',
-      [cfg.entries.address]: this.form.address || '',
-      [cfg.entries.message]: finalMessage,
-    });
+    cfg.targets
+      .filter((t: GoogleFormTarget) => t.enabled)
+      .sort(
+        (a: GoogleFormTarget, b: GoogleFormTarget) =>
+          a.priority - b.priority
+      )
+      .forEach((target: GoogleFormTarget) => {
+        const payload = new URLSearchParams({
+          [target.entries.name]: this.form.name,
+          [target.entries.phone]: this.form.phone,
+          [target.entries.email]: this.form.email || '',
+          [target.entries.address]: this.form.address || '',
+          [target.entries.message]: finalMessage,
+        });
 
-    fetch(cfg.submitUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: payload.toString(),
-    });
+        fetch(target.submitUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: payload.toString(),
+        });
+      });
 
-    alert('Thank you! We will contact you shortly.');
-    this.close.emit();
-  }
+    this.isSent = true;
 
-  ngOnInit() {
-    const project = this.context?.projectName || 'your project';
-
-    this.form.message = `Hi RiseRoots Team,
-
-I am interested in ${project} Property. 
-Please share layout information and next steps.
-
-Looking forward to your response.`;
+    setTimeout((): void => {
+      this.close.emit();
+    }, 1800);
   }
 }

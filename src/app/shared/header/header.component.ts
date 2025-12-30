@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -9,6 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  @Input() festivalEffect: 'confetti' | 'fireworks' | 'flowers' | null = null;
+  @Input() festivalMessage?: string;
+
+
   /* ================= CONSTANT BRAND ================= */
   readonly title = 'RiseRoots Enterprises';
   readonly tagline = 'Grounded in excellence and rising with innovation';
