@@ -21,6 +21,13 @@ em {
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'GreatVibes';
+  src: url('fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .header {
   position: relative; /* REQUIRED */
   overflow: hidden;   /* CONTAINS FLOWERS */

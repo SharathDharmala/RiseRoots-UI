@@ -15,7 +15,6 @@
   margin: 0 auto;
 }
 
-/* Wider wrapper for real estate section */
 .realestate-container {
   max-width: 1500px;
   margin: 0 auto;
@@ -28,11 +27,8 @@
 }
 
 /* ======================================================
-   CENTER COLUMN (RESPONSIVE – NO FIXED HEIGHT)
+   CENTER COLUMN
 ====================================================== */
-/* =========================
-   CENTER BANNER (AUTO HEIGHT)
-========================= */
 .realestate-center {
   display: flex;
   flex-direction: column;
@@ -41,49 +37,24 @@
   overflow: hidden;
 }
 
-/* BOTTOM MEDIA AREA */
-/* =========================
-   VIDEO CONTAINER
-========================= */
-.media-zone {
-  position: relative;
-  width: 100%;
-  margin-top: 12px;
-
-  border-radius: 22px;
-  overflow: hidden;
-
-  background: transparent; /* 🔥 no black */
-}
-
-/* =========================
-   VIDEO ITSELF
-========================= */
-.bg-video {
-  width: 100%;
-  max-height: 220px; /* ⬅ reduce from current size */
-  object-fit: cover;
-  display: block;
-  border-radius: 22px;
-  transition: opacity 0.5s ease-in-out; /* 🔥 smooth */
-  opacity: 1;
-}
-/* =========================
-   BANNER MEDIA ZONE
-========================= */
+/* ======================================================
+   MEDIA ZONE
+====================================================== */
+.media-zone,
 .banner-media-zone {
   position: relative;
   width: 100%;
   margin-top: 12px;
   border-radius: 22px;
   overflow: hidden;
+  background: transparent;
 }
 
 /* VIDEO / IMAGE */
 .bg-video,
 .banner-slide {
   width: 100%;
-  height: 160px; /* 👈 controlled height */
+  height: 160px;
   object-fit: cover;
   display: block;
   border-radius: 22px;
@@ -91,110 +62,87 @@
 }
 
 /* ======================================================
-   BASE WATERMARK (shared positioning)
+   WATERMARK – SINGLE SOURCE OF TRUTH
 ====================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Allura&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap");
+
+/* ======================================================
+   SIGNATURE PROMOTIONAL WATERMARK
+   (RiseRoots – Golden City, Vizag)
+====================================================== */
+/* =========================================
+   SIGNATURE PROMOTIONAL VIDEO WATERMARK
+========================================= */
+/* =========================================
+   PREMIUM SIGNATURE VIDEO WATERMARK
+   (Bold + Romantic + Promotional)
+========================================= */
 .video-watermark {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  transform: translate(-50%, -50%) rotate(-6deg);
 
-  font-size: clamp(22px, 3.2vw, 42px);
-  line-height: 1.15;
+  font-family: 'GreatVibes', cursive;
+  font-size: clamp(42px, 6vw, 78px); /* 🔥 increased size */
+  line-height: 1.05;
 
-  font-weight: 500;
-  letter-spacing: 1.5px;
+  font-weight: 600;                 /* 🔥 bolder stroke */
+  letter-spacing: 1.4px;
 
-  color: rgba(255, 255, 255, 0.55); /* 👈 stronger but still subtle */
+  /* ❤️ Rich signature red 
+  color: rgba(185, 22, 22, 0.85);
 
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 255, 255, 0.25);
+  /* ✨ Depth + glow (signature feel) 
+  text-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(185, 22, 22, 0.55),
+    0 0 34px rgba(185, 22, 22, 0.35);*/
 
+    /* 🔴 Bright confident red */
+  color: rgba(210, 28, 28, 0.9);
+
+  /* ❌ No romantic glow, only clarity */
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35);
+
+  white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  white-space: nowrap;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* CINEMATIC VIGNETTE */
+.video-watermark::after {
+  content: '✦';
+  margin-left: 12px;
+  font-size: 0.6em;
+  opacity: 0.6;
+}
+
+/* Banner variant – softer */
+.banner-media-zone .video-watermark {
+  font-size: clamp(20px, 2.8vw, 36px);
+  opacity: 0.45;
+}
+
+/* Video variant – slightly stronger */
+.media-zone .video-watermark {
+  font-size: clamp(24px, 3.2vw, 42px);
+  opacity: 0.6;
+}
+
+/* ======================================================
+   CINEMATIC VIGNETTE
+====================================================== */
+.media-zone::after,
 .banner-media-zone::after {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.18) 100%);
   pointer-events: none;
-}
-
-/* WATERMARK */
-/* Banner watermark – elegant & subtle */
-.banner-media-zone .video-watermark {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-
-  font-size: 42px;
-  font-weight: 600;
-  letter-spacing: 2px;
-
-  color: rgba(255, 255, 255, 0.25);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-}
-
-/* =========================
-   SOFT EDGE / CINEMATIC FADE
-========================= */
-.media-zone::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-
-  /* soft vignette */
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.18) 100%);
-
-  pointer-events: none;
-}
-
-/* =========================
-   VIDEO WATERMARK
-========================= */
-/* Video watermark – stronger presence */
-.media-zone .video-watermark {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-
-  font-size: 52px;
-  font-weight: 700;
-  letter-spacing: 3px;
-
-  color: rgba(255, 255, 255, 0.28);
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-}
-
-/* Slightly stronger on mobile */
-@media (max-width: 768px) {
-  .media-zone {
-    min-height: 160px;
-  }
-  .media-zone .video-watermark {
-    font-size: 34px;
-    letter-spacing: 3px;
-    color: rgba(255, 255, 255, 0.26);
-  }
-  .bg-video {
-    width: 100%;
-    height: 200px; /* match banner feel */
-    object-fit: cover; /* 🔥 no empty sides */
-    border-radius: 18px;
-  }
-}
-@media (max-width: 768px) {
-  .banner-media-zone .video-watermark {
-    font-size: 26px;
-    letter-spacing: 1.5px;
-  }
-
-  .media-zone .video-watermark {
-    font-size: 30px;
-    letter-spacing: 2px;
-  }
 }
 
 /* ======================================================
@@ -221,7 +169,6 @@
   transition: all 0.25s ease;
 }
 
-/* ACTIVE */
 .menu button.active {
   background: linear-gradient(135deg, #1f3c88, #274bb5);
   color: #ffffff;
@@ -230,13 +177,11 @@
   font-weight: 600;
 }
 
-/* HOVER */
 .menu button:hover:not(.active):not(.disabled) {
   background: #eef2ff;
   border-color: #1f3c88;
 }
 
-/* DISABLED */
 .menu button.disabled {
   background: repeating-linear-gradient(45deg, #f3f4f6, #f3f4f6 8px, #eef0f3 8px, #eef0f3 16px);
   color: #9ca3af;
@@ -245,68 +190,31 @@
   opacity: 0.85;
 }
 
-.menu button .coming-soon {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  font-weight: 500;
-  color: #9ca3af;
-}
-
 /* ======================================================
-   CENTER BANNER (MAIN HERO – SMALL IMAGE)
-====================================================== */
-/* ======================================================
-   BANNER CONTAINER
+   BANNER (MAIN HERO)
 ====================================================== */
 .banner {
   width: 100%;
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-
-  /* 🔥 remove dull / black background */
   background: transparent;
 }
 
-/* ======================================================
-   BANNER IMAGE (SMALL HERO)
-====================================================== */
-.banner img {
-  width: 100%;
-  height: auto; /* 🔥 image controls height */
-  max-height: 360px; /* desktop hero size */
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border-radius: 18px;
-}
-
-/* ======================================================
-   OPTIONAL: BANNER VIDEO (future-proof)
-====================================================== */
+.banner img,
 .banner video {
   width: 100%;
-  height: auto;
   max-height: 360px;
   object-fit: cover;
-  object-position: center;
-  display: block;
   border-radius: 18px;
 }
 
-/* ======================================================
-   BANNER OVERLAY (BOTTOM ONLY – CENTER BRIGHT)
-====================================================== */
 .banner-overlay {
   position: absolute;
   inset: 0;
-
   display: flex;
   align-items: flex-end;
   padding: 18px 22px;
-
-  /* 🔥 no dull center */
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.55) 0%,
@@ -314,13 +222,9 @@
     rgba(0, 0, 0, 0.1) 55%,
     rgba(0, 0, 0, 0) 75%
   );
-
-  pointer-events: none; /* overlay should not block clicks */
+  pointer-events: none;
 }
 
-/* ======================================================
-   TEXT
-====================================================== */
 .banner-overlay h3 {
   margin: 0 0 6px;
   font-size: 22px;
@@ -371,96 +275,35 @@
   box-shadow: 0 6px 16px rgba(31, 60, 136, 0.35);
   transform: translateY(-1px);
 }
-.locations-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 
-  font-size: 15px;
-  font-weight: 600;
-
-  color: #14532d; /* deep green */
-  background: #f0fdf4; /* very light green */
-  padding: 8px 14px;
-
-  border-radius: 20px;
-  border: 1px solid #bbf7d0;
-
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.locations-cta .arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 18px;
-  height: 18px;
-
-  font-size: 12px;
-  color: #15803d;
-  border: 1.5px solid #15803d;
-  border-radius: 50%;
-
-  transition: transform 0.2s ease;
-}
-
-.locations-cta:hover .arrow {
-  transform: translateY(3px);
-}
 /* ======================================================
-   RESPONSIVE LAYOUT
+   RESPONSIVE
 ====================================================== */
-
-/* Tablet & down */
 @media (max-width: 1024px) {
   .realestate {
     grid-template-columns: 1fr;
   }
-
-  /* Media height consistency */
-  .banner img,
-  .banner video,
-  .bg-video {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 18px;
-  }
-
-  .banner-overlay h3 {
-    font-size: 20px;
-  }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  /* 🔥 Remove all aspect-ratio logic */
-  .realestate-center {
-    aspect-ratio: unset;
-    max-height: none;
-  }
-
-  /* Banner + video behave identically */
   .banner img,
   .banner video,
   .bg-video {
-    width: 100%;
     height: 220px;
-    object-fit: cover;
-    border-radius: 16px;
   }
 
-  .banner-overlay {
-    padding: 14px 16px;
+/*  .video-watermark {
+    font-size: clamp(30px, 8vw, 48px);
+    letter-spacing: 1px;
+    transform: translate(-50%, -50%) rotate(-4deg);
+  }
+*/
+  .video-watermark {
+    font-size: clamp(30px, 8vw, 46px);
+    letter-spacing: 1px;
+    transform: translate(-50%, -50%) rotate(-3deg);
   }
 
-  .banner-overlay h3 {
-    font-size: 18px;
-  }
-
-  /* Horizontal category menu */
   .menu {
     display: flex;
     gap: 10px;
@@ -473,33 +316,12 @@
   }
 }
 
-/* Small mobile */
 @media (max-width: 480px) {
   .banner img,
   .banner video,
   .bg-video {
     height: 200px;
-    border-radius: 14px;
   }
-
-  .banner-overlay h3 {
-    font-size: 16px;
-  }
-
-  .banner-sub {
-    font-size: 12px;
-  }
-}
-
-/* ======================================================
-   MEDIA CONTAINER SAFETY (GLOBAL)
-====================================================== */
-.banner,
-.media-zone,
-.banner-media-zone {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 /* ======================================================
@@ -508,4 +330,76 @@
 img {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+/* ======================================================
+   LOCATIONS CTA (RESTORED FROM ORIGINAL STYLE)
+====================================================== */
+.locations-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-bottom: 12px;
+  padding: 8px 14px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #14532d; /* deep green */
+  background: #f0fdf4; /* soft green background */
+
+  border-radius: 20px;
+  border: 1px solid #bbf7d0;
+
+  cursor: default;
+  user-select: none;
+}
+
+/* Arrow styling */
+.locations-cta .arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #15803d;
+  border: 1.5px solid #15803d;
+  border-radius: 50%;
+
+  animation: arrowBounce 1.4s infinite;
+}
+
+/* Subtle guidance animation */
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* ======================================================
+   MOBILE TUNING
+====================================================== */
+@media (max-width: 768px) {
+  .locations-cta {
+    font-size: 14px;
+    padding: 7px 12px;
+    margin-bottom: 10px;
+  }
+
+  .locations-cta .arrow {
+    width: 16px;
+    height: 16px;
+    font-size: 11px;
+  }
 }

@@ -41,7 +41,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'flats',
-      banner: 'banners/residential-flats3.jpg',
+      banner: 'banners/residential-flats4.jpg',
       label: {
         en: 'Residential Flats',
         te: 'నివాస ఫ్లాట్లు',

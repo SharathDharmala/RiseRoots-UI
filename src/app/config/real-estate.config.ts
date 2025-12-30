@@ -93,7 +93,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.FARM],
         [
           { basePath: `${FARM}/devarapalli-chandanvalley`, count: 6 },
-          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 1, ext: 'mp4' },
+          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 0, ext: 'mp4' },
         ]
       ),
     },

@@ -1,13 +1,12 @@
 <!-- ================= HEADER ================= -->
 <app-header
   [lang]="lang"
-  [text]="text"
   [activeTab]="activeTab"
-  (langChange)="switchLang($event)"
-  (tabChange)="switchTab($event)">
+  (langChange)="onLangChange($event)"
+  (tabChange)="onTabChange($event)">
 </app-header>
 
-<!-- ================= FESTIVAL BLAST (TOP LAYER) ================= -->
+<!-- ================= FESTIVAL BLAST ================= -->
 <app-festival-blast
   *ngIf="festivalEffect"
   [effect]="festivalEffect"

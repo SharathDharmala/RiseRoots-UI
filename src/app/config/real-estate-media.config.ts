@@ -30,5 +30,5 @@ export const REAL_ESTATE_BANNER_MEDIA = {
       ext: 'jpg',
     } as MediaSourceConfig,
   },
-  watermarkText: 'RiseRoots • Golden City Vizag',
+  watermarkText: 'RiseRoots – Golden City, Vizag',
 };

@@ -9,19 +9,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  /* ================= LANGUAGE ================= */
-  @Input() lang: 'en' | 'te' | 'hi' = 'en';
-  @Output() langChange = new EventEmitter<'en' | 'te' | 'hi'>();
+  /* ================= CONSTANT BRAND ================= */
+  readonly title = 'RiseRoots Enterprises';
+  readonly tagline = 'Grounded in excellence and rising with innovation';
 
-  /* ================= TEXT ================= */
-  @Input() text!: any;
-
-  /* ================= TABS ================= */
+  /* ================= STATE ================= */
+  @Input() lang!: 'en' | 'te' | 'hi';
   @Input() activeTab!: 'services' | 'realestate' | 'xyz';
+
+  @Output() langChange = new EventEmitter<'en' | 'te' | 'hi'>();
   @Output() tabChange = new EventEmitter<'services' | 'realestate' | 'xyz'>();
 
-  switchLang(language: 'en' | 'te' | 'hi') {
-    this.langChange.emit(language);
+  switchLang(lang: 'en' | 'te' | 'hi') {
+    this.langChange.emit(lang);
   }
 
   switchTab(tab: 'services' | 'realestate' | 'xyz') {

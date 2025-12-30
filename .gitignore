@@ -49,4 +49,4 @@ Thumbs.db
 *.mkv
 
 # Safety: ignore any media folders if needed
-src/public/**/videos/
+#src/public/**/videos/
