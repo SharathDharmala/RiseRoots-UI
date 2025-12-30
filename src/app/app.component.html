@@ -1,34 +1,11 @@
 <!-- ================= HEADER ================= -->
-<header class="header" [ngClass]="lang">
-  <div class="header-inner header-wide">
-    <div class="brand header-logo">
-      <img src="assets/logo/riseroots.png" alt="RiseRoots Logo" class="logo" />
-      <span class="brand-name">{{ text[lang].title }}</span>
-    </div>
-
-    <div class="lang">
-      <button (click)="switchLang('en')">EN</button>
-      <button (click)="switchLang('te')">TE</button>
-      <button (click)="switchLang('hi')">HI</button>
-    </div>
-  </div>
-
-  <nav class="tabs">
-    <button
-      [class.active]="activeTab === 'services'"
-      (click)="switchTab('services')">
-      Our Services
-    </button>
-
-    <button
-      [class.active]="activeTab === 'realestate'"
-      (click)="switchTab('realestate')">
-      Real Estate
-    </button>
-
-    <button (click)="switchTab('xyz')">...</button>
-  </nav>
-</header>
+<app-header
+  [lang]="lang"
+  [text]="text"
+  [activeTab]="activeTab"
+  (langChange)="switchLang($event)"
+  (tabChange)="switchTab($event)">
+</app-header>
 
 <!-- ================= FESTIVAL BLAST (TOP LAYER) ================= -->
 <app-festival-blast
@@ -37,7 +14,7 @@
   [message]="festivalMessage">
 </app-festival-blast>
 
-<!-- ================= PAGE CONTENT (THIS WAS MISSING ❗) ================= -->
+<!-- ================= MAIN CONTENT ================= -->
 <main class="page-content">
   <app-landing
     *ngIf="activeTab === 'services'"
@@ -53,3 +30,6 @@
     <h2>Coming Soon</h2>
   </section>
 </main>
+
+<!-- ================= FOOTER ================= -->
+<app-footer [lang]="lang"></app-footer>

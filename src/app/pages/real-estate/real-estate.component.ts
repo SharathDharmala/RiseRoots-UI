@@ -33,11 +33,11 @@ export class RealEstateComponent implements AfterViewInit {
       key: 'plots',
       banner: 'banners/open-plots1.jpg',
       label: { en: 'Open Plots', te: 'ఓపెన్ ప్లాట్లు', hi: 'ओपन प्लॉट्स' },
-      /*subtitle: {
+      subtitle: {
         en: 'VMRDA & RERA approved plots',
         te: 'VMRDA & RERA ఆమోదిత ప్లాట్లు',
         hi: 'VMRDA और RERA अनुमोदित प्लॉट्स',
-      },*/
+      },
     },
     {
       key: 'flats',
@@ -47,11 +47,11 @@ export class RealEstateComponent implements AfterViewInit {
         te: 'నివాస ఫ్లాట్లు',
         hi: 'रेसिडेंशियल फ्लैट्स',
       },
-      /*subtitle: {
+      subtitle: {
         en: 'RERA approved, Ready & under-construction homes',
         te: 'RERA ఆమోదిత, సిద్ధంగా ఉన్న మరియు నిర్మాణంలో ఉన్న ఇళ్లు',
         hi: 'RERA अनुमोदित, रेडी और निर्माणाधीन घर',
-      },*/
+      },
     },
     {
       key: 'farmLands',
@@ -61,11 +61,11 @@ export class RealEstateComponent implements AfterViewInit {
         te: 'వ్యవసాయ భూములు',
         hi: 'फार्म लैंड',
       },
-      /*subtitle: {
+      subtitle: {
         en: 'Agricultural & long-term investment lands',
         te: 'వ్యవసాయ మరియు దీర్ఘకాలిక పెట్టుబడి భూములు',
         hi: 'कृषि और दीर्घकालिक निवेश भूमि',
-      },*/
+      },
     },
 
     /* ===== COMING SOON ===== */

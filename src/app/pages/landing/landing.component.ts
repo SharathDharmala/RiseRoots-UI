@@ -129,7 +129,7 @@ export class LandingComponent implements OnInit {
 
       intro: [
         {
-          brand: 'RiseRoots Enterprises',
+          brand: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్',
           tagline: 'grounded in excellence and rising with innovation',
           text: '2020లో స్థాపించబడిన విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న విశ్వసనీయ రియల్ ఎస్టేట్ కన్సల్టెన్సీ. అక్కయ్యపాలెం నుండి కార్యకలాపాలు నిర్వహిస్తూ, చట్టబద్ధత, పారదర్శకత మరియు కస్టమర్ నమ్మకంపై ఆధారపడి స్పష్టమైన మరియు విలువ ఆధారిత రియల్ ఎస్టేట్ సలహా సేవలను అందిస్తున్నాము.',
         },
@@ -179,7 +179,7 @@ export class LandingComponent implements OnInit {
 
       intro: [
         {
-          brand: 'RiseRoots Enterprises',
+          brand: 'राइज़रूट्स एंटरप्राइज़ेज़',
           tagline: 'grounded in excellence and rising with innovation',
           text: '2020 में स्थापित, विशाखापट्टनम स्थित एक विश्वसनीय रियल एस्टेट कंसल्टेंसी, जो ईमानदारी, पारदर्शिता और ग्राहक विश्वास पर आधारित है। अक्कैय्यापालेम से संचालित होकर, हम स्पष्ट, अनुपालन-आधारित और मूल्य-संचालित रियल एस्टेट सलाह सेवाएँ प्रदान करते हैं।',
         },

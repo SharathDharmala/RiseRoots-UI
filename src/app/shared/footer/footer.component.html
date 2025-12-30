@@ -1,0 +1,78 @@
+<footer class="footer">
+  <div class="footer-wide footer-grid">
+    <!-- LEFT -->
+    <div class="footer-left">
+      <p class="address">
+        Kailash's MK Towers, 49-11-24,<br />
+        Lalitha Nagar, Akkayyapalem,<br />
+        Visakhapatnam, Andhra Pradesh – 530016
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="footer-right">
+      <!-- CONTACT -->
+      <!-- CONTACT -->
+      <div class="contact">
+        <!-- PHONE + WHATSAPP -->
+        <div class="contact-row" *ngFor="let g of groupedContacts">
+          <!-- CALL -->
+          <a
+            [href]="g.phone.callLink"
+            class="phone"
+            aria-label="Call {{ g.phone.value }}"
+            (click)="contactActions.call(g.phone.value, 'app_root')"
+          >
+            📞 {{ g.phone.value }}
+          </a>
+
+          <!-- WHATSAPP -->
+          <a
+            *ngIf="g.phone.whatsappLink"
+            [href]="g.phone.whatsappLink"
+            target="_blank"
+            rel="noopener"
+            class="icon whatsapp"
+            aria-label="WhatsApp {{ g.phone.value }}"
+            (click)="contactActions.whatsapp(g.phone.value, 'app_root')"
+          >
+            <img src="assets/icons/watsapp.png" alt="WhatsApp" class="whatsapp-icon" />
+            WhatsApp
+          </a>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="contact-row" *ngFor="let e of emails">
+          <a *ngIf="e.mailto" [href]="e.mailto" class="email" aria-label="Email {{ e.value }}">
+            <img src="assets/icons/email.png" alt="Email" class="email-icon" />
+            {{ e.value }}
+          </a>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="footer-links">
+        <a href="https://g.page/r/Cdfwoh1q0OHuEAE/review" target="_blank">
+          ⭐
+          {{ lang === 'en' ? 'Google Reviews' : lang === 'te' ? 'గూగుల్ సమీక్షలు' : 'गूगल रिव्यू' }}
+        </a>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=RiseRoots+Enterprises+Akkayyapalem+Visakhapatnam"
+          target="_blank"
+        >
+          📍
+          {{
+            lang === 'en'
+              ? 'View on Google Maps'
+              : lang === 'te'
+              ? 'గూగుల్ మ్యాప్స్‌లో చూడండి'
+              : 'गूगल मैप्स पर देखें'
+          }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">© RiseRoots Enterprises. All rights reserved.</div>
+</footer>
