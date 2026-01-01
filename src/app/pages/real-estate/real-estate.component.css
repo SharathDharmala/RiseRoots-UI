@@ -86,7 +86,7 @@
   font-size: clamp(42px, 6vw, 78px); /* 🔥 increased size */
   line-height: 1.05;
 
-  font-weight: 600;                 /* 🔥 bolder stroke */
+  font-weight: 600; /* 🔥 bolder stroke */
   letter-spacing: 1.4px;
 
   /* ❤️ Rich signature red 
@@ -98,12 +98,11 @@
     0 0 18px rgba(185, 22, 22, 0.55),
     0 0 34px rgba(185, 22, 22, 0.35);*/
 
-    /* 🔴 Bright confident red */
+  /* 🔴 Bright confident red */
   color: rgba(210, 28, 28, 0.9);
 
   /* ❌ No romantic glow, only clarity */
-  text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 
   white-space: nowrap;
   pointer-events: none;
@@ -289,7 +288,7 @@
     height: 220px;
   }
 
-/*  .video-watermark {
+  /*  .video-watermark {
     font-size: clamp(30px, 8vw, 48px);
     letter-spacing: 1px;
     transform: translate(-50%, -50%) rotate(-4deg);
@@ -398,5 +397,21 @@ img {
     width: 16px;
     height: 16px;
     font-size: 11px;
+  }
+}
+
+.banner-video {
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
+}
+.banner-video {
+  animation: subtleZoom 12s linear infinite;
+}
+@keyframes subtleZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
   }
 }

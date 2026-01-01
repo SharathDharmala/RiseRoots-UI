@@ -70,6 +70,7 @@
   color: rgba(255, 255, 255, 0.85);
   margin-top: 2px;
   white-space: nowrap;
+  display: block;
 }
 
 /* ===============================
@@ -173,4 +174,137 @@
   font-weight: 600;
   text-align: center;
   z-index: 5;
+}
+
+/* =========================
+   MOBILE / TABLET HEADER FIX
+========================= */
+@media (max-width: 768px) {
+  .header-inner {
+    display: flex;
+    flex-direction: row; /* 👈 keep in one row */
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 14px;
+    gap: 12px;
+  }
+
+  /* Brand block */
+  .header .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 75%; /* 👈 prevents overlap */
+  }
+
+  .header .brand-name {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .header .brand-tagline {
+    font-size: 11px;
+    opacity: 0.85;
+  }
+
+  /* Language buttons */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0; /* 👈 never squeeze */
+  }
+
+  .lang-switch button {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+
+  /* Tabs go BELOW */
+  .header-tabs {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+/* =========================
+   MOBILE HEADER FIX
+========================= */
+@media (max-width: 768px) {
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  /* Brand area */
+  .header .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: calc(100% - 120px); /* 🔥 reserve space for language buttons */
+  }
+
+  .header .brand-name {
+    font-size: 14px; /* 🔥 slightly reduced */
+    line-height: 1.2;
+  }
+
+  .header .brand-tagline {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Language buttons */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .lang-switch button {
+    font-size: 11px;
+    padding: 4px 7px;
+    min-width: 32px;
+    border-radius: 8px;
+  }
+}
+/* =========================
+   MOBILE HEADER – TAGLINE FIX
+========================= */
+@media (max-width: 768px) {
+  .header .brand {
+    max-width: calc(100% - 110px); /* keeps space for lang buttons */
+  }
+
+  .header .brand-name {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .header .brand-tagline {
+    font-size: 10.5px; /* 👈 slightly smaller */
+    line-height: 1.25;
+    margin-top: 2px;
+
+    /* 👇 allow wrapping into max 2 lines */
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Language buttons stay fixed */
+  .lang {
+    flex-shrink: 0;
+  }
 }

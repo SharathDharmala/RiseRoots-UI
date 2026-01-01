@@ -16,7 +16,7 @@ export class HeaderComponent {
 
   /* ================= CONSTANT BRAND ================= */
   readonly title = 'RiseRoots Enterprises';
-  readonly tagline = 'Grounded in excellence and rising with innovation';
+  readonly tagline = 'Grounded in excellence, rising with innovation';
 
   /* ================= STATE ================= */
   @Input() lang!: 'en' | 'te' | 'hi';

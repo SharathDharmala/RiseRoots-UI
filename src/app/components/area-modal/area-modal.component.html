@@ -1,7 +1,6 @@
 <!-- ================= MAIN MODAL ================= -->
 <div class="modal-backdrop" (click)="close()">
   <div class="modal" (click)="$event.stopPropagation()">
-
     <!-- ================= HEADER ================= -->
     <div class="modal-header">
       <h3>{{ title }}</h3>
@@ -16,7 +15,6 @@
       (touchstart)="onStart($event)"
       (touchend)="onEnd($event)"
     >
-
       <!-- LEFT NAV -->
       <button class="nav left" [disabled]="currentIndex === 0" (click)="prev()">‹</button>
 
@@ -66,27 +64,29 @@
 
       <!-- 🔥 LEAVE A MESSAGE – MEDIA SLIDES CTA -->
       <div class="slider-cta" *ngIf="currentIndex < media.length">
-        <button class="message-btn" (click)="openMessageModal('slider')">
-          💬 Leave a Message
-        </button>
+        <button class="message-btn" (click)="openMessageModal('slider')">💬 Leave a Message</button>
       </div>
 
       <!-- ================= CONTACT SLIDE ================= -->
       <div *ngIf="currentIndex === media.length" class="contact-slide">
-        <div class="contact-content">
-
-          <!-- CONTACT CTA -->
+        <!-- SECTION 1 : QUESTION / MESSAGE -->
+        <div class="contact-section section-question">
           <div class="contact-cta">
             <span>Have a question about this property?</span>
             <button class="message-btn" (click)="openMessageModal('contact')">
               💬 Leave a Message
             </button>
           </div>
+        </div>
 
+        <div class="contact-separator"></div>
+
+        <!-- SECTION 2 : CALL / WHATSAPP -->
+        <div class="contact-section section-call">
           <h3>Call or WhatsApp Us</h3>
 
           <div class="contact-wrapper">
-            <!-- PHONE + WHATSAPP ROWS -->
+            <!-- PHONE ROWS (UNCHANGED) -->
             <div class="contact-row" *ngFor="let group of contactGroups">
               <div class="contact-number">
                 {{ group.value }}
@@ -140,36 +140,25 @@
               </div>
             </div>
 
-            <!-- EMAIL FOOTER (VISIBLE EMAILS ONLY) -->
+            <!-- EMAIL FOOTER -->
             <div class="contact-footer" *ngFor="let email of visibleEmails">
-              <a [href]="email.mailto">
-                ✉️ {{ email.label }} {{ email.value }}
-              </a>
+              <a [href]="email.mailto"> ✉️ {{ email.label }} {{ email.value }} </a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- RIGHT NAV -->
-      <button
-        class="nav right"
-        [disabled]="currentIndex === media.length"
-        (click)="next()"
-      >
+      <button class="nav right" [disabled]="currentIndex === media.length" (click)="next()">
         ›
       </button>
     </div>
 
     <!-- ================= FOOTER ================= -->
-    <div class="modal-footer">
-      {{ currentIndex + 1 }} / {{ totalSlides }}
-    </div>
+    <div class="modal-footer">{{ currentIndex + 1 }} / {{ totalSlides }}</div>
   </div>
 </div>
 
 <!-- ================= 🔥 LEAVE MESSAGE POPUP (OUTSIDE MODAL) ================= -->
-<app-leave-message
-  *ngIf="showLeaveMessage"
-  [context]="leadContext"
-  (close)="closeLeaveMessage()">
+<app-leave-message *ngIf="showLeaveMessage" [context]="leadContext" (close)="closeLeaveMessage()">
 </app-leave-message>

@@ -2,15 +2,18 @@
 /* GLOBAL RESET */
 html,
 body {
+  margin: 0;          /* 🔥 KILLS TOP & LEFT GAP */
+  padding: 0;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
 
+
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;   /* 🔥 REMOVE padding from global */
+  padding: 0; /* 🔥 REMOVE padding from global */
 }
 
 strong {
@@ -27,10 +30,43 @@ em {
   font-weight: normal;
   font-style: normal;
 }
-
 .header {
+  width: 100%; /* ✅ SAFE */
+  max-width: 100%;
   position: relative; /* REQUIRED */
-  overflow: hidden;   /* CONTAINS FLOWERS */
+  overflow: hidden; /* CONTAINS FLOWERS */
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px;
+
+  flex-wrap: wrap; /* 🔥 IMPORTANT */
+  overflow: hidden; /* prevents bleed */
+}
+.header,
+.footer {
+  overflow-x: hidden;
+}
+
+.header *,
+.footer * {
+  max-width: 100%;
+  word-break: break-word;
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap; /* 🔥 REQUIRED */
+  padding: 0 16px;
+}
+@media (max-width: 768px) {
+  .header,
+  .footer {
+    width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 /* ======================================================
@@ -44,4 +80,9 @@ em {
   --accent: #d4af37;
   --text-soft: #f1f4fa;
 }
-
+/* 🔥 GLOBAL FIX FOR CUT TEXT */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

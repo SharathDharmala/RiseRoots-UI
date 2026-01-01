@@ -1,4 +1,4 @@
-import { MediaSourceConfig } from '../data/media.config.model';
+import { MediaSourceConfig } from './media.config.model';
 
 export const REAL_ESTATE_BANNER_MEDIA = {
   enabled: true, // 🔥 master switch (everything off)
@@ -8,11 +8,11 @@ export const REAL_ESTATE_BANNER_MEDIA = {
   ========================= */
   videoEnabled: true, // 🔥 individual toggle
   video: {
-    playbackRate: 1.5,
-    maxItemsToPlay: 4,
+    playbackRate: 1.1,
+    maxItemsToPlay: 7,   // 🔥 MUST match actual files
     source: {
-      basePath: 'assets/videos/video', // image1.mp4...
-      count: 4,
+      basePath: 'assets/videos/video', // video1.mp4...
+      count: 7,    //count can be configure, how many wanted to play..
       ext: 'mp4',
     } as MediaSourceConfig,
   },

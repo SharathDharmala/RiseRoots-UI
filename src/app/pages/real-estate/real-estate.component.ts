@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { REAL_ESTATE_CONFIG, AreaConfig, CategoryConfig } from '../../config/real-estate.config';
 
 import { REAL_ESTATE_BANNER_MEDIA } from '../../config/real-estate-media.config';
-import { resolveMediaSources } from '../../data/media.utils';
+import { resolveMediaSources } from '../../config/media.utils';
 
 @Component({
   selector: 'app-real-estate',
@@ -31,7 +31,7 @@ export class RealEstateComponent implements AfterViewInit {
   categories: CategoryConfig[] = [
     {
       key: 'plots',
-      banner: 'banners/open-plots1.jpg',
+      banner: 'banners/open-plots1.jpeg',
       label: { en: 'Open Plots', te: 'ఓపెన్ ప్లాట్లు', hi: 'ओपन प्लॉट्स' },
       subtitle: {
         en: 'VMRDA & RERA approved plots',
@@ -41,7 +41,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'flats',
-      banner: 'banners/residential-flats4.jpg',
+      banner: 'banners/residential-flats1.jpeg',
       label: {
         en: 'Residential Flats',
         te: 'నివాస ఫ్లాట్లు',
@@ -55,7 +55,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'farmLands',
-      banner: 'banners/farm-lands1.jpg',
+      banner: 'banners/farm-lands1.jpeg',
       label: {
         en: 'Farm Lands',
         te: 'వ్యవసాయ భూములు',
@@ -144,7 +144,6 @@ export class RealEstateComponent implements AfterViewInit {
       this.imageTimer = null;
     }
   }
-
   private initVideos(): void {
     this.videos = resolveMediaSources(this.bannerMedia.video.source).slice(
       0,
@@ -156,30 +155,38 @@ export class RealEstateComponent implements AfterViewInit {
     const video = this.bannerVideo?.nativeElement;
     if (!video || this.videos.length === 0) return;
 
-    video.onended = null;
-    video.style.opacity = '0';
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
 
-    setTimeout(() => {
-      video.src = this.videos[this.currentVideoIndex];
-      video.load();
-      video.muted = true;
-      video.playbackRate = this.bannerMedia.video.playbackRate;
+    const playIndex = () => {
+      video.style.opacity = '0';
 
-      video.play().catch(() => {});
-      video.style.opacity = '1';
-    }, 300);
+      const src = this.videos[this.currentVideoIndex];
+      video.src = src;
+
+      video.oncanplay = () => {
+        video.playbackRate = this.bannerMedia.video.playbackRate;
+
+        video.play().catch(() => {});
+        video.style.opacity = '1';
+      };
+    };
 
     video.onended = () => {
       this.currentVideoIndex = (this.currentVideoIndex + 1) % this.videos.length;
-      this.playVideo();
+      playIndex();
     };
+
+    // ▶ start first video
+    playIndex();
   }
 
   ngAfterViewInit(): void {
     if (!this.bannerMedia.enabled) return;
 
     if (this.bannerMedia.videoEnabled) {
-      this.initVideos();
+      this.initVideos(); // 🔥 MISSING BEFORE
       this.playVideo();
     }
 
@@ -191,40 +198,20 @@ export class RealEstateComponent implements AfterViewInit {
     }
   }
 
-  private getVideoSources(): string[] {
-    if (!this.bannerMedia.videoEnabled) return [];
+  private loadAndPlayVideo(): void {
+    const video = this.bannerVideo.nativeElement;
 
-    return resolveMediaSources(this.bannerMedia.video.source).slice(
-      0,
-      this.bannerMedia.video.maxItemsToPlay
-    );
-  }
-
-  private startVideoPlayback(): void {
-    const video = this.bannerVideo?.nativeElement;
-    const videos = this.getVideoSources();
-
-    if (!video || videos.length === 0) return;
-
-    video.onended = null;
-
-    // 🔥 fade out
     video.style.opacity = '0';
 
     setTimeout(() => {
-      video.src = videos[this.currentVideoIndex];
+      video.src = this.videos[this.currentVideoIndex];
       video.load();
       video.muted = true;
       video.playbackRate = this.bannerMedia.video.playbackRate;
 
       video.play().catch(() => {});
-      video.style.opacity = '1'; // 🔥 fade in
-    }, 300);
-
-    video.onended = () => {
-      this.currentVideoIndex = (this.currentVideoIndex + 1) % videos.length;
-      this.startVideoPlayback();
-    };
+      video.style.opacity = '1';
+    }, 250);
   }
 
   selectCategory(category: CategoryConfig): void {
@@ -261,5 +248,6 @@ export class RealEstateComponent implements AfterViewInit {
 
   ngOnDestroy(): void {
     this.stopImageSlider();
+    this.currentVideoIndex = 0;
   }
 }

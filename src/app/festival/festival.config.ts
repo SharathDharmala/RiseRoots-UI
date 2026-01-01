@@ -17,14 +17,14 @@ export interface FestivalConfig {
 }
 export const FESTIVALS: FestivalConfig[] = [
     {
-    name: 'New Year',
-    start: '12-25',
+    name: 'welcome',
+    start: '12-30',
     end: '12-31',
     effect: 'confetti',
     blast: true,
     headerEffect: true,
     messageEnabled: true,
-    message: 'Happy New Year from RiseRoots Family 🎉',
+    message: 'Welcome to RiseRoots Family 🎉',
   },
   {
     name: 'New Year',
@@ -33,7 +33,7 @@ export const FESTIVALS: FestivalConfig[] = [
     blast: true,
     headerEffect: true,
     messageEnabled: true,
-    message: 'Happy New Year from RiseRoots Family 🎉',
+    message: 'Happy New Year from RiseRoots Enterprises 🎉',
   },
   {
     name: 'Pongal',
@@ -43,7 +43,7 @@ export const FESTIVALS: FestivalConfig[] = [
     blast: true,
     headerEffect: true,
     messageEnabled: true,
-    message: 'Happy Pongal 🌾 from RiseRoots Family',
+    message: 'Happy Pongal 🌾 from RiseRoots Enterprises',
   },
   {
     name: 'Diwali',
@@ -52,6 +52,6 @@ export const FESTIVALS: FestivalConfig[] = [
     blast: true,
     headerEffect: true,
     messageEnabled: true,
-    message: 'Wishing you a Prosperous Diwali ✨',
+    message: 'Wishing you a Prosperous Diwali from  RiseRoots Enterprises ✨',
   },
 ];

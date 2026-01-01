@@ -99,3 +99,201 @@
   justify-content: flex-end;
   white-space: nowrap;
 }
+/* =====================================================
+   FOOTER – MOBILE & TABLET FINAL OVERRIDE (FIX)
+===================================================== */
+@media (max-width: 1024px) {
+  /* Stack left & right sections */
+  .footer .footer-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px;
+  }
+
+  .footer .footer-left,
+  .footer .footer-right {
+    width: 100%;
+    margin: 0;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* FORCE phone + whatsapp in ONE LINE */
+  .footer .contact-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    gap: 10px;
+    white-space: nowrap !important; /* keep single line */
+  }
+
+  /* Phone text */
+  .footer .phone {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* WhatsApp link inline */
+  .footer .contact .icon.whatsapp {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  /* Footer links center */
+  .footer .footer-links {
+    justify-content: center !important;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .footer .contact .icon.whatsapp {
+    font-size: 12px;
+  }
+}
+
+/* ======================================================
+   MOBILE EXTRA POLISH
+====================================================== */
+@media (max-width: 480px) {
+  .footer-left .address {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .contact-row {
+    flex-direction: column; /* one below another */
+  }
+
+  .contact .icon {
+    justify-content: center;
+  }
+}
+/* =========================
+   FOOTER MOBILE ALIGNMENT
+========================= */
+@media (max-width: 768px) {
+  .footer-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .footer-left,
+  .footer-right {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-row {
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap; /* 🔥 keep in single line */
+  }
+
+  .phone {
+    font-size: 14px;
+  }
+
+  .contact .icon.whatsapp {
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+.footer-bottom {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.email {
+  color: var(--text-soft);
+  opacity: 0.9;
+}
+
+.email:hover {
+  color: var(--accent);
+}
+.footer-links {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+@media (max-width: 768px) {
+  .footer-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-row {
+    justify-content: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}
+/* Phone number refinement */
+.footer .phone {
+  font-size: 13px; /* was 14px */
+  font-weight: 500; /* smoother than default */
+  letter-spacing: 0.2px; /* subtle breathing */
+  color: rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer .phone::before {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.footer .contact-row {
+  gap: 10px;
+  margin-bottom: 6px; /* was tight */
+}
+@media (max-width: 1024px) {
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer .contact-row {
+    justify-content: center;
+  }
+}
+

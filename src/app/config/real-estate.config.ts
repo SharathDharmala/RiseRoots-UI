@@ -86,8 +86,8 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       images: generateMedia(
         [BANNERS.FARM],
         [
-          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 6 },
-          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 0, ext: 'mp4' },
+          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 21 },
+          { basePath: `${FARM}/devarapalli-chandanvalley`, count: 1, ext: 'mp4' },
         ]
       ),
     },
@@ -99,7 +99,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       images: generateMedia(
         [BANNERS.FARM],
         [
-          { basePath: `${FARM}/devarapalli-phenixvalley`, count: 3 },
+          { basePath: `${FARM}/devarapalli-phenixvalley`, count: 30 },
           { basePath: `${FARM}/devarapalli-phenixvalley`, count: 0, ext: 'pdf' },
         ]
       ),
@@ -125,6 +125,57 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
   ============================== */
   plots: [
     {
+      key: 'bhogapuram-kohinoor',
+      name: 'Bhogapuram – Kohinoor Gateway Commercial',
+      enabled: true,
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [{ basePath: `${PLOTS}/bhogapuram-kohinoor`, count: 11 }]
+      ),
+    },
+    {
+      key: 'kothavalasa',
+      name: 'Kothavalasa(Chandhuluru) - Sunrise Promotors',
+      enabled: true,
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [
+          { basePath: `${PLOTS}/kothavalasa-sunrise-promotors`, count: 15 },
+          { basePath: `${PLOTS}/kothavalasa-sunrise-promotors`, count: 1, ext: 'mp4' },
+        ]
+      ),
+    },
+    {
+      key: 'kothavalasa',
+      name: 'Kothavalasa - Swathi Promotors(MLA Township)',
+      enabled: true,
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [
+          { basePath: `/open-plots/kothavalasa-swathi-promotors-mla-township`, count: 22 },
+          { basePath: `/open-plots/kothavalasa-swathi-promotors-mla-township`, count: 0, ext: 'mp4' },
+        ]
+      ),
+    },   
+    {
+      key: 'vizianagaram',
+      name: 'Vizianagaram – AKR Garden City (Chelluru)',
+      enabled: true,
+      images: generateMedia(
+        [BANNERS.PLOTS],
+        [
+          { basePath: `${PLOTS}/vizianagaram`, count: 25 },
+          { basePath: `${PLOTS}/vizianagaram`, count: 1, ext: 'mp4' },
+        ]
+      ),
+    }, 
+    {
+      key: 'dabbanda',
+      name: 'Dabbanda(Simhachalam)',
+      enabled: true,
+      images: generateMedia([BANNERS.PLOTS], [{ basePath: '/open-plots/dabbanda', count: 8 }]),
+    },
+    {
       key: 'anandapuram',
       name: 'Anandapuram',
       enabled: true,
@@ -132,7 +183,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
     },
     {
       key: 'tagarapuvalasa-utkarsha',
-      name: 'Tagarapuvalasa – Utkarsha Vajradhaara',
+      name: 'Tagarapuvalasa – Utkarsha Vajradhaara, Highway Facing',
       enabled: true,
       images: generateMedia(
         [BANNERS.PLOTS],
@@ -158,20 +209,9 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       key: 'gandigundam',
       name: 'Gandigundam',
       enabled: true,
-      images: generateMedia([BANNERS.PLOTS], [{ basePath: `${PLOTS}/gandigundam`, count: 6 }]),
+      images: generateMedia([BANNERS.PLOTS], [{ basePath: `${PLOTS}/gandigundam`, count: 5 }]),
     },
-    {
-      key: 'vizianagaram',
-      name: 'Vizianagaram – AKR Garden City (Chelluru)',
-      enabled: true,
-      images: generateMedia(
-        [BANNERS.PLOTS],
-        [
-          { basePath: `${PLOTS}/vizianagaram`, count: 25 },
-          { basePath: `${PLOTS}/vizianagaram`, count: 1, ext: 'mp4' },
-        ]
-      ),
-    },
+    
     {
       key: 'dakamarri',
       name: 'Dakamarri',
@@ -192,34 +232,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.PLOTS],
         [{ basePath: `${PLOTS}/bhogapuram-aerodestiny`, count: 1 }]
       ),
-    },
-    {
-      key: 'bhogapuram-kohinoor',
-      name: 'Bhogapuram – Kohinoor',
-      enabled: true,
-      images: generateMedia(
-        [BANNERS.PLOTS],
-        [{ basePath: `${PLOTS}/bhogapuram-kohinoor`, count: 11 }]
-      ),
-    },
-    {
-      key: 'kothavalasa',
-      name: 'Kothavalasa',
-      enabled: true,
-      images: generateMedia(
-        [BANNERS.PLOTS],
-        [
-          { basePath: `${PLOTS}/kothavalasa`, count: 2 },
-          { basePath: `${PLOTS}/kothavalasa`, count: 1, ext: 'mp4' },
-        ]
-      ),
-    },
-    {
-      key: 'dabbanda',
-      name: 'Dabbanda(Simhachalam)',
-      enabled: true,
-      images: generateMedia([BANNERS.PLOTS], [{ basePath: '/open-plots/dabbanda', count: 8 }]),
-    },
+    },    
     {
       key: 'polipilli-aerogateway',
       name: 'Aeroateway - Polipilli',

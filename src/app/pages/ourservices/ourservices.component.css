@@ -63,11 +63,9 @@
 ===================================================== */
 
 .landing .intro {
-  font-size: 15px;
-  line-height: 1.7;
   margin-bottom: 14px;
-  color: #374151;
 }
+
 
 /* =====================================================
    SECTION TITLES
@@ -81,6 +79,21 @@
   font-weight: 600;
   color: #081c15;
 }
+.seo-h1 {
+  font-size: 15px;              /* 👈 small */
+  font-weight: 500;
+  color: #5f6f8a;               /* soft muted blue */
+  margin: 0 0 6px;
+  letter-spacing: 0.3px;
+}
+
+.ui-title {
+  font-size: 28px;              /* main visual title */
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #111;
+}
+
 
 /* =====================================================
    SERVICES LIST
@@ -118,6 +131,14 @@
   line-height: 1.45;
   color: #374151;
 }
+.evaluation,
+.phased,
+.vision {
+  font-size: 15px;        /* SAME as intro */
+  line-height: 1.7;
+  color: #374151;
+}
+
 
 /* =====================================================
    CORE STRENGTHS
@@ -247,4 +268,14 @@
   100% {
     transform: scale(1);
   }
+}
+/* ============================
+   BASE CONTENT TEXT (UNIFIED)
+============================ */
+.services-card p,
+.services-card li,
+.services-card .text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #374151;
 }

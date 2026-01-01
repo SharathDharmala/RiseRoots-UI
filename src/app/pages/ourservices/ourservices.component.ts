@@ -63,168 +63,158 @@ export class LandingComponent implements OnInit {
   }
 
   content: any = {
-    /* ======================================================
-     ENGLISH
-  ====================================================== */
     en: {
       title: 'Our Services',
 
+      /* =========================
+       INTRO
+    ========================= */
       intro: [
         {
           brand: 'RiseRoots Enterprises',
-          tagline: '',
-          text: 'Founded in 2020, RiseRoots Enterprises is a Visakhapatnam-based real estate consultancy rooted in integrity, transparency, and customer trust. Operating from Akkayyapalem, we deliver compliant, clear, and value-driven property advisory services, positioning ourselves as a single point solution for all real estate needs.',
+          text: 'Founded in 2020, RiseRoots Enterprises is a Visakhapatnam-based real estate consultancy specializing in low budget plots, affordable flats, and budget-friendly farm lands, delivering transparent, compliant, and value-driven advisory services supported by structured processes and disciplined execution.',
         },
         {
-          text: 'We partner with individuals, families, and investors to enable informed and secure real estate decisions. Our growth has been shaped by ethical practices, strong regional expertise, and long-term client relationships rather than volume-driven transactions.',
+          text: 'We partner with individuals, families, first-time buyers, investors, and organizations to enable informed and secure decision-making. Our advisory approach emphasizes clarity, legal compliance, and affordability—helping clients identify value-driven property options aligned with their budget and long-term goals.',
         },
         {
-          text: 'Today, RiseRoots Enterprises is recognized as a reliable, customer-centric advisory firm, offering structured guidance that balances immediate needs with long-term investment potential—always aligned with our clients’ financial goals.',
+          text: 'Today, RiseRoots Enterprises is recognized as a reliable, customer-centric advisory firm in Vizag, offering structured guidance that balances immediate requirements with long-term investment potential—while remaining positioned for responsible expansion into future consulting domains.',
         },
       ],
 
-      activeTitle: 'Our Active Services',
+      /* =========================
+       SERVICE LANDSCAPE
+    ========================= */
+      activeTitle: 'Our Service Landscape',
+
       activeServices: [
-        'Open Plots – Carefully selected layouts with clear titles, statutory approvals, and strong future growth potential',
-        'Residential Flats – Ready-to-move and under-construction options suitable for both end-users and investors',
-        'Farm Lands – Agricultural and investment-grade lands with verified ownership and long-term value',
+        'Open Plots – Carefully selected low budget plots in Visakhapatnam with clear titles, statutory approvals, and strong future growth potential',
+        'Residential Flats – Affordable flats in Vizag, including ready-to-move and under-construction options aligned with lifestyle and investment needs',
+        'Farm Lands – Budget-friendly agricultural and investment-grade farm lands near Visakhapatnam with verified ownership and long-term value',
       ],
 
       evaluation:
-        'Each property recommendation is evaluated based on legal compliance, location advantages, infrastructure development, and future appreciation prospects.',
+        'Each recommendation is evaluated through a defined framework covering legal compliance, location advantages, infrastructure development, and long-term appreciation potential. In addition to these core offerings, our advisory scope extends—on a need-driven basis—to land leasing, resale facilitation, commercial sales and leasing, property management support, joint development models, and documentation coordination, enabling a scalable and evolving consulting approach.',
 
-      extendedTitle: 'Extended Advisory & Support Services',
-      extendedServices: [
-        'Land Leasing – Agricultural and commercial lease opportunities',
-        'Resale Properties – Verified resale plots and residential units',
-        'Commercial Sales & Leasing – Shops, office spaces, and commercial assets',
-        'Property Management – End-to-end support for NRIs and long-term investors, including rent and maintenance coordination',
-        'Joint Ventures & Development – Structured landowner–builder partnerships and revenue-sharing models',
-        'Legal & Documentation Support – Assistance with title verification, registrations, and complete property documentation',
-      ],
-
+      /* =========================
+       DISCLAIMER (SAFE)
+    ========================= */
       phased:
-        'All extended services are introduced in a phased and structured manner, maintaining consistent standards of transparency, compliance, and trust.',
+        'RiseRoots Enterprises operates as an independent consultancy and advisory organization. Final decisions, transactions, and statutory compliances remain the responsibility of the respective property owners, developers, and clients.',
 
+      /* =========================
+       CORE STRENGTHS
+    ========================= */
       strengthsTitle: 'Our Core Strengths',
+
       strengths: [
-        'Trusted consulting across Open Plots, Residential Flats, and Farm Lands',
-        'Transparent, ethical, and customer-focused advisory approach',
-        'Strong emphasis on VMRDA & RERA approved properties',
-        'Investment solutions aligned with budgets and long-term financial objectives',
-        'Assistance with bank loans and end-to-end documentation',
-        'Clear guidance backed by strong local market insight and practical experience',
+        'Trusted advisory experience across low budget plots, affordable flats, and farm lands',
+        'Transparent, ethical, and customer-focused consulting approach',
+        'Strong emphasis on legally compliant properties, including VMRDA and RERA approvals',
+        'Investment guidance aligned with client budgets and long-term financial objectives',
+        'Support with bank loan facilitation and end-to-end documentation processes',
+        'Clear, practical guidance backed by strong local market insight and on-ground experience in Visakhapatnam',
       ],
 
+      /* =========================
+       VISION
+    ========================= */
       visionTitle: 'Our Vision',
-      vision:
-        'To bring a disciplined, transparent, and long-term perspective to real estate investments—ensuring every property decision is informed, legally secure, and aligned with future aspirations.',
-    },
 
-    /* ======================================================
-     TELUGU
-  ====================================================== */
+      vision:
+        'To bring a disciplined, transparent, and long-term perspective to property advisory and investment decisions—ensuring every engagement is informed, legally secure, budget-aligned, and positioned for sustainable future growth.',
+    },
     te: {
       title: 'మా సేవలు',
 
       intro: [
         {
           brand: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్',
-          tagline: '',
-          text: '2020లో స్థాపించబడిన విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న విశ్వసనీయ రియల్ ఎస్టేట్ కన్సల్టెన్సీ. అక్కయ్యపాలెం నుండి కార్యకలాపాలు నిర్వహిస్తూ, చట్టబద్ధత, పారదర్శకత మరియు కస్టమర్ నమ్మకంపై ఆధారపడి స్పష్టమైన మరియు విలువ ఆధారిత రియల్ ఎస్టేట్ సలహా సేవలను అందిస్తున్నాము.',
+          text: '2020లో స్థాపించబడిన రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న ఒక విశ్వసనీయ రియల్ ఎస్టేట్ కన్సల్టెన్సీ సంస్థ. తక్కువ బడ్జెట్ ప్లాట్లు, అందుబాటు ధరల ఫ్లాట్లు మరియు బడ్జెట్‌కు అనుగుణమైన వ్యవసాయ భూములపై ప్రత్యేక దృష్టితో, అక్కయ్యపాలెం నుండి పారదర్శకత, చట్టబద్ధత మరియు దీర్ఘకాలిక విలువలను ఆధారంగా చేసుకుని సలహా సేవలను అందిస్తోంది.',
         },
         {
-          text: 'వ్యక్తులు, కుటుంబాలు మరియు పెట్టుబడిదారులు భద్రమైన మరియు అవగాహనతో కూడిన రియల్ ఎస్టేట్ నిర్ణయాలు తీసుకునేలా మేము విశ్వసనీయ మార్గనిర్దేశం అందిస్తున్నాము. నైతిక విలువలు, బలమైన స్థానిక మార్కెట్ అనుభవం మరియు దీర్ఘకాలిక సంబంధాలే మా అభివృద్ధికి ఆధారం.',
+          text: 'వ్యక్తులు, కుటుంబాలు, మొదటిసారి కొనుగోలు చేసే వారు మరియు పెట్టుబడిదారులు సురక్షితమైన మరియు అవగాహనతో కూడిన నిర్ణయాలు తీసుకునేలా మేము మార్గనిర్దేశం అందిస్తున్నాము.',
         },
         {
-          text: 'ఈ రోజు, RiseRoots Enterprises ఒక విశ్వసనీయ మరియు కస్టమర్ కేంద్రిత రియల్ ఎస్టేట్ సలహాదార సంస్థగా గుర్తింపు పొందింది. తక్షణ అవసరాలు మరియు దీర్ఘకాలిక పెట్టుబడి లక్ష్యాల మధ్య సమతుల్యతతో స్పష్టమైన మార్గనిర్దేశం అందిస్తోంది.',
+          text: 'నైతిక విలువలు, స్థానిక మార్కెట్ అవగాహన మరియు ప్రాజెక్ట్ ఆధారిత విధానమే మా అభివృద్ధికి మూలాధారం.',
         },
+      ],
+
+      activeTitle: 'మా సేవల పరిధి',
+
+      activeServices: [
+        'ఓపెన్ ప్లాట్లు – విశాఖపట్నంలో తక్కువ బడ్జెట్‌లో లభించే చట్టబద్ధత కలిగిన ప్లాట్లు',
+        'నివాస ఫ్లాట్లు – విశాఖలో అందుబాటు ధరలతో సిద్ధంగా ఉన్న మరియు నిర్మాణంలో ఉన్న ఫ్లాట్లు',
+        'వ్యవసాయ భూములు – ధృవీకరించిన యాజమాన్యంతో పెట్టుబడి విలువ కలిగిన బడ్జెట్ అనుకూల భూములు',
       ],
 
       evaluation:
-        'ప్రతి ఆస్తిని చట్టబద్ధత, ప్రాంత ప్రాముఖ్యత, మౌలిక సదుపాయాలు మరియు భవిష్యత్ విలువ ఆధారంగా సమగ్రంగా పరిశీలిస్తాము.',
+        'ప్రతి ఆస్తి చట్టబద్ధత, ప్రాంత ప్రాముఖ్యత, మౌలిక సదుపాయాలు మరియు దీర్ఘకాలిక విలువ ఆధారంగా పరిశీలించబడుతుంది. అవసరాల ఆధారంగా లీజింగ్, రీసేల్, కమర్షియల్ లావాదేవీలు మరియు డాక్యుమెంటేషన్ సహాయం వంటి సేవలు అందించబడతాయి.',
 
-      extendedTitle: 'అదనపు సలహా మరియు మద్దతు సేవలు',
-      extendedServices: [
-        'భూమి లీజింగ్ – వ్యవసాయ మరియు వాణిజ్య లీజింగ్ అవకాశాలు',
-        'రిసేల్ ఆస్తులు – ధృవీకరించిన రిసేల్ ప్లాట్లు మరియు ఫ్లాట్లు',
-        'వాణిజ్య విక్రయాలు & లీజింగ్ – షాపులు మరియు కార్యాలయ స్థలాలు',
-        'ప్రాపర్టీ మేనేజ్‌మెంట్ – ఎన్‌ఆర్‌ఐలు మరియు దీర్ఘకాలిక పెట్టుబడిదారులకు మద్దతు',
-        'జాయింట్ వెంచర్స్ & అభివృద్ధి – భూమి యజమాని–బిల్డర్ భాగస్వామ్యాలు',
-        'లీగల్ & డాక్యుమెంటేషన్ సహాయం – రిజిస్ట్రేషన్ మరియు పత్రాల పరిశీలన',
-      ],
-
-      phased: 'ఈ సేవలన్నీ దశలవారీగా మరియు పూర్తిస్థాయి పారదర్శకతతో అందించబడతాయి.',
+      phased:
+        'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ ఒక స్వతంత్ర సలహా సంస్థగా పనిచేస్తుంది. తుది నిర్ణయాలు మరియు చట్టబద్ధ బాధ్యతలు సంబంధిత పక్షాలవే.',
 
       strengthsTitle: 'మా ప్రధాన బలాలు',
+
       strengths: [
-        'ఓపెన్ ప్లాట్లు, ఫ్లాట్లు మరియు వ్యవసాయ భూములపై విశ్వసనీయ సలహా',
-        'నైతిక విలువలతో కూడిన పారదర్శక విధానం',
-        'VMRDA & RERA ఆమోదిత ఆస్తులపై ప్రత్యేక దృష్టి',
-        'బడ్జెట్ మరియు భవిష్యత్ లక్ష్యాలకు అనుగుణమైన పెట్టుబడి పరిష్కారాలు',
-        'బ్యాంక్ లోన్ మరియు పూర్తి డాక్యుమెంటేషన్ సహాయం',
-        'స్థానిక మార్కెట్ అనుభవంతో స్పష్టమైన మార్గనిర్దేశం',
+        'తక్కువ బడ్జెట్ ప్లాట్లు మరియు ఫ్లాట్లలో విశ్వసనీయ సలహా',
+        'పారదర్శక మరియు నైతిక విధానం',
+        'చట్టబద్ధ ఆస్తులపై ప్రత్యేక దృష్టి',
+        'బడ్జెట్‌కు అనుగుణమైన పెట్టుబడి మార్గనిర్దేశం',
+        'లోన్ మరియు డాక్యుమెంటేషన్ సహాయం',
+        'స్థానిక మార్కెట్ అనుభవంపై ఆధారిత మార్గనిర్దేశం',
       ],
 
       visionTitle: 'మా దృష్టి',
-      vision:
-        'రియల్ ఎస్టేట్ పెట్టుబడులకు క్రమశిక్షణ, పారదర్శకత మరియు దీర్ఘకాలిక దృష్టిని అందించడమే మా లక్ష్యం.',
-    },
 
-    /* ======================================================
-     HINDI
-  ====================================================== */
+      vision:
+        'రియల్ ఎస్టేట్ సలహాలో పారదర్శకత, క్రమశిక్షణ మరియు దీర్ఘకాలిక దృష్టిని తీసుకురావడం మా లక్ష్యం.',
+    },
     hi: {
       title: 'हमारी सेवाएँ',
 
       intro: [
         {
           brand: 'राइज़रूट्स एंटरप्राइज़ेज़',
-          tagline: '',
-          text: '2020 में स्थापित, विशाखापट्टनम स्थित एक विश्वसनीय रियल एस्टेट कंसल्टेंसी, जो ईमानदारी, पारदर्शिता और ग्राहक विश्वास पर आधारित है। अक्कैय्यापालेम से संचालित होकर, हम स्पष्ट, अनुपालन-आधारित और मूल्य-संचालित रियल एस्टेट सलाह सेवाएँ प्रदान करते हैं।',
+          text: '2020 में स्थापित, राइज़रूट्स एंटरप्राइज़ेज़ विशाखापट्टनम स्थित एक विश्वसनीय रियल एस्टेट परामर्श संस्था है। अक्कैय्यापालेम से संचालित होकर, हम कम बजट प्लॉट्स, किफायती फ्लैट्स और बजट-अनुकूल फार्म लैंड्स पर विशेष ध्यान देते हुए पारदर्शी, अनुपालन-आधारित और मूल्य-केंद्रित परामर्श सेवाएँ प्रदान करते हैं।',
         },
         {
-          text: 'हम व्यक्तियों, परिवारों और निवेशकों को सुरक्षित एवं सूचित रियल एस्टेट निर्णय लेने में मार्गदर्शन प्रदान करते हैं। हमारा विकास नैतिक कार्यप्रणाली, मजबूत स्थानीय बाजार अनुभव और दीर्घकालिक संबंधों से प्रेरित है।',
+          text: 'हम व्यक्तियों, परिवारों और निवेशकों को सुरक्षित और समझदारीपूर्ण संपत्ति निर्णय लेने में मार्गदर्शन प्रदान करते हैं।',
         },
         {
-          text: 'आज, RiseRoots Enterprises को एक विश्वसनीय और ग्राहक-केंद्रित रियल एस्टेट सलाहकार के रूप में पहचाना जाता है, जो तात्कालिक आवश्यकताओं और दीर्घकालिक निवेश लक्ष्यों के बीच संतुलित मार्गदर्शन प्रदान करता है।',
+          text: 'हमारा दृष्टिकोण नैतिक प्रक्रियाओं, कानूनी अनुपालन और स्थानीय बाजार अनुभव पर आधारित है।',
         },
       ],
 
-      activeTitle: 'हमारी सक्रिय सेवाएँ',
+      activeTitle: 'हमारा सेवा परिदृश्य',
+
       activeServices: [
-        'ओपन प्लॉट्स – स्पष्ट स्वामित्व, कानूनी अनुमोदन और विकास क्षमता वाले',
-        'रेसिडेंशियल फ्लैट्स – रेडी-टू-मूव और निर्माणाधीन विकल्प',
-        'फार्म लैंड – सत्यापित स्वामित्व वाली कृषि और निवेश योग्य भूमि',
+        'ओपन प्लॉट्स – विशाखापट्टनम में कम बजट में उपलब्ध कानूनी स्वामित्व वाले प्लॉट्स',
+        'रेसिडेंशियल फ्लैट्स – विज़ाग में किफायती कीमतों पर रेडी और निर्माणाधीन फ्लैट्स',
+        'फार्म लैंड – सत्यापित स्वामित्व वाली बजट-अनुकूल कृषि एवं निवेश भूमि',
       ],
 
       evaluation:
-        'प्रत्येक संपत्ति का मूल्यांकन कानूनी स्थिति, स्थान, बुनियादी ढांचे और भविष्य की संभावनाओं के आधार पर किया जाता है।',
+        'प्रत्येक संपत्ति का मूल्यांकन कानूनी स्थिति, स्थान, बुनियादी ढांचे और दीर्घकालिक संभावनाओं के आधार पर किया जाता है। आवश्यकता अनुसार अतिरिक्त परामर्श सेवाएँ भी प्रदान की जाती हैं।',
 
-      extendedTitle: 'विस्तारित सलाह एवं सहयोग सेवाएँ',
-      extendedServices: [
-        'लैंड लीजिंग – कृषि एवं व्यावसायिक लीजिंग अवसर',
-        'रीसेल प्रॉपर्टीज – सत्यापित रीसेल प्लॉट्स और फ्लैट्स',
-        'कमर्शियल सेल्स एवं लीजिंग – दुकानें और कार्यालय स्थान',
-        'प्रॉपर्टी मैनेजमेंट – एनआरआई और दीर्घकालिक निवेशकों के लिए सहयोग',
-        'जॉइंट वेंचर्स एवं डेवलपमेंट – भूमि मालिक–डेवलपर साझेदारी',
-        'कानूनी एवं दस्तावेज़ सहायता – रजिस्ट्रेशन और दस्तावेज़ सत्यापन',
-      ],
-
-      phased: 'इन सेवाओं को चरणबद्ध और पूर्ण पारदर्शिता के साथ प्रदान किया जाता है।',
+      phased:
+        'राइज़रूट्स एंटरप्राइज़ेज़ एक स्वतंत्र परामर्श संस्था के रूप में कार्य करता है। अंतिम निर्णय और कानूनी जिम्मेदारियाँ संबंधित पक्षों की होती हैं।',
 
       strengthsTitle: 'हमारी प्रमुख विशेषताएँ',
+
       strengths: [
-        'ओपन प्लॉट्स, फ्लैट्स और फार्म लैंड में विश्वसनीय सलाह',
+        'कम बजट प्लॉट्स और किफायती फ्लैट्स में विश्वसनीय सलाह',
         'पारदर्शी और नैतिक कार्यप्रणाली',
-        'VMRDA एवं RERA अनुमोदित संपत्तियों पर विशेष ध्यान',
-        'बजट और दीर्घकालिक लक्ष्यों के अनुरूप निवेश समाधान',
-        'बैंक लोन एवं पूर्ण दस्तावेज़ सहयोग',
-        'स्थानीय बाजार अनुभव पर आधारित स्पष्ट मार्गदर्शन',
+        'कानूनी रूप से अनुपालन योग्य संपत्तियाँ',
+        'दीर्घकालिक निवेश मार्गदर्शन',
+        'ऋण और दस्तावेज़ सहायता',
+        'स्थानीय बाजार आधारित व्यावहारिक अनुभव',
       ],
 
       visionTitle: 'हमारा दृष्टिकोण',
-      vision: 'रियल एस्टेट निवेश में अनुशासन, पारदर्शिता और दीर्घकालिक सोच लाना हमारा उद्देश्य है।',
+
+      vision:
+        'रियल एस्टेट परामर्श में अनुशासन, पारदर्शिता और दीर्घकालिक सोच लाना हमारा उद्देश्य है।',
     },
   };
 }
