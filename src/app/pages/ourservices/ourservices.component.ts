@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 import { FestivalBlastComponent } from '../../festival/festival-blast/festival-blast.component';
 
@@ -33,6 +34,8 @@ interface PageContent {
   templateUrl: './ourservices.component.html',
   styleUrls: ['./ourservices.component.css'],
 })
+
+
 export class LandingComponent implements OnInit {
   @Input() lang: 'en' | 'te' | 'hi' = 'en';
 
@@ -41,27 +44,61 @@ export class LandingComponent implements OnInit {
   festivalMessage?: string;
   festivalName?: string;
 
-  constructor(private festivalService: FestivalService) {}
+  seoKey: 'lowBudgetPlots' | 'affordableFlats' | 'budgetLands' = 'lowBudgetPlots';
+
+  seoContent: Record<
+    'lowBudgetPlots' | 'affordableFlats' | 'budgetLands',
+    { h1: string; paragraphs: string[] }
+  > = {
+    lowBudgetPlots: {
+      h1: 'Low Budget Plots in Visakhapatnam – Verified & Affordable Options',
+      paragraphs: [
+        'Low budget plots in Visakhapatnam are increasingly preferred by first-time buyers and long-term investors.',
+        'Areas such as Anandapuram, Sabbavaram, Pendurthi, Bheemili Mandal, and Parawada have emerged as promising locations.',
+        'RiseRoots Enterprises assists buyers in identifying VMRDA-approved plots with clear titles and proper access roads.',
+      ],
+    },
+
+    affordableFlats: {
+      h1: 'Affordable Flats in Visakhapatnam for Families & Investors',
+      paragraphs: [
+        'Affordable flats in Visakhapatnam offer a practical solution for families seeking urban living within a controlled budget.',
+        'Localities such as Madhurawada, Yendada, PM Palem, and Kommadi are witnessing steady residential demand.',
+        'We guide buyers through RERA-approved projects, builder credibility, and bank loan eligibility.',
+      ],
+    },
+
+    budgetLands: {
+      h1: 'Budget Lands Near Vizag with Long-Term Investment Potential',
+      paragraphs: [
+        'Budget lands near Vizag are gaining popularity among investors.',
+        'Regions like Atchutapuram, Devarapalli, and the Narsipatnam Road belt offer value-driven options.',
+        'Our advisory ensures ownership verification, road connectivity, and future growth prospects.',
+      ],
+    },
+  };
+
+  constructor(private festivalService: FestivalService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    const routeKey = this.route.snapshot.data['seoKey'];
+    if (routeKey) {
+      this.seoKey = routeKey;
+    }
+
     const festival = this.festivalService.getTodayFestival();
     if (!festival) return;
 
-    // 🎆 Full screen blast (one-time)
     this.festivalEffect = festival.blast
       ? (festival.effect as 'confetti' | 'fireworks' | 'flowers')
       : null;
 
-    // 🌸 Header subtle effect (all day)
     this.showHeaderEffect = !!festival.headerEffect;
-
-    // 📝 Optional message
     this.festivalMessage = festival.messageEnabled ? festival.message : undefined;
-
-    // 🏷 Banner name
     this.festivalName = festival.name;
   }
 
+  
   content: any = {
     en: {
       title: 'Our Services',

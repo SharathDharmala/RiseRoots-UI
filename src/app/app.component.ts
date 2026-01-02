@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterOutlet } from '@angular/router';
 import { LandingComponent } from './pages/ourservices/ourservices.component';
 import { RealEstateComponent } from './pages/real-estate/real-estate.component';
 import { FestivalBlastComponent } from './festival/festival-blast/festival-blast.component';
@@ -14,6 +14,7 @@ import { FestivalService } from './festival/festival.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,      // 🔥 REQUIRED
     CommonModule,
     HeaderComponent,
     LandingComponent,

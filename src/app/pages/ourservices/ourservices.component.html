@@ -17,11 +17,14 @@
 <!-- MAIN LANDING CONTENT (ALWAYS PRESENT) -->
 <!-- ============================= -->
 <section class="landing">
+  <div class="services-wrapper">
   <div class="services-card">
-        <!-- SEO PRIMARY HEADING -->
-    <h1 class="seo-h1">
-      Low Budget Plots & Affordable Flats in Visakhapatnam
-    </h1>
+    <!-- SEO PRIMARY HEADING -->
+   
+    <p *ngFor="let p of seoContent?.[seoKey]?.paragraphs" class="intro">
+      {{ p }}
+    </p>
+
     <!-- TITLE -->
     <h2>{{ content[lang].title }}</h2>
 
@@ -81,7 +84,7 @@
     </h3>
 
     <p class="vision">
-      <span class="text">{{ content[lang].vision }}</span>      
+      <span class="text">{{ content[lang].vision }}</span>
     </p>
 
     <!-- WHY CHOOSE -->
@@ -94,5 +97,6 @@
         <li *ngFor="let reason of content[lang].why">🌟 {{ reason }}</li>
       </ul>
     </ng-container>
+  </div>
   </div>
 </section>
