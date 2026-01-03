@@ -10,7 +10,6 @@ import { SeoPopupComponent } from '../seo-popup/seo-popup.component';
 import { LanguageService, AppLang } from '../../services/language.service';
 import { Router } from '@angular/router';
 
-
 type SeoKey = 'lowBudgetPlots' | 'affordableFlats' | 'budgetLands';
 
 const SEO_CATEGORY_MAP: Record<SeoKey, keyof typeof REAL_ESTATE_CONFIG> = {
@@ -70,7 +69,7 @@ export class LandingComponent implements OnInit {
   festivalName?: string;
 
   seoKey: 'lowBudgetPlots' | 'affordableFlats' | 'budgetLands' = 'lowBudgetPlots';
-
+  highlightCTA = true;
   get activeAreas(): string[] {
     if (!this.activeSeoKey) return [];
 
@@ -117,6 +116,7 @@ export class LandingComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    setTimeout(() => (this.highlightCTA = false), 2500);
     /* 🔹 Language subscription */
     this.langService.lang$.subscribe((lang) => {
       this.lang = lang;

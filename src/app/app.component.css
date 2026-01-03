@@ -1,6 +1,12 @@
 /* ===============================
    GLOBAL
 ================================ */
+
+/* Centralized header height (easy future change) */
+:root {
+  --header-height: 96px;
+}
+
 html,
 body {
   width: 100%;
@@ -10,13 +16,32 @@ body {
 
 html {
   overflow-y: auto;
+
+  /* Smooth UX polish */
+  scroll-behavior: smooth;
+
+  /* Prevent layout shift when scrollbar appears */
+  scrollbar-gutter: stable;
 }
 
 body {
-  background: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #f8fbf9 100%);
-  padding-top: 96px; /* header space */
+  /* Subtle premium background */
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ffffff 60%,
+    #f8fbf9 100%
+  );
+
+  /* Space for sticky header */
+  padding-top: var(--header-height);
+
+  /* Better font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Universal box sizing */
 *,
 *::before,
 *::after {
@@ -31,21 +56,36 @@ body {
 }
 
 /* ===============================
-   PLACEHOLDER
+   PLACEHOLDER / EMPTY STATES
 ================================ */
 .placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+
   min-height: 40vh;
   text-align: center;
+
+  font-size: 14px;
+  color: #64748b;
 }
 
 /* ===============================
    MOBILE
 ================================ */
 @media (max-width: 768px) {
-  body {
-    padding-top: 120px;
+  :root {
+    --header-height: 120px;
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY – REDUCED MOTION
+================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

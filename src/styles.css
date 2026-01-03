@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 /* GLOBAL RESET */
+@import './animations.css';
 html,
 body {
-  margin: 0;          /* 🔥 KILLS TOP & LEFT GAP */
+  margin: 0; /* 🔥 KILLS TOP & LEFT GAP */
   padding: 0;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
-
 
 .app-container {
   max-width: 1200px;
@@ -85,4 +85,57 @@ em {
 *::before,
 *::after {
   box-sizing: border-box;
+}
+/* ===============================
+   GLOBAL ANIMATIONS
+================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* CTA Glow */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 193, 7, 0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 193, 7, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+.cta-highlight {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+@keyframes subtleZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
+}
+/* Subtle guidance animation */
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
 }

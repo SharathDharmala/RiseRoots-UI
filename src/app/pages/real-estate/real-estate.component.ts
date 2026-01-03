@@ -18,6 +18,7 @@ import { LanguageService, AppLang } from '../../services/language.service';
 })
 export class RealEstateComponent implements AfterViewInit {
   lang: AppLang = 'en';
+  highlightCTA = true;
 
   constructor(
     private router: Router,
@@ -194,8 +195,9 @@ export class RealEstateComponent implements AfterViewInit {
     // ▶ start first video
     playIndex();
   }
-/*
+  /*
   ngOnInit(): void {
+    setTimeout(() => this.highlightCTA = false, 2500);
     this.route.data.subscribe((data) => {
       const categoryKey = data['category'];
 
@@ -208,19 +210,18 @@ export class RealEstateComponent implements AfterViewInit {
   }
 */
   ngOnInit(): void {
-  this.langService.lang$.subscribe((lang) => {
-    this.lang = lang;
-  });
+    this.langService.lang$.subscribe((lang) => {
+      this.lang = lang;
+    });
 
-  this.route.data.subscribe((data) => {
-    const categoryKey = data['category'];
-    const found = this.categories.find(c => c.key === categoryKey);
-    if (found) {
-      this.activeCategory = found;
-    }
-  });
-}
-
+    this.route.data.subscribe((data) => {
+      const categoryKey = data['category'];
+      const found = this.categories.find((c) => c.key === categoryKey);
+      if (found) {
+        this.activeCategory = found;
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     if (!this.bannerMedia.enabled) return;
@@ -254,10 +255,20 @@ export class RealEstateComponent implements AfterViewInit {
     }, 250);
   }
 
+  activeTabKey: string | null = null;
+  justSelectedKey: string | null = null;
+
   selectCategory(category: CategoryConfig): void {
     if (category.disabled || !category.route) return;
 
     this.router.navigate(['/real-estate', category.route], { relativeTo: this.route.root });
+
+    this.activeTabKey = category.key;
+    this.justSelectedKey = category.key;
+
+    setTimeout(() => {
+      this.justSelectedKey = null;
+    }, 300);
   }
 
   /* =========================
