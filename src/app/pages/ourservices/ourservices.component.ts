@@ -1,9 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 import { FestivalBlastComponent } from '../../festival/festival-blast/festival-blast.component';
 
 import { FestivalService } from '../../festival/festival.service';
+import { REAL_ESTATE_CONFIG } from '../../config/real-estate.config';
+import { SeoPopupComponent } from '../seo-popup/seo-popup.component';
+import { LanguageService, AppLang } from '../../services/language.service';
+import { Router } from '@angular/router';
+
+
+type SeoKey = 'lowBudgetPlots' | 'affordableFlats' | 'budgetLands';
+
+const SEO_CATEGORY_MAP: Record<SeoKey, keyof typeof REAL_ESTATE_CONFIG> = {
+  lowBudgetPlots: 'plots',
+  affordableFlats: 'flats',
+  budgetLands: 'farmLands',
+};
 
 interface IntroItem {
   brand?: string;
@@ -29,36 +43,99 @@ interface PageContent {
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, FestivalBlastComponent],
+  imports: [CommonModule, FestivalBlastComponent, SeoPopupComponent],
   templateUrl: './ourservices.component.html',
   styleUrls: ['./ourservices.component.css'],
 })
 export class LandingComponent implements OnInit {
-  @Input() lang: 'en' | 'te' | 'hi' = 'en';
+  @Input() lang: AppLang = 'en';
+
+  activeSeoKey: SeoKey | null = null;
+
+  openSeoPopup(key: SeoKey) {
+    this.activeSeoKey = key;
+  }
+
+  closeSeoPopup() {
+    this.activeSeoKey = null;
+  }
+
+  navigateToRealEstate(): void {
+    this.router.navigate(['/real-estate']);
+  }
 
   festivalEffect: 'confetti' | 'fireworks' | 'flowers' | null = null;
   showHeaderEffect = false;
   festivalMessage?: string;
   festivalName?: string;
 
-  constructor(private festivalService: FestivalService) {}
+  seoKey: 'lowBudgetPlots' | 'affordableFlats' | 'budgetLands' = 'lowBudgetPlots';
 
+  get activeAreas(): string[] {
+    if (!this.activeSeoKey) return [];
+
+    const categoryKey = SEO_CATEGORY_MAP[this.activeSeoKey];
+    return (REAL_ESTATE_CONFIG[categoryKey] || []).filter((a) => a.enabled).map((a) => a.name);
+  }
+
+  seoContent: Record<
+    'lowBudgetPlots' | 'affordableFlats' | 'budgetLands',
+    { h1: string; paragraphs: string[] }
+  > = {
+    lowBudgetPlots: {
+      h1: 'Low Budget Plots in Visakhapatnam – Verified & Affordable Options',
+      paragraphs: [
+        'Low budget plots in Visakhapatnam are increasingly preferred by first-time buyers and long-term investors looking for secure and value-driven land ownership.',
+        'These plot developments are typically located across emerging and well-connected regions around Vizag, offering long-term growth potential supported by infrastructure expansion.',
+        'RiseRoots Enterprises assists buyers in identifying legally compliant, VMRDA-approved plots with clear titles, proper access roads, and future-ready layouts.',
+      ],
+    },
+
+    affordableFlats: {
+      h1: 'Affordable Flats in Visakhapatnam for Families & Investors',
+      paragraphs: [
+        'Affordable flats in Visakhapatnam provide a practical housing solution for families, working professionals, and investors seeking urban convenience within a planned budget.',
+        'Residential projects across Vizag are witnessing steady demand due to connectivity, lifestyle infrastructure, and proximity to employment corridors.',
+        'Our advisory supports buyers in shortlisting RERA-compliant projects, evaluating builder credibility, and understanding bank loan eligibility and documentation requirements.',
+      ],
+    },
+
+    budgetLands: {
+      h1: 'Budget Lands Near Vizag with Long-Term Investment Potential',
+      paragraphs: [
+        'Budget lands near Vizag are gaining popularity among investors looking for long-term appreciation and flexible investment entry points.',
+        'Such land parcels are typically located along growth corridors, highway belts, and developing zones surrounding Visakhapatnam.',
+        'RiseRoots Enterprises ensures due diligence covering ownership verification, road connectivity, zoning clarity, and long-term development prospects.',
+      ],
+    },
+  };
+
+  constructor(
+    private langService: LanguageService,
+    private festivalService: FestivalService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   ngOnInit(): void {
+    /* 🔹 Language subscription */
+    this.langService.lang$.subscribe((lang) => {
+      this.lang = lang;
+    });
+
+    const routeKey = this.route.snapshot.data['seoKey'];
+    if (routeKey) {
+      this.seoKey = routeKey;
+    }
+
     const festival = this.festivalService.getTodayFestival();
     if (!festival) return;
 
-    // 🎆 Full screen blast (one-time)
     this.festivalEffect = festival.blast
       ? (festival.effect as 'confetti' | 'fireworks' | 'flowers')
       : null;
 
-    // 🌸 Header subtle effect (all day)
     this.showHeaderEffect = !!festival.headerEffect;
-
-    // 📝 Optional message
     this.festivalMessage = festival.messageEnabled ? festival.message : undefined;
-
-    // 🏷 Banner name
     this.festivalName = festival.name;
   }
 
@@ -127,94 +204,119 @@ export class LandingComponent implements OnInit {
     te: {
       title: 'మా సేవలు',
 
+      /* =========================
+     INTRO
+  ========================= */
       intro: [
         {
           brand: 'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్',
-          text: '2020లో స్థాపించబడిన రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న ఒక విశ్వసనీయ రియల్ ఎస్టేట్ కన్సల్టెన్సీ సంస్థ. తక్కువ బడ్జెట్ ప్లాట్లు, అందుబాటు ధరల ఫ్లాట్లు మరియు బడ్జెట్‌కు అనుగుణమైన వ్యవసాయ భూములపై ప్రత్యేక దృష్టితో, అక్కయ్యపాలెం నుండి పారదర్శకత, చట్టబద్ధత మరియు దీర్ఘకాలిక విలువలను ఆధారంగా చేసుకుని సలహా సేవలను అందిస్తోంది.',
+          text: '2020లో స్థాపించబడిన రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్, విశాఖపట్నం కేంద్రంగా పనిచేస్తున్న ఒక రియల్ ఎస్టేట్ కన్సల్టెన్సీ సంస్థ. తక్కువ బడ్జెట్ ప్లాట్లు, అందుబాటు ధరల ఫ్లాట్లు, మరియు బడ్జెట్‌కు అనుగుణమైన ఫామ్ ల్యాండ్స్‌లో ప్రత్యేక నైపుణ్యంతో, పారదర్శకమైన, చట్టబద్ధమైన మరియు విలువ ఆధారిత సలహా సేవలను క్రమబద్ధమైన ప్రక్రియల ద్వారా అందిస్తోంది.',
         },
         {
-          text: 'వ్యక్తులు, కుటుంబాలు, మొదటిసారి కొనుగోలు చేసే వారు మరియు పెట్టుబడిదారులు సురక్షితమైన మరియు అవగాహనతో కూడిన నిర్ణయాలు తీసుకునేలా మేము మార్గనిర్దేశం అందిస్తున్నాము.',
+          text: 'వ్యక్తులు, కుటుంబాలు, మొదటిసారి కొనుగోలు చేసే వారు, పెట్టుబడిదారులు మరియు సంస్థలు సురక్షితమైన మరియు అవగాహనతో కూడిన నిర్ణయాలు తీసుకునేలా మేము సహకరిస్తాము. మా సలహా విధానం స్పష్టత, చట్టపరమైన అనుసరణ మరియు ఖర్చుకు తగిన విలువపై దృష్టి సారిస్తుంది.',
         },
         {
-          text: 'నైతిక విలువలు, స్థానిక మార్కెట్ అవగాహన మరియు ప్రాజెక్ట్ ఆధారిత విధానమే మా అభివృద్ధికి మూలాధారం.',
+          text: 'ఈ రోజు, రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ విశాఖపట్నంలో ఒక విశ్వసనీయమైన, కస్టమర్-కేంద్రిత సలహా సంస్థగా గుర్తింపు పొందింది. తక్షణ అవసరాలు మరియు దీర్ఘకాలిక పెట్టుబడి అవకాశాల మధ్య సమతుల్యతను పాటిస్తూ, భవిష్యత్ విస్తరణకు బాధ్యతాయుతంగా సిద్ధంగా ఉంది.',
         },
       ],
 
+      /* =========================
+     SERVICE LANDSCAPE
+  ========================= */
       activeTitle: 'మా సేవల పరిధి',
 
       activeServices: [
-        'ఓపెన్ ప్లాట్లు – విశాఖపట్నంలో తక్కువ బడ్జెట్‌లో లభించే చట్టబద్ధత కలిగిన ప్లాట్లు',
-        'నివాస ఫ్లాట్లు – విశాఖలో అందుబాటు ధరలతో సిద్ధంగా ఉన్న మరియు నిర్మాణంలో ఉన్న ఫ్లాట్లు',
-        'వ్యవసాయ భూములు – ధృవీకరించిన యాజమాన్యంతో పెట్టుబడి విలువ కలిగిన బడ్జెట్ అనుకూల భూములు',
+        'ఓపెన్ ప్లాట్లు – విశాఖపట్నంలో స్పష్టమైన టైటిల్స్, చట్టపరమైన అనుమతులు మరియు భవిష్యత్ వృద్ధి సామర్థ్యం కలిగిన తక్కువ బడ్జెట్ ప్లాట్లు',
+        'నివాస ఫ్లాట్లు – విశాఖలో జీవనశైలి మరియు పెట్టుబడి అవసరాలకు అనుగుణంగా సిద్ధంగా ఉన్న మరియు నిర్మాణంలో ఉన్న అందుబాటు ధరల ఫ్లాట్లు',
+        'ఫామ్ ల్యాండ్స్ – విశాఖపట్నం సమీపంలో ధృవీకరించిన యాజమాన్యం మరియు దీర్ఘకాలిక విలువ కలిగిన బడ్జెట్‌కు అనుకూలమైన వ్యవసాయ మరియు పెట్టుబడి భూములు',
       ],
 
       evaluation:
-        'ప్రతి ఆస్తి చట్టబద్ధత, ప్రాంత ప్రాముఖ్యత, మౌలిక సదుపాయాలు మరియు దీర్ఘకాలిక విలువ ఆధారంగా పరిశీలించబడుతుంది. అవసరాల ఆధారంగా లీజింగ్, రీసేల్, కమర్షియల్ లావాదేవీలు మరియు డాక్యుమెంటేషన్ సహాయం వంటి సేవలు అందించబడతాయి.',
+        'ప్రతి సిఫారసు చట్టపరమైన అనుసరణ, ప్రాంత ప్రాధాన్యత, మౌలిక సదుపాయాల అభివృద్ధి మరియు దీర్ఘకాలిక విలువ ఆధారంగా సమగ్రంగా పరిశీలించబడుతుంది. ఈ ప్రధాన సేవలతో పాటు, అవసరాన్ని బట్టి భూ లీజింగ్, రీసేల్ సపోర్ట్, కమర్షియల్ అమ్మకాలు మరియు లీజింగ్, ప్రాపర్టీ మేనేజ్‌మెంట్, జాయింట్ డెవలప్‌మెంట్ మోడల్స్ మరియు డాక్యుమెంటేషన్ సమన్వయం వంటి సేవలు కూడా అందించబడతాయి.',
 
       phased:
-        'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ ఒక స్వతంత్ర సలహా సంస్థగా పనిచేస్తుంది. తుది నిర్ణయాలు మరియు చట్టబద్ధ బాధ్యతలు సంబంధిత పక్షాలవే.',
+        'రైజ్‌రూట్స్ ఎంటర్‌ప్రైజెస్ ఒక స్వతంత్ర కన్సల్టెన్సీ మరియు సలహా సంస్థగా పనిచేస్తుంది. తుది నిర్ణయాలు, లావాదేవీలు మరియు చట్టపరమైన బాధ్యతలు సంబంధిత ప్రాపర్టీ యజమానులు, డెవలపర్లు మరియు కస్టమర్లవే.',
 
+      /* =========================
+     CORE STRENGTHS
+  ========================= */
       strengthsTitle: 'మా ప్రధాన బలాలు',
 
       strengths: [
-        'తక్కువ బడ్జెట్ ప్లాట్లు మరియు ఫ్లాట్లలో విశ్వసనీయ సలహా',
-        'పారదర్శక మరియు నైతిక విధానం',
-        'చట్టబద్ధ ఆస్తులపై ప్రత్యేక దృష్టి',
-        'బడ్జెట్‌కు అనుగుణమైన పెట్టుబడి మార్గనిర్దేశం',
-        'లోన్ మరియు డాక్యుమెంటేషన్ సహాయం',
-        'స్థానిక మార్కెట్ అనుభవంపై ఆధారిత మార్గనిర్దేశం',
+        'తక్కువ బడ్జెట్ ప్లాట్లు, అందుబాటు ధరల ఫ్లాట్లు మరియు ఫామ్ ల్యాండ్స్‌లో విశ్వసనీయ సలహా అనుభవం',
+        'పారదర్శక, నైతిక మరియు కస్టమర్-కేంద్రిత కన్సల్టింగ్ విధానం',
+        'VMRDA మరియు RERA అనుమతులతో కూడిన చట్టబద్ధ ఆస్తులపై బలమైన దృష్టి',
+        'కస్టమర్ బడ్జెట్ మరియు దీర్ఘకాలిక ఆర్థిక లక్ష్యాలకు అనుగుణమైన పెట్టుబడి మార్గనిర్దేశం',
+        'బ్యాంక్ లోన్ సదుపాయం మరియు పూర్తి స్థాయి డాక్యుమెంటేషన్ సపోర్ట్',
+        'విశాఖపట్నంలోని స్థానిక మార్కెట్ అవగాహన మరియు ప్రత్యక్ష అనుభవంతో కూడిన స్పష్టమైన మార్గనిర్దేశం',
       ],
 
+      /* =========================
+     VISION
+  ========================= */
       visionTitle: 'మా దృష్టి',
 
       vision:
-        'రియల్ ఎస్టేట్ సలహాలో పారదర్శకత, క్రమశిక్షణ మరియు దీర్ఘకాలిక దృష్టిని తీసుకురావడం మా లక్ష్యం.',
+        'ప్రాపర్టీ సలహా మరియు పెట్టుబడి నిర్ణయాల్లో క్రమశిక్షణ, పారదర్శకత మరియు దీర్ఘకాలిక దృష్టిని తీసుకురావడం — ప్రతి వ్యవహారం సమాచారం ఆధారంగా, చట్టబద్ధంగా, బడ్జెట్‌కు అనుగుణంగా మరియు స్థిరమైన భవిష్యత్ వృద్ధికి సిద్ధంగా ఉండేలా చేయడం.',
     },
+
     hi: {
       title: 'हमारी सेवाएँ',
 
+      /* =========================
+     INTRO
+  ========================= */
       intro: [
         {
           brand: 'राइज़रूट्स एंटरप्राइज़ेज़',
-          text: '2020 में स्थापित, राइज़रूट्स एंटरप्राइज़ेज़ विशाखापट्टनम स्थित एक विश्वसनीय रियल एस्टेट परामर्श संस्था है। अक्कैय्यापालेम से संचालित होकर, हम कम बजट प्लॉट्स, किफायती फ्लैट्स और बजट-अनुकूल फार्म लैंड्स पर विशेष ध्यान देते हुए पारदर्शी, अनुपालन-आधारित और मूल्य-केंद्रित परामर्श सेवाएँ प्रदान करते हैं।',
+          text: '2020 में स्थापित, राइज़रूट्स एंटरप्राइज़ेज़ विशाखापट्टनम स्थित एक रियल एस्टेट कंसल्टेंसी है, जो कम बजट प्लॉट्स, किफायती फ्लैट्स और बजट-अनुकूल फार्म लैंड्स में विशेषज्ञता रखती है। हम संरचित प्रक्रियाओं और अनुशासित निष्पादन के माध्यम से पारदर्शी, अनुपालन-आधारित और मूल्य-केंद्रित परामर्श सेवाएँ प्रदान करते हैं।',
         },
         {
-          text: 'हम व्यक्तियों, परिवारों और निवेशकों को सुरक्षित और समझदारीपूर्ण संपत्ति निर्णय लेने में मार्गदर्शन प्रदान करते हैं।',
+          text: 'हम व्यक्तियों, परिवारों, पहली बार संपत्ति खरीदने वालों, निवेशकों और संगठनों के साथ मिलकर सुरक्षित और सूचित निर्णय लेने में सहायता करते हैं। हमारा परामर्श दृष्टिकोण स्पष्टता, कानूनी अनुपालन और किफायत पर केंद्रित है।',
         },
         {
-          text: 'हमारा दृष्टिकोण नैतिक प्रक्रियाओं, कानूनी अनुपालन और स्थानीय बाजार अनुभव पर आधारित है।',
+          text: 'आज, राइज़रूट्स एंटरप्राइज़ेज़ विशाखापट्टनम में एक विश्वसनीय और ग्राहक-केंद्रित सलाहकार संस्था के रूप में पहचानी जाती है, जो तात्कालिक आवश्यकताओं और दीर्घकालिक निवेश संभावनाओं के बीच संतुलित मार्गदर्शन प्रदान करती है।',
         },
       ],
 
+      /* =========================
+     SERVICE LANDSCAPE
+  ========================= */
       activeTitle: 'हमारा सेवा परिदृश्य',
 
       activeServices: [
-        'ओपन प्लॉट्स – विशाखापट्टनम में कम बजट में उपलब्ध कानूनी स्वामित्व वाले प्लॉट्स',
-        'रेसिडेंशियल फ्लैट्स – विज़ाग में किफायती कीमतों पर रेडी और निर्माणाधीन फ्लैट्स',
-        'फार्म लैंड – सत्यापित स्वामित्व वाली बजट-अनुकूल कृषि एवं निवेश भूमि',
+        'ओपन प्लॉट्स – विशाखापट्टनम में स्पष्ट टाइटल्स, वैधानिक अनुमोदन और मजबूत भविष्य विकास क्षमता वाले कम बजट प्लॉट्स',
+        'रेसिडेंशियल फ्लैट्स – विशाखापट्टनम में जीवनशैली और निवेश आवश्यकताओं के अनुरूप रेडी-टू-मूव और निर्माणाधीन किफायती फ्लैट्स',
+        'फार्म लैंड्स – विशाखापट्टनम के आसपास सत्यापित स्वामित्व और दीर्घकालिक मूल्य वाले बजट-अनुकूल कृषि एवं निवेश भूमि',
       ],
 
       evaluation:
-        'प्रत्येक संपत्ति का मूल्यांकन कानूनी स्थिति, स्थान, बुनियादी ढांचे और दीर्घकालिक संभावनाओं के आधार पर किया जाता है। आवश्यकता अनुसार अतिरिक्त परामर्श सेवाएँ भी प्रदान की जाती हैं।',
+        'प्रत्येक सिफारिश का मूल्यांकन कानूनी अनुपालन, स्थान की गुणवत्ता, बुनियादी ढांचे के विकास और दीर्घकालिक मूल्य वृद्धि की संभावनाओं के आधार पर किया जाता है। इन मुख्य सेवाओं के अतिरिक्त, आवश्यकता के अनुसार भूमि लीज़िंग, पुनर्विक्रय सहायता, वाणिज्यिक बिक्री और लीज़िंग, प्रॉपर्टी प्रबंधन, संयुक्त विकास मॉडल और दस्तावेज़ समन्वय जैसी सेवाएँ भी प्रदान की जाती हैं।',
 
       phased:
-        'राइज़रूट्स एंटरप्राइज़ेज़ एक स्वतंत्र परामर्श संस्था के रूप में कार्य करता है। अंतिम निर्णय और कानूनी जिम्मेदारियाँ संबंधित पक्षों की होती हैं।',
+        'राइज़रूट्स एंटरप्राइज़ेज़ एक स्वतंत्र कंसल्टेंसी और सलाहकार संगठन के रूप में कार्य करता है। अंतिम निर्णय, लेन-देन और वैधानिक अनुपालन संबंधित संपत्ति मालिकों, डेवलपर्स और ग्राहकों की जिम्मेदारी होती है।',
 
+      /* =========================
+     CORE STRENGTHS
+  ========================= */
       strengthsTitle: 'हमारी प्रमुख विशेषताएँ',
 
       strengths: [
-        'कम बजट प्लॉट्स और किफायती फ्लैट्स में विश्वसनीय सलाह',
-        'पारदर्शी और नैतिक कार्यप्रणाली',
-        'कानूनी रूप से अनुपालन योग्य संपत्तियाँ',
-        'दीर्घकालिक निवेश मार्गदर्शन',
-        'ऋण और दस्तावेज़ सहायता',
-        'स्थानीय बाजार आधारित व्यावहारिक अनुभव',
+        'कम बजट प्लॉट्स, किफायती फ्लैट्स और फार्म लैंड्स में विश्वसनीय परामर्श अनुभव',
+        'पारदर्शी, नैतिक और ग्राहक-केंद्रित कंसल्टिंग दृष्टिकोण',
+        'VMRDA और RERA अनुमोदनों सहित कानूनी रूप से अनुपालन योग्य संपत्तियों पर मजबूत फोकस',
+        'ग्राहक बजट और दीर्घकालिक वित्तीय लक्ष्यों के अनुरूप निवेश मार्गदर्शन',
+        'बैंक लोन सुविधा और एंड-टू-एंड दस्तावेज़ सहायता',
+        'विशाखापट्टनम में मजबूत स्थानीय बाजार समझ और ऑन-ग्राउंड अनुभव पर आधारित स्पष्ट मार्गदर्शन',
       ],
 
+      /* =========================
+     VISION
+  ========================= */
       visionTitle: 'हमारा दृष्टिकोण',
 
       vision:
-        'रियल एस्टेट परामर्श में अनुशासन, पारदर्शिता और दीर्घकालिक सोच लाना हमारा उद्देश्य है।',
+        'संपत्ति परामर्श और निवेश निर्णयों में अनुशासन, पारदर्शिता और दीर्घकालिक सोच लाना — ताकि प्रत्येक सहभागिता सूचित, कानूनी रूप से सुरक्षित, बजट-अनुकूल और सतत भविष्य विकास के लिए तैयार हो।',
     },
   };
 }

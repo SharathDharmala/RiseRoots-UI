@@ -1,33 +1,12 @@
 <!-- ================= HEADER ================= -->
-<app-header
-  [lang]="lang"
-  [activeTab]="activeTab"
-  (langChange)="onLangChange($event)"
-  (tabChange)="onTabChange($event)">
-</app-header>
+<app-header [lang]="lang" (langChange)="onLangChange($event)"> </app-header>
 
-<!-- ================= FESTIVAL BLAST ================= -->
-<app-festival-blast
-  *ngIf="festivalEffect"
-  [effect]="festivalEffect"
-  [message]="festivalMessage">
-</app-festival-blast>
+<router-outlet></router-outlet>
+<router-outlet [lang]="lang"></router-outlet>
 
 <!-- ================= MAIN CONTENT ================= -->
 <main class="page-content">
-  <app-landing
-    *ngIf="activeTab === 'services'"
-    [lang]="lang">
-  </app-landing>
-
-  <app-real-estate
-    *ngIf="activeTab === 'realestate'"
-    [lang]="lang">
-  </app-real-estate>
-
-  <section *ngIf="activeTab === 'xyz'" class="placeholder">
-    <h2>Coming Soon</h2>
-  </section>
+  <router-outlet></router-outlet>
 </main>
 
 <!-- ================= FOOTER ================= -->
