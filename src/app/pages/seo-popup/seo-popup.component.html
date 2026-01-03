@@ -1,0 +1,78 @@
+<div class="seo-overlay" (click)="close.emit()">
+  <div class="seo-popup" (click)="$event.stopPropagation()">
+    <button class="close" (click)="close.emit()">✕</button>
+
+    <!-- HEADER (SEO SAFE: ENGLISH ONLY) -->
+    <h2>{{ title }}</h2>
+
+    <!-- SUBTITLE -->
+    <p class="popup-subtitle" *ngIf="lang === 'en'">
+      Below are some of the actively evaluated locations currently available under this category.
+    </p>
+    <p class="popup-subtitle" *ngIf="lang === 'te'">
+      ఈ విభాగంలో ప్రస్తుతం మేము పరిశీలిస్తున్న ముఖ్యమైన ప్రాంతాలు ఇవి.
+    </p>
+    <p class="popup-subtitle" *ngIf="lang === 'hi'">
+      इस श्रेणी के अंतर्गत वर्तमान में मूल्यांकन किए जा रहे प्रमुख स्थान नीचे दिए गए हैं।
+    </p>
+
+    <!-- SCROLLABLE BODY -->
+    <div class="popup-body">
+      <!-- HIGHLIGHT -->
+      <div class="popup-highlight">
+        <strong *ngIf="lang === 'en'">How RiseRoots Curates Locations</strong>
+        <strong *ngIf="lang === 'te'">రైజ్‌రూట్స్ ప్రాంతాలను ఎలా ఎంపిక చేస్తుంది</strong>
+        <strong *ngIf="lang === 'hi'">राइज़रूट्स स्थानों का चयन कैसे करता है</strong>
+
+        <p *ngIf="lang === 'en'">
+          We actively shortlist budget-aligned properties in and around
+          <strong>Visakhapatnam</strong> based on legal compliance, clear ownership, road access,
+          infrastructure development, and long-term appreciation — suitable for both first-time
+          buyers and investors.
+        </p>
+
+        <p *ngIf="lang === 'te'">
+          మేము <strong>విశాఖపట్నం</strong> పరిసర ప్రాంతాలలో చట్టబద్ధమైన అనుమతులు, స్పష్టమైన
+          యాజమాన్యం, రహదారి సదుపాయం, మౌలిక సదుపాయాల అభివృద్ధి మరియు దీర్ఘకాలిక విలువను పరిగణలోకి
+          తీసుకొని బడ్జెట్‌కు అనుగుణమైన ఆస్తులను ఎంపిక చేస్తాము — ఇవి మొదటిసారి కొనుగోలు చేసే వారికి
+          మరియు పెట్టుబడిదారులకు అనుకూలంగా ఉంటాయి.
+        </p>
+
+        <p *ngIf="lang === 'hi'">
+          हम <strong>विशाखापट्टनम</strong> और उसके आसपास के क्षेत्रों में कानूनी स्वीकृति, स्पष्ट
+          स्वामित्व, सड़क संपर्क, बुनियादी ढांचे के विकास और दीर्घकालिक मूल्य वृद्धि के आधार पर
+          बजट-अनुकूल संपत्तियों का चयन करते हैं — जो पहली बार खरीदने वालों और निवेशकों दोनों के लिए
+          उपयुक्त होती हैं।
+        </p>
+      </div>
+
+      <!-- LIST NOTE -->
+      <p class="list-note" *ngIf="lang === 'en'">
+        Currently evaluated locations under this category:
+      </p>
+      <p class="list-note" *ngIf="lang === 'te'">ఈ విభాగంలో ప్రస్తుతం పరిశీలనలో ఉన్న ప్రాంతాలు:</p>
+      <p class="list-note" *ngIf="lang === 'hi'">
+        इस श्रेणी में वर्तमान में मूल्यांकन किए जा रहे स्थान:
+      </p>
+
+      <!-- AREA LIST -->
+      <ul class="area-list">
+        <li *ngFor="let area of activeAreas">
+          <span class="check">✓</span>
+          <span class="area-name">{{ area }}</span>
+        </li>
+      </ul>
+
+      <!-- FOOTER CTA -->
+      
+      <div class="popup-footer">
+        {{ footerCtaText }}
+        <a class="real-estate-link" (click)="goToRealEstate()">
+          <ng-container *ngIf="lang === 'en'">click here</ng-container>
+          <ng-container *ngIf="lang === 'te'">ఇక్కడ క్లిక్ చేయండి</ng-container>
+          <ng-container *ngIf="lang === 'hi'">यहाँ क्लिक करें</ng-container> </a
+        >.
+      </div>
+    </div>
+  </div>
+</div>

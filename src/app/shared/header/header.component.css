@@ -308,3 +308,32 @@
     flex-shrink: 0;
   }
 }
+.tabs a {
+  padding: 6px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.header .tabs a.active {
+  background: #f2c94c;
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+
+nav.tabs a.active {
+  background: #f2c94c;
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+nav.tabs a.active {
+  background: #f2c94c !important;
+  color: #1f2937 !important;
+}

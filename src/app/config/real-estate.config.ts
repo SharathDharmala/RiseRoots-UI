@@ -27,7 +27,7 @@ export interface CategoryConfig {
     | 'propertyManagement'
     | 'jointVentures'
     | 'legalSupport';
-
+  route?: string;
   banner?: string;
   label: { en: string; te: string; hi: string };
   subtitle?: { en: string; te: string; hi: string };
@@ -153,10 +153,14 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.PLOTS],
         [
           { basePath: `/open-plots/kothavalasa-swathi-promotors-mla-township`, count: 22 },
-          { basePath: `/open-plots/kothavalasa-swathi-promotors-mla-township`, count: 0, ext: 'mp4' },
+          {
+            basePath: `/open-plots/kothavalasa-swathi-promotors-mla-township`,
+            count: 0,
+            ext: 'mp4',
+          },
         ]
       ),
-    },   
+    },
     {
       key: 'vizianagaram',
       name: 'Vizianagaram – AKR Garden City (Chelluru)',
@@ -168,7 +172,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
           { basePath: `${PLOTS}/vizianagaram`, count: 1, ext: 'mp4' },
         ]
       ),
-    }, 
+    },
     {
       key: 'dabbanda',
       name: 'Dabbanda(Simhachalam)',
@@ -211,7 +215,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
       enabled: true,
       images: generateMedia([BANNERS.PLOTS], [{ basePath: `${PLOTS}/gandigundam`, count: 5 }]),
     },
-    
+
     {
       key: 'dakamarri',
       name: 'Dakamarri',
@@ -232,7 +236,7 @@ export const REAL_ESTATE_CONFIG: Record<string, AreaConfig[]> = {
         [BANNERS.PLOTS],
         [{ basePath: `${PLOTS}/bhogapuram-aerodestiny`, count: 1 }]
       ),
-    },    
+    },
     {
       key: 'polipilli-aerogateway',
       name: 'Aeroateway - Polipilli',

@@ -1,11 +1,13 @@
 import { AreaModalComponent } from '../../components/area-modal/area-modal.component';
 import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { REAL_ESTATE_CONFIG, AreaConfig, CategoryConfig } from '../../config/real-estate.config';
 
 import { REAL_ESTATE_BANNER_MEDIA } from '../../config/real-estate-media.config';
 import { resolveMediaSources } from '../../config/media.utils';
+import { LanguageService, AppLang } from '../../services/language.service';
 
 @Component({
   selector: 'app-real-estate',
@@ -15,7 +17,13 @@ import { resolveMediaSources } from '../../config/media.utils';
   styleUrls: ['./real-estate.component.css'],
 })
 export class RealEstateComponent implements AfterViewInit {
-  @Input() lang: 'en' | 'te' | 'hi' = 'en';
+  lang: AppLang = 'en';
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private langService: LanguageService
+  ) {}
 
   /* =========================
      VIDEO REF
@@ -25,12 +33,15 @@ export class RealEstateComponent implements AfterViewInit {
 
   bannerMedia = REAL_ESTATE_BANNER_MEDIA;
 
+  activeCategoryKey!: string;
+
   /* =========================
      CATEGORIES
   ========================= */
   categories: CategoryConfig[] = [
     {
       key: 'plots',
+      route: 'open-plots',
       banner: 'banners/open-plots1.jpeg',
       label: { en: 'Open Plots', te: 'ఓపెన్ ప్లాట్లు', hi: 'ओपन प्लॉट्स' },
       subtitle: {
@@ -41,6 +52,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'flats',
+      route: 'residential-flats',
       banner: 'banners/residential-flats1.jpeg',
       label: {
         en: 'Residential Flats',
@@ -55,6 +67,7 @@ export class RealEstateComponent implements AfterViewInit {
     },
     {
       key: 'farmLands',
+      route: 'farm-lands',
       banner: 'banners/farm-lands1.jpeg',
       label: {
         en: 'Farm Lands',
@@ -181,6 +194,33 @@ export class RealEstateComponent implements AfterViewInit {
     // ▶ start first video
     playIndex();
   }
+/*
+  ngOnInit(): void {
+    this.route.data.subscribe((data) => {
+      const categoryKey = data['category'];
+
+      const found = this.categories.find((c) => c.key === categoryKey);
+      if (found) {
+        this.activeCategory = found;
+        this.activeCategoryKey = found.key;
+      }
+    });
+  }
+*/
+  ngOnInit(): void {
+  this.langService.lang$.subscribe((lang) => {
+    this.lang = lang;
+  });
+
+  this.route.data.subscribe((data) => {
+    const categoryKey = data['category'];
+    const found = this.categories.find(c => c.key === categoryKey);
+    if (found) {
+      this.activeCategory = found;
+    }
+  });
+}
+
 
   ngAfterViewInit(): void {
     if (!this.bannerMedia.enabled) return;
@@ -215,8 +255,9 @@ export class RealEstateComponent implements AfterViewInit {
   }
 
   selectCategory(category: CategoryConfig): void {
-    if (category.disabled) return;
-    this.activeCategory = category;
+    if (category.disabled || !category.route) return;
+
+    this.router.navigate(['/real-estate', category.route], { relativeTo: this.route.root });
   }
 
   /* =========================
